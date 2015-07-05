@@ -16,7 +16,7 @@ Installation of Java JDK/Android Studio, navigating Android Studio,Context Menus
 
 **Refs**
 
-[Ref.[1]](#abcd) chapter 1/2/3/7
+[Ref.[1]](#ref1) chapter 1/2/3/7
 
 ### Debugging
 
@@ -26,20 +26,74 @@ Installation of Java JDK/Android Studio, navigating Android Studio,Context Menus
 
 **Refs**
 
-[Ref.[1]](#abcd) chapter 4/12
+[Ref.[1]](#ref1) chapter 4/12
+
+## Week 2 The Java language
+
+### Language Concepts
+
+**Contents**
+
+Data type, variable, expressions, identifiers, statements, google java style
+
+**Refs**
+
+[Ref.[2]](#ref2) chapter 2
+
+[Google Java Style](https://google-styleguide.googlecode.com/svn/trunk/javaguide.html)
+
+### Classes and Objects
+
+**Contents**
+
+Classes, constants, methods, constructors, modifiers, inheritence
+
+**Refs**
+
+[Ref.[3]](#ref3) chapter 5
+
+## Week 3 Simple views and Controls
+
+### UI design
+
+**Contents**
+
+MVC pattern, activity lifecyle, fragments, and intents
+
+**Refs**
+
+[Ref.[2]](#ref2) chapter 2
+
+[Google Java Style](https://google-styleguide.googlecode.com/svn/trunk/javaguide.html)
+
+### Classes and Objects
+
+**Contents**
+
+Classes, constants, methods, constructors, modifiers, inheritence
+
+**Refs**
+
+[Ref.[3]](#ref3) chapter 5
+
+
+
+
+
+
 
 
 
 # Assessmen plan
 
-Refer on Moodle for this
+Refer to Moodle for this
 
 # Reading list
 
-1. <a name="ref1"></a>Learn Android Studio
-2. Learn Java for Android Development
-3. Android Apps for Absolute Beginners
-4. Introduction to Android Application Development
-5. Beginning Android 4 Application Development
+1. <a name="ref1"></a>[Learn Android Studio](http://www.amazon.co.uk/Learn-Android-Studio-Quickly-Effectively/dp/1430266015)
+2. <a name="ref2"></a>[Learn Java for Android Development](http://www.amazon.co.uk/Learn-Java-Android-Development/dp/1430264543)
+3. <a name="ref3"></a>[Android Apps for Absolute Beginners](http://www.amazon.co.uk/Android-Absolute-Beginners-Wallace-Jackson/dp/1484200209)
+4. <a name="ref4"></a>[Beginning Android 4 Application Development](http://www.amazon.co.uk/Beginning-Android-4-Application-Development/dp/1118199545)
+5. <a name="ref5"></a>[Introduction to Android Application Development](http://www.amazon.co.uk/Introduction-Android-Application-Development-Essentials/dp/0321940261)
 
 
