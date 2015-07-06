@@ -255,24 +255,6 @@ Send SMS messages, send internet messagesget feedback, camera 2 api
 
 **Refs**
 
-## Week 12 Messaging
-
-### SMS messaging
-
-**Contents**
-
-Send SMS messages, send internet messagesget feedback, camera 2 api
-
-**Refs**
-
-[Ref.[4]](#ref4) chapter 8
-
-### To be confirmed
-
-**Contents**
-
-**Refs**
-
 
 
 
