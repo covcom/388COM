@@ -12,7 +12,7 @@ There are all together 22 labs to be delivered in 11 weeks. That is, 2 labs per 
 
 **Contents**
 
-Installation of Java JDK/Android Studio, navigating Android Studio,Context Menus, getting help, Code generation, Git
+'Hello World', Installation of Java JDK/Android Studio, navigating Android Studio,Context Menus, getting help, Code generation, Git
 
 **Refs**
 
@@ -22,7 +22,7 @@ Installation of Java JDK/Android Studio, navigating Android Studio,Context Menus
 
 **Contents**
 
-'Hello World', AVD, common operations, refactoring, logging, debugger's tool window
+AVD, common operations, refactoring, logging, debugger's tool window
 
 **Refs**
 
@@ -52,7 +52,35 @@ Classes, constants, methods, constructors, modifiers, inheritence
 
 [Ref.[3]](#ref3) chapter 5
 
-## Week 3 Simple views and Controls
+## Week 3 XML and gradle
+
+### XML
+
+**Contents**
+
+App manifest, XML schema, syntax, styles
+
+**Refs**
+
+[Ref.[3]](#ref3) chapter 4
+
+[Android official API guide: App Manifest](http://developer.android.com/guide/topics/manifest/manifest-intro.html)
+
+### Gradle
+
+**Contents**
+
+IntelliJ build system, gradle build concepts, Android lib dependencies
+
+**Refs**
+
+[Ref.[1]](#ref1) chapter 13
+
+[Android official API guide: Build System Overview](https://developer.android.com/sdk/installing/studio-build.html)
+
+[Gradle Plugin User Guide](http://tools.android.com/tech-docs/new-build-system/user-guide)
+
+## Week 4 Simple views and Controls
 
 ### UI design
 
@@ -78,7 +106,7 @@ Fragments, screen orientation, basic views, action bar
 
 [Ref.[4]](#ref4) chapter 3/4
 
-## Week 4 Composit views
+## Week 5 Composit views
 
 ### List view
 
@@ -104,7 +132,29 @@ Grid view, specialized fragments, dialogs
 
 [Android official API guide: Dialogs](http://developer.android.com/guide/topics/ui/dialogs.html)
 
-## Week 5 Testing
+## Week 6 Data Persistence
+
+### Shared preference
+
+**Contents**
+
+Application preference, prefrence activity, files and directories
+
+**Refs**
+
+[Ref.[5]](#ref5) chapter 11/12
+
+### SQL database
+
+**Contents**
+
+SQLite api, helper class, pre-creating databases
+
+**Refs**
+
+[Ref.[4]](#ref4) chapter 6
+
+## Week 7 Testing
 
 ### Unit testing
 
@@ -128,29 +178,8 @@ The Android testing API, activity testing, service testing, content pjrovider te
 
 [Android official API guide: Testing fundamentals](http://developer.android.com/tools/testing/testing_android.html)
 
-## Week 6 Data Persistence
 
-### Shared preference
-
-**Contents**
-
-Application preference, prefrence activity, files and directories
-
-**Refs**
-
-[Ref.[5]](#ref5) chapter 11/12
-
-### SQL database
-
-**Contents**
-
-SQLite api, helper class, pre-creating databases
-
-**Refs**
-
-[Ref.[4]](#ref4) chapter 6
-
-## Week 7 Wearables
+## Week 8 Wearables
 
 ### Android wear
 
@@ -168,11 +197,11 @@ Setting up wearable environment, optimize for screen technologies, build watchfa
 
 **Contents**
 
-See iOS counterparts
+Pebble, Microsoft Band
 
 **Refs**
 
-## Week 8 Graphics and Animation
+## Week 9 Graphics and Animation
 
 ### Graphic design
 
@@ -198,64 +227,53 @@ Frame animation, tween animation, hybrid animation
 
 [Android official API guide: Adding Animations](http://developer.android.com/training/animation/index.html)
 
-## Week 9 Location
+## Week 10 Location services and Maps
 
 ### Location services
 
 **Contents**
 
-Getting location, retrive updates, display address
+Getting location, retrive updates, display address, Google maps
 
 **Refs**
 
 [Android official API guide: Making Your App Location-Aware](http://developer.android.com/training/location/index.html)
 
+[Google Maps API for Android](https://developers.google.com/maps/documentation/android/)
+
 ### Indoor location
 
 **Contents**
 
-See iOS counterparts
+iBeacons, Proximity, Triangulation
 
 **Refs**
 
-## Week 10
+## Week 11 Multimedia
 
-### Google Maps
+### Audio playback
 
 **Contents**
 
-Google maps
+Volume, playback, audio focus
 
 **Refs**
 
-[Google Maps API for Android](https://developers.google.com/maps/documentation/android/)
+[Ref.[3]](#ref3) chapter 10
 
-### More advanced maps
+[Android official API guide: Managing Audio Playback](http://developer.android.com/training/managing-audio/index.html)
+
+### Photos and videos
 
 **Contents**
 
+Camera2, Streaming video, MediaPlayer, MediaController
 
 **Refs**
 
-## Week 11 Messaging
+[Ref.[3]](#ref3) chapter 11
 
-### SMS messaging
-
-**Contents**
-
-Send SMS messages, send internet messagesget feedback, camera 2 api
-
-**Refs**
-
-[Ref.[4]](#ref4) chapter 8
-
-### To be confirmed
-
-**Contents**
-
-**Refs**
-
-
+[Android official API guide: Capturing Photos](http://developer.android.com/training/camera/index.html)
 
 
 # Assessmen plan
