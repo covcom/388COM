@@ -58,28 +58,220 @@ Classes, constants, methods, constructors, modifiers, inheritence
 
 **Contents**
 
-MVC pattern, activity lifecyle, fragments, and intents
+MVC pattern, activity lifecyle, layouts, and intents
+
+Pattern usability and design principles: animation, style, layout, components, pattern usability
 
 **Refs**
 
-[Ref.[2]](#ref2) chapter 2
+[Ref.[4]](#ref4) chapter 2
 
-[Google Java Style](https://google-styleguide.googlecode.com/svn/trunk/javaguide.html)
+[Android official API guide: Material Design](http://developer.android.com/design/index.html)
 
-### Classes and Objects
+### Simple and complex view
 
 **Contents**
 
-Classes, constants, methods, constructors, modifiers, inheritence
+Fragments, screen orientation, basic views, action bar
 
 **Refs**
 
-[Ref.[3]](#ref3) chapter 5
+[Ref.[4]](#ref4) chapter 3/4
+
+## Week 4 Composit views
+
+### List view
+
+**Contents**
+
+Simple listview, complex listview, adapter view
+
+**Refs**
+
+[Ref.[4]](#ref4) chapter 4
+
+[Android official API guide: List View ](http://developer.android.com/guide/topics/ui/layout/listview.html)
+
+### Grid view
+
+**Contents**
+
+Grid view, specialized fragments, dialogs
+
+**Refs**
+
+[Ref.[4]](#ref4) chapter 4
+
+[Android official API guide: Dialogs](http://developer.android.com/guide/topics/ui/dialogs.html)
+
+## Week 5 Testing
+
+### Unit testing
+
+**Contents**
+
+Unit test best practices, junit essentials
+
+**Refs**
+
+[Ref.[5]](#ref5) chapter 18
+
+[vogella tutorials: Unit Testing with JUnit](http://www.vogella.com/tutorials/JUnit/article.html)
+
+### Android testing
+
+**Contents**
+
+The Android testing API, activity testing, service testing, content pjrovider testing, acceptance testing--robotium, continuous integration
+
+**Refs**
+
+[Android official API guide: Testing fundamentals](http://developer.android.com/tools/testing/testing_android.html)
+
+## Week 6 Data Persistence
+
+### Shared preference
+
+**Contents**
+
+Application preference, prefrence activity, files and directories
+
+**Refs**
+
+[Ref.[5]](#ref5) chapter 11/12
+
+### SQL database
+
+**Contents**
+
+SQLite api, helper class, pre-creating databases
+
+**Refs**
+
+[Ref.[4]](#ref4) chapter 6
+
+## Week 7 Wearables
+
+### Android wear
+
+**Contents**
+
+Setting up wearable environment, optimize for screen technologies, build watchface service, initialize drawable resources and styles
+
+**Refs**
+
+[Ref.[1]](#ref1) chapter 15
+
+[Ref.[3]](#ref3) chapter 15
+
+### 3rd party wearables
+
+**Contents**
+
+See iOS counterparts
+
+**Refs**
+
+## Week 8 Graphics and Animation
+
+### Graphic design
+
+**Contents**
+
+Imaging concepts, format, drawable assets, ImageButton XML structure, grid view, 3rd party filters
+
+**Refs**
+
+[Ref.[3]](#ref3) chapter 9
+
+[Ref.[4]](#ref4) chapter 5
+
+### Animation
+
+**Contents**
+
+Frame animation, tween animation, hybrid animation
+
+**Refs**
+
+[Ref.[3]](#ref3) chapter 10
+
+[Android official API guide: Adding Animations](http://developer.android.com/training/animation/index.html)
+
+## Week 9 Location
+
+### Location services
+
+**Contents**
+
+Getting location, retrive updates, display address
+
+**Refs**
+
+[Android official API guide: Making Your App Location-Aware](http://developer.android.com/training/location/index.html)
+
+### Indoor location
+
+**Contents**
+
+See iOS counterparts
+
+**Refs**
+
+## Week 10
+
+### Google Maps
+
+**Contents**
+
+Google maps
+
+**Refs**
+
+[Google Maps API for Android](https://developers.google.com/maps/documentation/android/)
+
+### More advanced maps
+
+**Contents**
 
 
+**Refs**
 
+## Week 11 Messaging
 
+### SMS messaging
 
+**Contents**
+
+Send SMS messages, send internet messagesget feedback, camera 2 api
+
+**Refs**
+
+[Ref.[4]](#ref4) chapter 8
+
+### To be confirmed
+
+**Contents**
+
+**Refs**
+
+## Week 12 Messaging
+
+### SMS messaging
+
+**Contents**
+
+Send SMS messages, send internet messagesget feedback, camera 2 api
+
+**Refs**
+
+[Ref.[4]](#ref4) chapter 8
+
+### To be confirmed
+
+**Contents**
+
+**Refs**
 
 
 
