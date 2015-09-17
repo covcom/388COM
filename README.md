@@ -80,7 +80,7 @@ IntelliJ build system, gradle build concepts, Android lib dependencies
 
 [Gradle Plugin User Guide](http://tools.android.com/tech-docs/new-build-system/user-guide)
 
-## Week 4 Simple views and Controls
+## Week 4 Simple views and controls
 
 ### UI design
 
@@ -132,7 +132,7 @@ Grid view, specialized fragments, dialogs
 
 [Android official API guide: Dialogs](http://developer.android.com/guide/topics/ui/dialogs.html)
 
-## Week 6 Data Persistence
+## Week 6 Data persistence
 
 ### Shared preference
 
@@ -201,7 +201,7 @@ Pebble, Microsoft Band
 
 **Refs**
 
-## Week 9 Graphics and Animation
+## Week 9 Graphics and animation
 
 ### Graphic design
 

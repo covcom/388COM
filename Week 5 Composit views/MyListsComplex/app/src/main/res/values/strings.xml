@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">My Lists</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="first_names">
+        <item>Dwight</item>
+        <item>John</item>
+        <item>Lyndon</item>
+        <item>Richard</item>
+        <item>Gerald</item>
+        <item>Jimmy</item>
+        <item>Ronald</item>
+        <item>George</item>
+        <item>Bill</item>
+        <item>George</item>
+        <item>Barack</item>
+    </string-array>
+
+</resources>
