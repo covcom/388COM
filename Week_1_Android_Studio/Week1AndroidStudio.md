@@ -16,8 +16,6 @@ The expected outcomes after these 11 excercises are:
 
 In this 1st lab, you'll find out the things you need to have become an Android developer. You'll also design and run your 1st Android app.
 
-'Hello World', Installation of Java JDK/Android Studio, navigating Android Studio,Context Menus, getting help, Code generation, Git
-
 ### What is Android?
 
 First of all, let's ask a question - what is Android? Well, the answer depends on who you ask. There're several different levels to define Android: on the very deep level, it's a Linux operating system that controls a bunch of hardware devices. This is the same as any other operating systems such as Mac/Windows; on the very superficial level, Android are devices such as Samsung Galaxy; For us, Android developers, Android is an application runtime that we can develop codes which will turn into Dalvik virtual machines a.k.a. mobile apps.
@@ -90,7 +88,7 @@ Follow the steps below to create and run your first Android app:
 
  ![hello_android](.md_images/hello_android.png)
 
-6. If you are lucky to have an Android device attached to the computer you can use it for testing. But first of all you'll need to make your device debuggable. To use your device with Macs in ECM15, this is a two-step process:
+6. If you are lucky of having an Android device attached to the computer you can use it for testing. But first of all you'll need to make your device debuggable. Use your device with Macs is a two-step process:
 
  * You need to enable Developer options. On Android 4.2 and higher, the Developer options screen is hidden by default. To make it visible, go to Settings ==> About phone and tap Build number seven times. 
  * Enable USB debugging on your device. On most devices running Android 3.2 or older, you can find the option under Settings ==> Applications ==> Development. On Android 4.0 and newer, it's in Settings ==> Developer options.
@@ -103,9 +101,9 @@ Follow the steps below to create and run your first Android app:
 
 ### Android Studio guided tour
 
-Now it's time to go back to Android Studio and have a closer look of what we have done.
+Now it's time to go back to Android Studio and have a closer look at what we have done.
 
-Android Studio is based an Java IDE called IntelliJ. In fact, Google didn't document Android Studio very well and sometimes I need to go to IntelliJ website to look for answers. The whole IDE window you saw earlier can be roughly divided into 5 areas:
+Android Studio is based on an Java IDE called IntelliJ. In fact, Google doesn't document Android Studio very well and sometimes you'll need to go to IntelliJ website to look for answers. The whole IDE window you saw earlier can be roughly divided into 5 areas:
 
 ![Android Studio UI](https://www.jetbrains.com/img/webhelp/idea/large_mainWindow.gif)
 > The image above is from Jetbrains [website](https://www.jetbrains.com/idea/help/guided-tour-around-intellij-idea-user-interface.html).
@@ -128,31 +126,36 @@ Now take a look at the location you selected ealier to save the project. What yo
 
 ![Android Studio UI](.md_images/hello_files.png)
 
-The most important ones, however, are being contained in app/src/main. Actually when I download samples from Android website, I just go into this folder and ignore the rest. Some of the texts below are quoted from official [Android online tutorial](http://developer.android.com/training/basics/firstapp/creating-project.html), with some changes to suit our needs.
+The most important ones, however, are being contained in app/src/main. Actually when I download samples from Android website, sometimes I just go into this folder and ignore the rest.
 
 ![Android Studio UI](.md_images/hello_files2.png)
 
-1 activity_main.xml. This is the XML layout file for the activity you added when you created the project with Android Studio. In simple words, in Android activity represent a single screen where your users can perform certain tasks. Thus this xml defines your first (and only) screen in your app. The file at the moment includes a TextView that displays the message "Hello world!" and a floating button.
-app/src/main/java/com.mycompany.myfirstapp/MyActivity.java
-A tab for this file appears in Android Studio when the New Project workflow finishes. When you select the file you see the class definition for the activity you created. When you build and run the app, the Activity class starts the activity and loads the layout file that says "Hello World!"
-app/src/main/AndroidManifest.xml
-The manifest file describes the fundamental characteristics of the app and defines each of its components. You'll revisit this file as you follow these lessons and add more components to your app.
+1. activity_main.xml. This is the XML layout file for the activity you added when you created the project with Android Studio. In simple words, in Android activity represent a single screen where your users can perform certain tasks. Thus this xml defines your first (and only) screen in your app. The file at the moment includes a TextView that displays the message "Hello world!" and a floating button.
+2. MainActivity.java. This is the Java class that associates the xml layout file with different functions such as respond to button click. When you build and run the app, the Activity class starts the activity and loads the layout file that says "Hello World!".
+3. AndroidManifest.xml. The manifest file describes the fundamental characteristics of the app and defines each of its components. For example, it defines if your app needs to access the GPS sensor.
 
-### Difference between Android and iOS
+> On the official [Android developer website](https://developer.android.com/tools/projects/index.html), you'll see full descriptions of different files.
 
-### Compare Android with iOS, list at least 5 common features and 5 differences, and describe the benefits of Android being open source. Introduction to Android Application Development
+We were talking about Android Studio, but why all of a sudden we turned to our harddrive? Here is why - when you look at the 'Project' tool window to the left, you'll see some files being displayed. And those are the files we've just talked about! In ths 'Project' mode, you'll see important files but not in their ordinary tree structure. There're several different modes in this tool window apart from the 'Android' mode. For example, if you choose 'Project' mode the window will display file trees that assemble what's available on your harddrive.
 
-This is an Android module; we’re not going to learn any technical details of iOS. However, it’s important to realize that iOS is also a big player in the market, and it has been in a leading position for a relatively long time. With the release of iOS 8, many features that were unique to Android have now been adopted in iOS e.g. 3rd party input methods. The chances are that if a customer or even boss approaches you for an Android app, it’s highly likely they’ll need an iOS equivalent.
+![Project window](https://developer.android.com/images/tools/projectview01.png)
 
-free open complete
+### Android vs iOS
 
-[Ref.[1]](#ref1) chapter 1/2/3/7
+When talking about Android, you need to know what else there are in the market. The advantages Android offers are: free, open, and complete. But it's very likely that in the future you'll be asked to develope an Android app as well as an iOS app. 
+
+![Android market share](http://www.idc.com/prodserv/smartphone-ms-img/chart-ww-smartphone-os-market-share.png)
+
+Technically speaking, the two big players in the mobile OS market i.e. Android and iOS share a lot of things in common and at the same time have lots of differences. As a developer you need to bare this in mind. One simple example is that Android has a physical or virtual back button, so there's no need to show a 'back' click on the screen. But for iOS we definitely need one.
+
+![Android iOS](https://cms-assets.tutsplus.com/uploads/users/810/posts/23616/image/global-elements.png)
 
 ## Lab 2 Debugging
 
-AVD, common operations, refactoring, logging, debugger's tool window
 
-### Git
+Git common operations, logging, debugger's tool window
+
+### Git version control
 
 ### Intents
 
@@ -190,12 +193,3 @@ The above example, taken from ‘Mobile Design Pattern Gallery’ by Theresa Nei
 
 
 
-
-
-## Reading list
-
-1. <a name="ref1"></a>[Learn Android Studio](http://www.amazon.co.uk/Learn-Android-Studio-Quickly-Effectively/dp/1430266015)
-2. <a name="ref2"></a>[Learn Java for Android Development](http://www.amazon.co.uk/Learn-Java-Android-Development/dp/1430264543)
-3. <a name="ref3"></a>[Android Apps for Absolute Beginners](http://www.amazon.co.uk/Android-Absolute-Beginners-Wallace-Jackson/dp/1484200209)
-4. <a name="ref4"></a>[Beginning Android 4 Application Development](http://www.amazon.co.uk/Beginning-Android-4-Application-Development/dp/1118199545)
-5. <a name="ref5"></a>[Introduction to Android Application Development](http://www.amazon.co.uk/Introduction-Android-Application-Development-Essentials/dp/0321940261)

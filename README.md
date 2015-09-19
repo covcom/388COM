@@ -12,21 +12,21 @@ There are all together 22 labs to be delivered in 11 weeks. That is, 2 labs per 
 
 **Contents**
 
-'Hello World', Installation of Java JDK/Android Studio, navigating Android Studio,Context Menus, getting help, Code generation, Git
+Installation of Java JDK/Android Studio, AVD, 'Hello World', navigating Android Studio, Context Menus, getting help
 
 **Refs**
 
-[Ref.[1]](#ref1) chapter 1/2/3/7
+[Ref.[1]](#ref1) chapter 1/2
 
 ### Debugging
 
 **Contents**
 
-AVD, common operations, refactoring, logging, debugger's tool window
+Git common operations, logging, debugger's tool window
 
 **Refs**
 
-[Ref.[1]](#ref1) chapter 4/12
+[Ref.[1]](#ref1) chapter 7/12
 
 ## Week 2 The Java language
 
@@ -46,9 +46,13 @@ Data type, variable, expressions, identifiers, statements, google java style
 
 **Contents**
 
+Code generation, refactoring
+
 Classes, constants, methods, constructors, modifiers, inheritence
 
 **Refs**
+
+[Ref.[1]](#ref1) chapter 3/4
 
 [Ref.[3]](#ref3) chapter 5
 
