@@ -30,7 +30,7 @@ Git common operations, logging, debugger's tool window
 
 ## Week 2 The Java language
 
-### Language Concepts
+### Language concepts
 
 **Contents**
 
@@ -42,7 +42,7 @@ Data type, variable, expressions, identifiers, statements, google java style
 
 [Google Java Style](https://google-styleguide.googlecode.com/svn/trunk/javaguide.html)
 
-### Classes and Objects
+### Classes and objects
 
 **Contents**
 

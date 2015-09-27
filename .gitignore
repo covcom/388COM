@@ -33,3 +33,7 @@ Thumbs.db
 build/
 
 # the above is from http://stackoverflow.com/questions/16736856/what-should-be-in-my-gitignore-for-an-android-studio-project
+
+# need to ignore all ppt files, but keep generated pdf for class
+*.pptx
+
