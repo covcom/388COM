@@ -1,7 +1,7 @@
-package com.example.jianhuayang.myvehicle;
+package com.example.jianhuayang.mycar;
 
 /**
- * Created by jianhuayang on 25/09/15.
+ * Created by jianhuayang on 28/09/15.
  */
 public class Vehicle {
     private String make;

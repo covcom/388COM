@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,24 +10,23 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/activity_main"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Type and Run"
         android:textColor="@android:color/darker_gray"
-        android:textSize="24sp" />
-
+        android:textSize="24sp"
+        />
     <TextView
         android:id="@+id/labelMake"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/textView"
-        android:layout_below="@+id/textView"
         android:layout_marginLeft="19dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="36dp"
         android:text="Make:"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -35,10 +34,8 @@
         android:id="@+id/inputMake"
         android:layout_width="800dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/labelMake"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="10dp"
-        android:layout_toRightOf="@id/labelMake"
+        android:layout_marginLeft="19dp"
+        android:layout_marginRight="20dp"
         android:ems="10"
         android:hint="e.g. BMW" />
 
@@ -46,8 +43,7 @@
         android:id="@+id/labelYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/labelMake"
-        android:layout_below="@id/labelMake"
+        android:layout_marginLeft="19dp"
         android:layout_marginTop="20dp"
         android:text="Year:"
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -57,9 +53,8 @@
         android:id="@+id/inputYear"
         android:layout_width="800dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/labelYear"
-        android:layout_alignLeft="@id/inputMake"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginRight="20dp"
         android:ems="10"
         android:hint="e.g. 1980"
         android:inputType="number"
@@ -69,10 +64,10 @@
         android:id="@+id/buttonRun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/labelYear"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="22dp"
         android:onClick="onButtonClick"
         android:text="Run" />
 
-</RelativeLayout>
+
+</LinearLayout>

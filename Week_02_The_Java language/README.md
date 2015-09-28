@@ -26,6 +26,8 @@ google java style
 
 ### pattern
 Delegation 
+
+https://www.jetbrains.com/idea/help/replace-inheritance-with-delegation.html
 singleton
 ### uml
 
