@@ -12,20 +12,20 @@ public class Vehicle {
     public Vehicle() {
         this.make = "Volvo";
         this.year = 2012;
-        this.message = "default message";
+        this.message = "This is the default message.";
     }
 
     public Vehicle(String make, int year) {
         this.make = make;
         this.year = year;
-        this.message = "Your car is a " + make + " built in " + year;
+        this.message = "Your car is a " + make + " built in " + year + ".";
         count();
     }
 
     public Vehicle(String make) {
         this();
         this.make = make;
-        message = "You didn't type in year value";
+        message = "You didn't type in year value.";
         count();
     }
 
