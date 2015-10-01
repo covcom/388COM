@@ -58,7 +58,7 @@ public class Vehicle {
         this.counter++;
     }
 
-    interface controllerable {
+    interface Controllable {
         void control();
     }
 }

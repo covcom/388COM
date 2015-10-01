@@ -13,7 +13,7 @@ class Car extends Vehicle{
     }
 }
 
-class Diesel extends Vehicle implements Vehicle.controllerable{
+class Diesel extends Vehicle implements Vehicle.Controllable {
 
     private String type;
 
