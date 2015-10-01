@@ -18,7 +18,7 @@ Follow steps below to create your app and initialize your layout file:
 
 1. Create a new app and name it 'My Vehicle'.
 2. If you see the red floating action button, read on. Otherwise you can skip this step.
-
+ 
  Under 'layout' folder you can see both 'activity_main.xml' and 'content_main.xml', open 'activity_main.xml' by double clicking on it. In the design view, click and delete the floating action button.
  
  ![float button](.md_images/float.png)
@@ -35,14 +35,14 @@ Follow steps below to create your app and initialize your layout file:
             }
         });
  ```
-
+ 
 3. Open 'content_main.xml', in design view, drap and drop the following widgets onto the graphical layout below 'Hello World!'. These need to be in the order of:
   * Small Text
   * Plain Text
   * Small Text
   * Numer
   * Button
-
+ 
  When you drag widges, in the graphical layout you'll see guidelines that show you which other widget is being used as the guide. This gives you some idea of where to place your widgets.
  
  ![drag](.md_images/drag.png)
@@ -51,10 +51,10 @@ Follow steps below to create your app and initialize your layout file:
  
 4. Double click on word 'Hello World!', a small window will pop up. Type in 'Type and Run' in the text field, and 'textView' in the id filed, and hit enter. You'll see the texts being displayed has changed to 'Type and Run'. We could do this for all widgets on the graphical layout. But normally we only drag and drop on a relatively rough scale, we fine-tune the layout in Text view.
 
-4. Switch to the Text view, edit the layouts so it looks like the following:
-
-```xml
-    <TextView
+5. Switch to the Text view, edit the layouts so it looks like the following:
+ 
+ ```xml
+ <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -105,7 +105,7 @@ Follow steps below to create your app and initialize your layout file:
         android:hint="e.g. 1980"
         android:inputType="number" />
 
-    <Button
+ <Button
         android:id="@+id/buttonRun"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -115,19 +115,23 @@ Follow steps below to create your app and initialize your layout file:
         android:onClick="onButtonClick"
         android:text="Run" />
  ```
+ 
  You have done something similar to this (hopefully!) in last week's lab - editting different Android tags and attributes. We'll now have a closer look. And we'll look at them again later on during the module.
   
-  1. Views in Android (UI elements) are defined in XML using tags similar to HTML. Some tags have two parts i.e. openning and closing parts, such as RelativeLayout, which are usually container layouts. Some tags have just openning tags, and closing tags are replaced by a forward slice.
-  2. Attribuits have an 'android:' prefix, and the values are enclosed by double quotes.
-  4. A common layout attributes is id. Note the '@+id/' part before most id texts, the plus sign means that the id is being added to the system. In other words, there's no existing views with the same id. Otherwise the system will complain. Also note the 'match_parent' value in the RelativeLayout tag. This value replaces the old 'fill_parent' value.
-  5. Other common attributes inclue layout_width and layout_height. Possible values for these two are 'wrap_content' and 'match_parent'. The names explain themselves.
-  > If you see an online example using 'fill_parent', you know it has been there for a while.
-  6. RelativeLayout is one of the two most important layouts in Android. To allign views in a RelativeLayout, you used attributes such as layout_height, layout_alignParentLeft, layout below. For a comprehensive list of attributes that can be used to control the positioning, click [here](http://developer.android.com/reference/android/widget/RelativeLayout.LayoutParams.html).
-  > The reason that relative layout is important is that there're so many different screen sizes for Android. In a relative positioning system, once we know the origin point (top left corner) and the size of the view, we can determine its abosolute position. By contrast, iOS use absolute positioning as there'r only a limited number of screen sizes available.
+  * Views in Android (UI elements) are defined in XML using tags similar to HTML. Some tags have two parts i.e. openning and closing parts, such as RelativeLayout, which are usually container layouts. Some tags have just openning tags, and closing tags are replaced by a forward slice.
+  * Attribuits have an 'android:' prefix, and the values are enclosed by double quotes.
+  * A common layout attributes is id. Note the '@+id/' part before most id texts, the plus sign means that the id is being added to the system. In other words, there's no existing views with the same id. Otherwise the system will complain. Also note the 'match_parent' value in the RelativeLayout tag. This value replaces the old 'fill_parent' value.
+  * Other common attributes inclue layout_width and layout_height. Possible values for these two are 'wrap_content' and 'match_parent'. The names explain themselves.
+   
+   > If you see an online example using 'fill_parent', you know it has been there for a while.
+   
+  * RelativeLayout is one of the two most important layouts in Android. To allign views in a RelativeLayout, you used attributes such as layout_height, layout_alignParentLeft, layout below. For a comprehensive list of attributes that can be used to control the positioning, click [here](http://developer.android.com/reference/android/widget/RelativeLayout.LayoutParams.html).
   
- ![Android coordinates](http://i.stack.imgur.com/xgQ3b.png)
- 
-  7. Padding and margins in Android are the same as in CSS. The units used here are: dp (density-independent pixel) for everything except for fonts where sp (scale-independent pixel) is being used. For a thogrough explanation of the difference between dp, sp, pixel and scale-independence etc. click [here](http://developer.android.com/guide/practices/screens_support.html).
+   > The reason that relative layout is important is that there're so many different screen sizes for Android. In a relative positioning system, once we know the origin point (top left corner) and the size of the view, we can determine its abosolute position. By contrast, iOS use absolute positioning as there'r only a limited number of screen sizes available.
+    
+    ![Android coordinates](http://i.stack.imgur.com/xgQ3b.png)
+    
+  * Padding and margins in Android are the same as in CSS. The units used here are: dp (density-independent pixel) for everything except for fonts where sp (scale-independent pixel) is being used. For a thogrough explanation of the difference between dp, sp, pixel and scale-independence etc. click [here](http://developer.android.com/guide/practices/screens_support.html).
 
 ### Build the class
 
@@ -169,7 +173,7 @@ Following steps below to buid a new class:
         this.message = "This is the default message.";
     }
  ```
-
+ 
 5. Use the generator to generate two other constructors, so your code looks like this
  ```java
     public Vehicle(String make, int year) {
@@ -278,7 +282,7 @@ Following steps below to buid a new class:
    ```
 11. Now you have everything you need, but it may not be in a nice readable order. What Android Studio offers here is a rearrangement function. Click Code ==> Rearrange Code to see if it makes any differences. The rules Android Studio uses can be configured using Preferences ==> Editor ==> Code Style ==> Java
 
-![rearrange](.md_images/rearrange.png)
+ ![rearrange](.md_images/rearrange.png)
 
 ### Linking layout with behavior
 
@@ -310,8 +314,10 @@ Follow steps below to create an onButtonClick method that responds to user click
         Log.d(TAG, "User clicked " + Vehicle.counter + " times.");
         Log.d(TAG, "User message is \"" + vehicle + "\".");
     }
-    
+ ```
+ 
   What this code does is that it collects the make and year the user has typed, and then it creates a vehicle object and pops up a message. In case the user doesn't supply a year of their car, it'll use the default settings. In the meanwhile, the app records the number of times the button has been clicked. And this info goes to system log. Something you need to note in the codes above:
+  
     * (EditText) is an explicit type cast (type convertion). This is required as the return type of findViewById is View, which is the superclass of most UI elements in Android.
     * The getText().toString() will return a String. A simple getText() won't work as the return type for the method is Editable.
     * Toast in Android is a small pop-up message. The signature for the method we used is `public static Toast makeText (Context context, CharSequence text, int duration)`. Click [here](http://developer.android.com/reference/android/widget/Toast.html) for details of this method.
@@ -468,7 +474,7 @@ Go back to Vehicle.java, we need to prepare the class to make it ready.
  
 3. Click Code ==> Rearrange Code and Code ==> Reformat Code to make it look nicer.
 
-Now we're ready to explore inheritance in java.
+Now we're ready to explore inheritance in java:
 
 1. Create a new class called 'Car', and delete the public mofifier. By removing the public modifier, we make the class default. That means only classes with the same package can access it.
  > We don't have to remove 'public', but I want to make sure both subclasses have the same access level. The important thing to remember is that in Java there can only be one public class per .java file.
@@ -596,7 +602,6 @@ Now we're ready to explore inheritance in java.
 
 5. Insert `android:onClick="onButtonClick"' for both buttons in 'content_main.xml'.
 
-###
 
 ### Java naming conventions
 google java style
