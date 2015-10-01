@@ -25,9 +25,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        editTextMake = (EditText) findViewById(R.id.inputMake);
-        editTextYear = (EditText) findViewById(R.id.inputYear);
-        editTextColor = (EditText) findViewById(R.id.inputColor);
     }
 
     @Override
@@ -53,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onButtonClick(View view) {
+        editTextMake = (EditText) findViewById(R.id.inputMake);
+        editTextYear = (EditText) findViewById(R.id.inputYear);
+        editTextColor = (EditText) findViewById(R.id.inputColor);
         String make = editTextMake.getText().toString();
         String strYear = editTextYear.getText().toString();
         int intYear = Integer.parseInt(strYear);

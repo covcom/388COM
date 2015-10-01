@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), vehicle.getMessage(), Toast.LENGTH_SHORT).show();
         Log.d(TAG, "User clicked " + Vehicle.counter + " times.");
         Log.d(TAG, "User message is \"" + vehicle + "\".");
+
     }
 
 }

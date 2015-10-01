@@ -20,7 +20,6 @@ class Diesel extends Vehicle implements Vehicle.controllerable{
     public Diesel(String make, int year){
         super(make, year);
         this.type = "Diesel";
-
     }
 
     @Override
