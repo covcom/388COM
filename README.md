@@ -2,7 +2,7 @@
 
 This is the Android part of module 387COM 'Mobile Applications Development' at Coventry University. The module leader for this module is Mark Tyers. The person responsible for the teaching of the Android part is Jianhua Yang.
 
-There are all together 22 labs to be delivered in 11 weeks. That is, 2 labs per week. This document contains the module plan for academic year 15-16, and asssessment plan (subject to changes). In the Android part of the mdoule, we closely follow the overall structure/pace of the iOS part whenever possible. For iOS part of the module see [here](https://github.com/covcom/387COM).
+There are altogether 22 labs to be delivered in 11 weeks. That is 2 labs per week. This document contains the module plan for academic year 15-16, and assessment plan (subject to changes). In the Android part of the module, we closely follow the overall structure/pace of the iOS part whenever possible. For iOS part of the module see [here](https://github.com/covcom/387COM).
 
 # Teaching plan
 
@@ -34,27 +34,29 @@ Git common operations, logging, debugger's tool window
 
 **Contents**
 
-Data type, variable, expressions, identifiers, statements, google java style
+Data type, variable, expressions, identifiers, statements
+
+Code generation, refactoring
 
 **Refs**
 
-[Ref.[2]](#ref2) chapter 2
+[Ref.[1]](#ref1) chapter 3
 
-[Google Java Style](https://google-styleguide.googlecode.com/svn/trunk/javaguide.html)
+[Ref.[2]](#ref2) chapter 2
 
 ### Classes and objects
 
 **Contents**
 
-Code generation, refactoring
+Classes, constants, methods, constructors, modifiers, inheritance
 
-Classes, constants, methods, constructors, modifiers, inheritence
+Google Java style
 
 **Refs**
 
-[Ref.[1]](#ref1) chapter 3/4
-
 [Ref.[3]](#ref3) chapter 5
+
+[Google Java Style](https://google-styleguide.googlecode.com/svn/trunk/javaguide.html)
 
 ## Week 3 XML and gradle
 
@@ -68,19 +70,19 @@ App manifest, XML schema, syntax, styles
 
 [Ref.[3]](#ref3) chapter 4
 
-[Android official API guide: App Manifest](http://developer.android.com/guide/topics/manifest/manifest-intro.html)
+[App Manifest](http://developer.android.com/guide/topics/manifest/manifest-intro.html)
 
 ### Gradle
 
 **Contents**
 
-IntelliJ build system, gradle build concepts, Android lib dependencies
+IntelliJ build system, Gradle build concepts, Android lib dependencies
 
 **Refs**
 
 [Ref.[1]](#ref1) chapter 13
 
-[Android official API guide: Build System Overview](https://developer.android.com/sdk/installing/studio-build.html)
+[Build System Overview](https://developer.android.com/sdk/installing/studio-build.html)
 
 [Gradle Plugin User Guide](http://tools.android.com/tech-docs/new-build-system/user-guide)
 
@@ -90,7 +92,7 @@ IntelliJ build system, gradle build concepts, Android lib dependencies
 
 **Contents**
 
-MVC pattern, activity lifecyle, layouts, and intents
+MVC pattern, activity lifecycle, layouts, and intents
 
 Pattern usability and design principles: animation, style, layout, components, pattern usability
 
@@ -110,7 +112,7 @@ Fragments, screen orientation, basic views, action bar
 
 [Ref.[4]](#ref4) chapter 3/4
 
-## Week 5 Composit views
+## Week 5 Composite views
 
 ### List view
 
@@ -152,7 +154,7 @@ Application preference, prefrence activity, files and directories
 
 **Contents**
 
-SQLite api, helper class, pre-creating databases
+SQLite API, helper class, pre-creating databases
 
 **Refs**
 
@@ -176,7 +178,7 @@ Unit test best practices, junit essentials
 
 **Contents**
 
-The Android testing API, activity testing, service testing, content pjrovider testing, acceptance testing--robotium, continuous integration
+The Android testing API, activity testing, service testing, content provider testing, acceptance testing--robotium, continuous integration
 
 **Refs**
 
@@ -237,7 +239,7 @@ Frame animation, tween animation, hybrid animation
 
 **Contents**
 
-Getting location, retrive updates, display address, Google maps
+Getting location, retrieve updates, display address, Google maps
 
 **Refs**
 
@@ -280,7 +282,7 @@ Camera2, Streaming video, MediaPlayer, MediaController
 [Android official API guide: Capturing Photos](http://developer.android.com/training/camera/index.html)
 
 
-# Assessmen plan
+# Assessment plan
 
 Refer to Moodle for this
 
@@ -294,4 +296,4 @@ Refer to Moodle for this
 
 # About this Github repository
 
-This Github repository is setup to host lab materials and code examples we use throughout module 387COM. You can simply read and explore. If you would like a personal copy of it, you'll need to fork it as writing to it is not allowed. In the repository for module 305CDE, there is a [README](https://github.com/covcom/305CDE/blob/master/README.md) file written by Mark Tyers that explains how to fork repositories and keep them up to date.
+This Github repository is set up to host lab materials and code examples we use throughout module 387COM. You can simply read and explore. If you would like a personal copy of it, you'll need to fork it as writing to it is not allowed. In the repository for module 305CDE, there is a [README](https://github.com/covcom/305CDE/blob/master/README.md) file written by Mark Tyers that explains how to fork repositories and keep them up to date.

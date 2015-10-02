@@ -8,7 +8,7 @@ The expected outcomes after the module are:
 
 1. Demonstrate familiarity with the Java Programming language and the Android Studio.
 2. Design applications suitable for Android devices.
-3. Use the Android software development kit and emulator to develop applications for the Android platform.
+3. Use the Android software development kit and an emulator to develop applications for the Android platform.
 4. Make use of the main modes of interaction available on a smartphone platform.
 
 ## Lab 1 Introduction to Android Studio

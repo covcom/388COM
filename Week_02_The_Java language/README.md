@@ -153,7 +153,7 @@ Following steps below to build a new class:
  ```
  There're several things you need to know in the above codes:
  
-  * If you come from Python background (as most of you do), you'll notice the type names such as String (capital S) and int. Unlike Python, Java is a strictly typed language, you need to decare variable types before using them.
+  * If you come from Python background (as most of you do), you'll notice the type names such as String (capital S) and int. Unlike Python, Java is a strictly typed language, you need to declare variable types before using them.
   * Note access modifiers such as public and private. Public means everybody has access to that variable, and private is the complete opposite - nobody can. But if nobody has access rights, how can our Vehicle class use private variables? This is through getter and setter methods, as you'll find out later. There're also two other modifiers i.e. default and protected, do you know what those mean?
   * Also note the keyword static. This makes the counter variable a class variable that serves the whole class. By contrast, variables such as make is an instance variable (also called field). Instance variables are associated with an instance of the class i.e. objects.
   * The part 'counter = 0' is an assignment expression that sets the counter to zero. All instance variables in Java have default values, and a default value for int is 0. So this step is not really necessary, but this is considered good coding practices. Local variables e.g. those appear in a for loop, have to be initialized before first use. This is the same as in Python.
@@ -614,7 +614,7 @@ First of all, there are some common pitfalls that most students have and you sho
 
 1. Don't use more than one blank lines, don't use unnecessary white spaces. This will make your codes look ugly.
 2. Don't declare more than one variables in a single line.
-3. Don't prefix your variable name. If you follow some online resources you'll see some use 'm' as prefix denoting member (i.e. instance) variables. Don't do that, it's not recommended by Google.
+3. Don't prefix your variable name. If you follow some online resources you'll see some use 'm' as the prefix denoting member (i.e. instance) variables. Don't do that, it's not recommended by Google.
 
     > But sometimes you see this 'm' prefix in 'legacy' codes on the official Android website.
 
