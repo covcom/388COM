@@ -1,12 +1,29 @@
 # XML and gradle
 
+build process, how xml works with java
+
+XML (.XML) 􀂰 Java (.JAVA) 􀂰 ByteCode (.DEX) 􀂰 App (.APK) 􀂰 Runtime (DVM) 􀂰 Screen
+
 ## Lab 1 XML
 
-**Contents**
+To rename:
 
-App manifest, XML schema, syntax, styles
+1. Copy folder to new location, rename it. can be verified in .idea/.name
+2. right click to change module settings, flavors, id, string app name
+3. rename package name
+4. clean, rebuild, sync, close restart
+4. search mycar and my car to verify http://stackoverflow.com/questions/20252180/how-to-find-string-in-project-in-android-studio 
+if any hard coded string should be changed here
 
-**Refs**
+### XML and system resource
+
+syntax, schema, types
+
+The XML prolog is optional. If it exists, it must come first in the document.
+
+### string, styles, menu
+
+### manifest
 
 [Ref.[3]](#ref3) chapter 4
 
@@ -14,9 +31,16 @@ App manifest, XML schema, syntax, styles
 
 ## Lab 2 Gradle
 
-**Contents**
+### Gradle build concepts
 
-IntelliJ build system, Gradle build concepts, Android lib dependencies
+### build ann run
+
+outputs, temp files etc.
+
+
+### include different dependencies
+
+IntelliJ build system, , Android lib dependencies
 
 **Refs**
 
