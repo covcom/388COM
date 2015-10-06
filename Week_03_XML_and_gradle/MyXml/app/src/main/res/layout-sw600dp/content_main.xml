@@ -92,8 +92,7 @@
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_right"
         android:ems="10"
-        android:hint="e.g. 35,000"
-        android:inputType="number" />
+        android:hint="e.g. 35,000" />
 
     <TextView
         android:id="@+id/labelEngine"
@@ -101,6 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginTop="@dimen/margin_top"
+        android:inputType="numberDecimal"
         android:text="Engine size (litre):"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -111,8 +111,7 @@
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_right"
         android:ems="10"
-        android:hint="e.g. 1.4"
-        android:inputType="numberDecimal" />
+        android:hint="e.g. 1.4" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -139,17 +138,42 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textBlock"
-        style="@style/CodeFont"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1"
-        android:background="?android:attr/colorActivatedHighlight"
-        android:scrollbars="vertical"
-        android:text="" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="60dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorPrimary"
+        android:fillViewport="true">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textBlock"
+                style="@style/CodeFont"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scrollbars="vertical"
+                android:text="" />
+
+            <Button
+                android:id="@+id/buttonCearAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorPrimaryDark"
+                android:text="Clear all"
+                android:onClick="onClearClick"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

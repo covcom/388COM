@@ -6,6 +6,8 @@ XML (.XML) 􀂰 Java (.JAVA) 􀂰 ByteCode (.DEX) 􀂰 App (.APK) 􀂰 Runtime (
 
 ## Lab 1 XML
 
+svn checkout https://github.com/foobar/Test/trunk/foo
+
 To rename:
 
 1. Copy folder to new location, rename it. can be verified in .idea/.name
@@ -21,9 +23,14 @@ syntax, schema, types
 
 The XML prolog is optional. If it exists, it must come first in the document.
 
+http://www.w3schools.com/xml/xml_syntax.asp
+
 ### string, styles, menu
 
-### manifest
+https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/core/res/res/values/styles.xml
+
+### java reference type, auto boxing, hashmap, arraylist
+
 
 [Ref.[3]](#ref3) chapter 4
 
@@ -31,11 +38,17 @@ The XML prolog is optional. If it exists, it must come first in the document.
 
 ## Lab 2 Gradle
 
+### layout
+
+### generic lambda
+
+### manifest
+
 ### Gradle build concepts
 
 ### build ann run
 
-outputs, temp files etc.
+outputs, temp files etc. r
 
 
 ### include different dependencies

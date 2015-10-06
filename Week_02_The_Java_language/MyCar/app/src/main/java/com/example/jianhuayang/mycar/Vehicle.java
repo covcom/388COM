@@ -1,4 +1,4 @@
-package com.example.jianhuayang.myxml;
+package com.example.jianhuayang.mycar;
 
 /**
  * Created by jianhuayang on 25/09/15.
@@ -11,8 +11,6 @@ public class Vehicle {
     private String make;
     private int year;
     private String message;
-    private int price;
-    private double engine;
 
     // The default constructor
     public Vehicle() {
@@ -24,11 +22,9 @@ public class Vehicle {
     /*
      * This constructor takes two parameters.
      */
-    public Vehicle(String make, int year, int price, double engine) {
+    public Vehicle(String make, int year) {
         this.make = make;
         this.year = year;
-        this.price = price;
-        this.engine = engine;
         this.message = "Your car is a " + make + " built in " + year + ".";
         count();
     }
@@ -43,18 +39,6 @@ public class Vehicle {
         this.make = make;
         message = "You didn't type in year value.";
         count();
-    }
-
-    public String getMake() {
-        return make;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public double getEngine() {
-        return engine;
     }
 
     @Override
