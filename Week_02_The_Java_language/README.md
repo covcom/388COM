@@ -284,7 +284,7 @@ Following steps below to build a new class:
 
  ![rearrange](.md_images/rearrange.png)
 
-### Linking layout with behavior
+### Link layout with behavior
 
 Follow steps below to create an onButtonClick method that responds to user click
 

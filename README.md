@@ -70,8 +70,6 @@ App manifest, XML schema, syntax, styles
 
 [Ref.[3]](#ref3) chapter 4
 
-[App Manifest](http://developer.android.com/guide/topics/manifest/manifest-intro.html)
-
 ### Gradle
 
 **Contents**
@@ -81,6 +79,8 @@ IntelliJ build system, Gradle build concepts, Android lib dependencies
 **Refs**
 
 [Ref.[1]](#ref1) chapter 13
+
+[App Manifest](http://developer.android.com/guide/topics/manifest/manifest-intro.html)
 
 [Build System Overview](https://developer.android.com/sdk/installing/studio-build.html)
 

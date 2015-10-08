@@ -19,19 +19,16 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MyXmlActivity";
-
     private EditText editTextMake;
     private EditText editTextYear;
     private EditText editTextColor;
     private EditText editTextPrice;
     private EditText editTextEngine;
     private TextView textViewBlock;
-
     private Vehicle vehicle;
     // the diamond syntax because the empty angle brackets have the shape of a diamond, "core java for the impatient" C. Horstmann
     private ArrayList<Vehicle> vehicleList = new ArrayList<>();
     private StringBuilder outputs;
-
     private static Double depreciation;
     private Map<String, String> mapCarMaker = new HashMap<>();
 
@@ -49,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         editTextEngine = (EditText) findViewById(R.id.inputEngine);
         textViewBlock = (TextView) findViewById(R.id.textBlock);
         textViewBlock.setMovementMethod(new ScrollingMovementMethod());
-
         depreciation = getResources().getInteger(R.integer.depreciation) / 100.00;
         String[] manufacturers = getResources().getStringArray(R.array.manufacturer_array);
         String[] descriptions = getResources().getStringArray(R.array.description_array);
@@ -155,12 +151,12 @@ public class MainActivity extends AppCompatActivity {
         textViewBlock.setText(outputs);
     }
 
-    private Integer depreciatePrice(Integer price) {
+    private int depreciatePrice(int price) {
         return (int) (price * depreciation);
     }
 
-    private Double depreciateEngine(Double engine) {
-        return engine * depreciation;
+    private double depreciateEngine(double engine) {
+        return (double) Math.round(engine * depreciation * 100) / 100 ;
     }
 
     public void onClearClick(View v){
