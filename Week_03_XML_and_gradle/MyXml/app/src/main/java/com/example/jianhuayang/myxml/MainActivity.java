@@ -13,8 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Vehicle> vehicleList = new ArrayList<>();
     private StringBuilder outputs;
     private static Double depreciation;
-    private Map<String, String> mapCarMaker = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +44,6 @@ public class MainActivity extends AppCompatActivity {
         textViewBlock = (TextView) findViewById(R.id.textBlock);
         textViewBlock.setMovementMethod(new ScrollingMovementMethod());
         depreciation = getResources().getInteger(R.integer.depreciation) / 100.00;
-        String[] manufacturers = getResources().getStringArray(R.array.manufacturer_array);
-        String[] descriptions = getResources().getStringArray(R.array.description_array);
-
-        for (int i = 0; i < manufacturers.length; i++ ){
-            mapCarMaker.put(manufacturers[i], descriptions[i]);
-        }
     }
 
     @Override
@@ -133,17 +124,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             outputs = new StringBuilder();
             for (Vehicle v : vehicleList) {
-                String vehicleDescription = mapCarMaker.get(v.getMake());
-                if (vehicleDescription == null){
-                    vehicleDescription = "This is no description available for this manufacture";
-                }
                 outputs.append("This is vehicle No. " + (vehicleList.indexOf(v) + 1) + System.getProperty("line.separator"));
                 outputs.append("Manufacturer: " + v.getMake());
-//                outputs.append("Your message was: " + v.getMessage());
-//                outputs.append("The current value of your car is: " + depreciatePrice(v.getPrice()));
-//                outputs.append("The effective engine size of your car is : " + depreciateEngine(v.getEngine()));
-                outputs.append("Desciption of manufacturer: " + vehicleDescription);
-
+                outputs.append("; Current value: " + depreciatePrice(v.getPrice()));
+                outputs.append("; Effective engine size: " + depreciateEngine(v.getEngine()));
                 outputs.append(System.getProperty("line.separator"));
                 outputs.append(System.getProperty("line.separator"));
             }
@@ -157,9 +141,5 @@ public class MainActivity extends AppCompatActivity {
 
     private double depreciateEngine(double engine) {
         return (double) Math.round(engine * depreciation * 100) / 100 ;
-    }
-
-    public void onClearClick(View v){
-        clearVehicleList();
     }
 }

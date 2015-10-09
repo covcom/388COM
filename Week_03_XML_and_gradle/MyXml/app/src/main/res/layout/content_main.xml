@@ -141,14 +141,11 @@
 
     <TextView
         android:id="@+id/textBlock"
-        style="@style/CodeFont"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="@dimen/margin_top"
         android:background="?android:attr/colorActivatedHighlight"
-        android:scrollbars="vertical"
-        android:text="" />
-
+        android:scrollbars="vertical" />
 
 </LinearLayout>

@@ -1,14 +1,14 @@
 # XML and gradle
 
-Many of you have used virtual machines such as VMware Workstation Player or VirtualBox where one can setup several vitual operating systems in parallel on a solid single machine. In fact, the Android system use some similar technologies. In Android, each app runs within its own virtual machine a.k.a. sandbox. The Android system treats different apps as different 'users', hence they need permissions to access sensors etc. 
+Many of you have used virtual machines such as VMware Workstation Player or VirtualBox where one can setup several vitual operating systems in parallel on a  single 'solid' machine. In fact, the Android system use some similar technologies. In Android, each app runs within its own virtual machine a.k.a. sandbox. The Android system treats different apps as different 'users', hence they need permissions to access sensors etc. 
 
 In order to produce functional apps, we need to design front-end GUI layouts and back-end actions. We also need to define app-level entry point and permissions etc. Eventually, all these are packed into an apk archive that goes to Google Play store, and then onto your users' screen:
 
-XML (.XML) ==> Java (.JAVA) ==> ByteCode (.DEX) ==> App (.APK) ==> Runtime (DVM ) ==> Screen
+**XML (.XML) ==> Java (.JAVA) ==> ByteCode (.DEX) ==> App (.APK) ==> Runtime (DVM ) ==> Screen**
 
 ## Lab 1 XML
 
-First, we look at how to provide and access resources such as layouts and themes use XML. You have used XML to design your apps previously, now we'll examine again in more details.
+First, we look at how to provide and access resources such as layouts and strings using XML. You have used XML to design your apps previously, now we'll examine again in more details.
 
 ### Checkout a Git repository
 
@@ -280,7 +280,7 @@ Next, we need to make some changes to MainActivity.java to handle menu button cl
     > For discussions on when to use String and when to use StringBuilder, click [here](http://stackoverflow.com/questions/4645020/when-to-use-stringbuilder-in-java)
     
     * You have seen primitive data types such as int or double. In the codes above I used Double, which is not to be confused with double. Double here is a **wrapper class** for the primitive type double (there's also Integer for int etc.). The main reason that we need these wrapper classes is that these are objects, while primitive types are not. For example, we can declare `ArrayList<Double>` but we cannot declare `ArrayList<double>`.
-        
+    
         Wrapper class can be initialized using *proper* object initialization methods using keyword 'new'. For example, `Double  a = new Double(100.00)`. Or it can be initialized like an ordinary primitive type, e.g. `Double  a = 100.00`. This is called **autoboxing**. By definition, autoboxing refers to the automatic conversion that the Java compiler makes between the primitive types and their corresponding object wrapper classes.
     > For discussions on when to use primitive types and when to use wrapper classes, click [here](http://stackoverflow.com/questions/423704/int-or-integer/423718#423718)
     
@@ -437,18 +437,283 @@ Next, we need to make some changes to MainActivity.java to handle menu button cl
     ![mini_bmw](.md_images/mini_bmw.png)
     
     ![emptylist](.md_images/emptylist.png)
+    
+    > If you continuously press 'add' button you'll see in the ouput window the list gets longer but the serial number remains the same. Why is this?
+    
 ## Lab 2 Gradle
 
-### layout, style
-style, different size
+In this second lab of the week, we will continue our exploration of Android resources and we'll see how these resources are built into apk files using Gradle.
 
-https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/core/res/res/values/styles.xml
+### Styles, theme, densities, and screen sizes
 
-### java reference type, hashmap, generic lambda
+Duplicaet the project folder you created for the first lab, rename it 'MyXml2'. In Android Studio navigate to where 'MyXml2' is and open the project.
 
-### manifest
+> You can continue working on 'MyXml' project if you wish.
+
+We first look at styles.xml. Insert the following into the file in between `style` tags
+
+```xml
+<style name="CodeFont" parent="@android:style/TextAppearance.Small">
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textColor">#00FF00</item>
+    <item name="android:typeface">monospace</item>
+</style>
+```
+
+In the code above:
+    * We define a new style called 'CodeFont', that inherits everything from Android system style TextAppearance.Small. This inheritance is the same as in CSS.
+    
+> Unfortuantely Google didn't document Android styles very well. This has now become a trial-and-error micacle. You can have a look at the source codes [here](https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/core/res/res/values/styles.xml) if you want to know more.
+    
+    * System style TextAppearance.Small also inherits from another system style called TextAppearance. The full stop '.' indicates this inheritance. But you cannot inherit system style this way. You can only inherit your own styles using this notation, as you'll see later.
+    * 'item' tags define the attributes that we want to override from the parent style. In our case, we override textColor and typeface etc.
+    * Android Studio has a built-in theme editor where you can use palettes in a way similar to Photoshop.
+    
+![palette](.md_images/palette.png)
+    
+Open content_main.xml, insert `style="@style/CodeFont"` into the last TextView so it becomes
+    
+    ```xml
+    <TextView
+        android:id="@+id/textBlock"
+        style="@style/CodeFont"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="@dimen/margin_top"
+        android:background="?android:attr/colorActivatedHighlight"
+        android:scrollbars="vertical" />
+    ```
+    
+Note nomally we use namespace for attributes, but for styles we don't need to do that. (Don't ask me why).
+
+In the previw tool window, if you use default settings you should see it's currently Nexus 4 being used.
+
+![n4](.md_images/n4.png)
+
+Click on the littler black triangle next to 'Nexus 4' and select Preview All Screen Sizes. Now your preview tool window will show a bunch of screens. You can click on one of the small screens to swap the active model under preview (the bigger one in the top-left corner). If you look closely you'll see that the 'output' area is a bit too big on Nexus 7. (OK, this is subjective!). Click on the littler black triangle again, select Remove Previews. You should now be looking at Nexus 7.
+
+![n7](.md_images/n7.png)
+
+When you clicked on the littler black triangle you probably saw mdpi, hdpi, xhdpi etc next to phone models. Also when you downloaded 'plus' and 'minus' icons you saw different versions of the same icon file. So what do those mean?
+
+In Android there're many ways to customise system resources for your users according to their languages, screen sizes, screen density, screen orientation etc. This is very important for user experience. Here dpi refers to screen density, mdpi is around ~160dpi. We also have a set of definitions for screen sizes such as normal, large etc.
+
+![density](http://developer.android.com/images/screens_support/screens-ranges.png)
+
+These additional resource files are called *alternative resources*. They are named using the convention `<resources_name>-<config_qualifier>`. For example, for the options menu icons, we have drawable-hdpi, drawable-mdpi etc. If you remember I mentioned earlier that folder name matters, this is why. 
+
+In the project tool window, right click on styles.xml folder icon, select New ==> Values resource file. In the window that comes up, select Smallest Screen Width as the qualifier,  click on the icon '>>' to add it to the selection window to the right, and then give it a value of 600. Name the file styles.xml and click OK. Now we just created an alternative style file for devices that has a width greater than 600dp e.g. Nexus 7.
+
+![new_resources](.md_images/new_resources.png)
+
+![600dp](.md_images/600dp.png)
+
+Copy the following lines from 'styles.xml' and paste into 'styles.xml (sw600dp)'. Change `TextAppearance.Small` to `TextAppearance.Large`.
+
+```xml
+<style name="CodeFont" parent="@android:style/TextAppearance.Small">
+    <item name="android:layout_width">fill_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textColor">#00FF00</item>
+    <item name="android:typeface">monospace</item>
+</style>
+```
+Now if we run the app on Nexus 7, in the output area the font size should be larger than on Nexus 4.
+
+Following steps above, create a new dimens.xml for sw600dp devices. Insert the following values into the file:
+
+```xml
+<dimen name="margin_left">25dp</dimen>
+<dimen name="margin_top">20dp</dimen>
+<dimen name="margin_right">80dp</dimen>
+```
+
+Now if you look at the preview window, for Nexus 7 it looks much better. But there're still quite a bit of space at the bottom of the screen that hasn't be used. Let's do something for that!
+
+![n7_2](.md_images/n7_2.png)
+
+In the project tool window, right click on the layout folder icon, select New ==> Layout resource file. Set it to be sw600dp, and give it a name 'content_main.xml', click OK.
+
+Copy contents in 'content_main.xml' and paste into 'content_main.xml (sw600dp)' to replace what's in there already. Delete the last `TextView` tag and all attributes within it. Insert the following instead
+
+```xml
+<ScrollView
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginBottom="20dp"
+    android:layout_marginTop="15dp"
+    android:background="@color/colorPrimary"
+    android:fillViewport="true">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        
+        <TextView
+            android:id="@+id/textBlock"
+            style="@style/CodeFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical" />
+        
+        <Button
+            android:id="@+id/buttonCearAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorPrimaryDark"
+            android:onClick="onClearClick"
+            android:text="@string/menu_clear" />
+    </RelativeLayout>
+    
+</ScrollView>
+```
+
+There're several things to note in the code above:
+    
+    * We added a ScrollView to make the large area scrollable. In previous lab we used a scrollable TextView, but that's not ideal as it's not a container layout. Here we use ScrollView so that we can have a button at the bottom.
+    * ScrollView can only contain one child element.
+    * `fillViewport="true"` makes the scroll view’s child to expand to the height of the ScrollView. If this is set to 'false' the child element will stay at the very top of the layout.
+        
+Now the layout looks better on Nexus 7. 
+
+![n7_3](.md_images/n7_3.png)
+
+### HashMap, Generic, and lambda expression
+
+Now we turn to MainActivity.java file. To add a listener to the 'Clear All' button above, we need to insert the following into MainActivity.java
+
+```java
+public void onClearClick(View v){
+        clearVehicleList();
+    }
+```
+
+In addition, it'll be good to show some infomation about car manufactures in our app. We'll build a 'dictionary' for it.
+
+Insert the following into strings.xml file
+
+```xml
+<string-array name="manufacturer_array">
+    <item>Volvo</item>
+    <item>Mini</item>
+    <item>volkswagen</item>
+</string-array>
+<string-array name="description_array">
+    <item>Volvo Car Corporation is a Swedish premium automobile manufacturer, headquartered in the VAK building in Gothenburg.</item>
+    <item>The Mini is a small economy car made by the British Motor Corporation (BMC) and its successors from 1959 until 2000. The original is considered a British icon of the 1960s.</item>
+    <item>Volkswagen is a German car manufacturer headquartered in Wolfsburg, Lower Saxony, Germany.</item>
+</string-array>
+```
+In MainActivity.java declare a variable to hold car manufactures information. This declaration goes together with the declaration of UI elements i.e. outside of any methods.
+
+```java
+//remove back slash '\' in the following code
+private Map\<String, String> mapCarMaker = new HashMap<>();
+```
+
+Similar to Python dictionary, the Java way of doing a dictionary is to use the **HashMap** class. HashMap allows key-value pairs to be stored and looked up quickly. In fact, both List and Map are interfaces. The declaration `Map<String, String>` but not `HashMap<String, String>` is an example of *programming to an interface* 
+
+Insert the following lines into the `onCreate` method.
+
+```java
+    String[] manufacturers = getResources().getStringArray(R.array.manufacturer_array);
+    String[] descriptions = getResources().getStringArray(R.array.description_array);
+    // insert 'less than' sign before manufacturers.length
+    for (int i = 0; i  manufacturers.length; i++ ){
+        mapCarMaker.put(manufacturers[i], descriptions[i]);
+        }
+```
+
+What the code above does is to read car manufacturer names and their info. These are then put into a dictionary for later use. Note in here:
+    * We use String array instead of ArrayList as the size of the array is fixed.
+    * For array, it has a field (i.e. member variable) called length for its size. But for ArrayList, to get its size we need to call the size() method.
+
+In the `resetOutputs()` method, insert/rearrange the for loop so that it looks like below. What this code does is that it checks if a description is available for the manufacture. If yes, append the info to the output.
+
+```java
+for (Vehicle v : vehicleList) {
+    String vehicleDescription = mapCarMaker.get(v.getMake());
+    if (vehicleDescription == null){
+        vehicleDescription = "No description available.";
+    }
+    outputs.append("This is vehicle No. " + (vehicleList.indexOf(v) + 1) + System.getProperty("line.separator"));
+    outputs.append("Manufacturer: " + v.getMake());
+    outputs.append("; Current value: " + depreciatePrice(v.getPrice()));
+    outputs.append("; Effective engine size: " + depreciateEngine(v.getEngine()));
+    outputs.append("; Desciption: " + vehicleDescription);
+    outputs.append(System.getProperty("line.separator"));
+    outputs.append(System.getProperty("line.separator"));
+}
+```
+
+If you look at the MainActivity.java class, at the moment it's a bit redundant as it has two methods doing a similar job i.e. `depreciatePrice` and `depreciateEngine`. As Java is a type-safe language, it's necessary to have different methods for differnt different input types. But a more convinient way to do it is to use **Java Generics**.
+
+Comment out the two methods mentioned above, insert the following line of codes instead
+
+```java
+// remove back slash '\' in the following code
+private \<T extends Number> Double depreciateAnything(T originalValue) {
+    Double result;
+    if (originalValue instanceof Double) {
+        result = Math.round(originalValue.doubleValue() * 0.8 * 100) / 100.00;
+    } else {
+        result = originalValue.intValue() * 0.8;
+    }
+    return result;
+}
+```
+
+The code above is called a generic method. What it does is that we declare a type parameter 'T' to represent input type. But this type must be subclasses of Number e.g. Integer or Double. We then check the type of input variable to see the actual type, and perform calculations accordingly.
+
+* `T extends Number` is called bounded type parameter. In this case we require that the variable type passed into our method must be a subclass of Number.
+* Type declaration goes before the return type i.e. Double
+* `instanceof` is an operator in Java. This is equivalent as `type()` in Python.
+
+Now replace `depreciatePrice` and `depreciateEngine` with this new generic method.
+
+```java
+outputs.append("; Current value: " + depreciateAnything(v.getPrice()));
+outputs.append("; Effective engine size: " + depreciateAnything(v.getEngine()));
+```
+
+> I was going to show you how to use Java lambda expression to do the above calculation, but unfortunately lambda is a feature of Java 8 and not yet supported by Android. Can you figure out how to do the 'depreciation' using lambda?
+    Hint:
+```java
+interface depreciatable{
+Double depreciate(Double d);
+}
+depreciatable depreciateCalculator = (Double x) -> x.doubleValue() * 0.8;
+Double output = depreciateCalculator.depreciate(v.getPrice());
+```
+
+Now if you run the app on Nexus 7, either real device or AVD, you should see the following. Fill out the form, click 'create diesel' and then the '+' icon. You'll see the message pops up in the output area. The description for the car maker is also available.
+
+![volvo](.md_images/volvo.png)
+
+### App manifest
+
+Every application must have an AndroidManifest.xml file (with precisely that name) in its root directory. Open the AndroidManifest.xml file in your editor. There're several things to note in this file:
+
+1. The file defines 'metadata' of the app. There's one only one pair of `manifest` and `application` tag allowed.
+2. The `application` tag has three attributes i.e. icon, label, theme. Here, label is your application's name, and shouldn't be changed.
+3. There can be several `activity` tags in your app. The label attibute here is for the texts in the top left corner of the screen. If you omit the `label` attibute, the activity will use the label for the application.
+4. Activity name can be shortened. For example, we can use `".MainActivity"` instead of `"com.example.jianhuayang.myxml.MainActivity"`. The leading dot '.' in the former denotes the package attribute in 'manifest' tag.
+5. There can only be one launcher activity i.e. with tags `"android.intent.category.LAUNCHER"`. This denotes the entry point of the app.
+
+As we go along, you'll know more about app manifest. The above is all for now.
 
 ### Gradle build concepts
+
+
 
 ### build ann run
 
