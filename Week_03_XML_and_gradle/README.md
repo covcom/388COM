@@ -1,6 +1,6 @@
 # XML and gradle
 
-Many of you have used virtual machines such as VMware Workstation Player or VirtualBox where one can setup several vitual operating systems in parallel on a  single 'solid' machine. In fact, the Android system use some similar technologies. In Android, each app runs within its own virtual machine a.k.a. sandbox. The Android system treats different apps as different 'users', hence they need permissions to access sensors etc. 
+Many of you have used virtual machines such as VMware Workstation Player or VirtualBox where one can setup several virtual operating systems in parallel on a  single 'solid' machine. In fact, the Android system uses some similar technologies. In Android, each app runs within its own virtual machine a.k.a. sandbox. The Android system treats different apps as different 'users', hence they need permissions to access sensors etc. 
 
 In order to produce functional apps, we need to design front-end GUI layouts and back-end actions. We also need to define app-level entry point and permissions etc. Eventually, all these are packed into an apk archive that goes to Google Play store, and then onto your users' screen:
 
@@ -12,11 +12,11 @@ First, we look at how to provide and access resources such as layouts and string
 
 ### Checkout a Git repository
 
-The current excercise is based on a previous project called 'My Car'. If that project is not available on you hard drive, you need to do the following to download:
+The current exercise is based on a previous project called 'My Car'. If that project is not available on you hard drive, you need to do the following to download:
 
-1. Open a terminal window and navigate to the location where you want to save it. Then issue the following command to clone the whole repository into your harddrive `git clone https://github.com/covcom/388COM.git`. Alternatively, go to https://github.com/covcom/388COM, click 'Download Zip' to download the whole repository. 
+1. Open a terminal window and navigate to the location where you want to save it. Then issue the following command to clone the whole repository into your hard drive `git clone https://github.com/covcom/388COM.git`. Alternatively, go to https://github.com/covcom/388COM, click 'Download Zip' to download the whole repository. 
     
-    Once downloaded, un-zip and location the 'My Car' project under 'Week_02' folder. You might want to copy the project to somewhere handy for you.
+    Once downloaded, unzip and location the 'My Car' project under 'Week_02' folder. You might want to copy the project to somewhere handy for you.
     
     ![mycar](.md_images/mycar.png)
     
@@ -30,15 +30,15 @@ The current excercise is based on a previous project called 'My Car'. If that pr
     
     ![name](.md_images/name.png)
     
-3. Right click anywhere within the Project tool window, click Open Module Settings. Go to the Flavors tab, change Application Id from 'com.example.jianhuayang.mycar' to 'com.example.jianhuayang.myxml'
+3. Right-click anywhere within the Project tool window, click Open Module Settings. Go to the Flavors tab, change Application Id from 'com.example.jianhuayang.mycar' to 'com.example.jianhuayang.myxml'
 4. Double click to open the string resource file, change app_name from 'My Car' to 'My Xml'.
     
     ![string](.md_images/string.png)
     
-5. Locate the long package name 'com.example.jianhuayang.mycar' under Java folder, right click on it, select Refactor ==> Rename. In the small windows that pops up, type in 'myxml'. A tool windows called 'Find Previw' will show, click 'Do Refactor'.
-6. From the menu bar, select Build ==> Clean Project, and then from the menu bar select File ==> Syncrhonize. This should clear out traces of the old project.
-7. To verify that you don't have anything in this current projects that relates to 'mycar' or 'my car', in the project tool window, right click on app, then select Find in Path. Type in mycar, and hit enter. You'll see that indeed there's one occurance of 'MyCar'. Change it to something like 'MyXml'.
-    In stead of using 'Find in Path', what you could do is to use 'Search Everywhere'. This is available if you hit 'shift' key twice.
+5. Locate the long package name 'com.example.jianhuayang.mycar' under Java folder, right-click on it, select Refactor ==> Rename. In the small window that pops up, type in 'myxml'. A tool windows called 'Find Preview' will show, click 'Do Refactor'.
+6. From the menu bar, select Build ==> Clean Project, and then from the menu bar select File ==> Synchronize. This should clear out traces of the old project.
+7. To verify that you don't have anything in this current projects that relates to 'mycar' or 'my car', in the project tool window, right-click on app, then select Find in Path. Type in mycar, and hit enter. You'll see that indeed there's one occurrence of 'MyCar'. Change it to something like 'MyXml'.
+    Instead of using 'Find in Path', what you could do is to use 'Search Everywhere'. This is available if you hit 'shift' key twice.
     
     ![search_everywhere](.md_images/search_everywhere.png)
 
@@ -47,17 +47,17 @@ The current excercise is based on a previous project called 'My Car'. If that pr
 
 Open content_main.xml under app ==> res ==> layout folder. You have seen this layout file quite a few times already. Now let's have a closer examination of it.
 
-1. The very first line of the file i.e. `<?xml version="1.0" encoding="utf-8"?>` is called a prolo. It defines xml version and encoding. The prolog is optional. If it exists, it must come first in the document. This is automatically generated by Android Studio and you don't need to touch it.
+1. The very first line of the file i.e. `<?xml version="1.0" encoding="utf-8"?>` is called a prolog. It defines xml version and encoding. The prolog is optional. If it exists, it must come first in the document. This is automatically generated by Android Studio and you don't need to touch it.
 2. The second line of the xml defines a container layout called LinearLayout. This corresponds to a class called LinearLayout. In fact, all we do here in the xml file can be done in Java source codes. But probably xml is easier as it's more visual. 
-3. In xml, all tags come in pairs. If you look down the file, you'll see the closing tab of LinearLayout i.e. `</LinearLayout>` towards the end of the file. This is for container layouts where other elements can be contained in it. For layouts such as Button you'll need to close the tag using `/>`.
-4. xml is case sensitive. If you use linearLayout at where LinearLayout is expected, the system will complain.
-5. xmlns stands for xml namespace. The purpose of namespace in xml standard is to avoid conflicts. For example, in the current file the word 'android' is set to be 'http://schemas.android.com/apk/res/android'. When the system parse the file, where it sees the word android it'll  replace it with this long string. 
+3. In xml, all tags come in pairs. If you look down the file, you'll see the closing tab of LinearLayout i.e. `</LinearLayout>` towards the end of the file. This is for container layouts where other elements can be contained in it. For layouts such as Button, you'll need to close the tag using `/>`.
+4. xml is case-sensitive. If you use linearLayout at where LinearLayout is expected, the system will complain.
+5. xmlns stands for xml namespace. The purpose of a namespace in xml standard is to avoid conflicts. For example, in the current file the word 'android' is set to be 'http://schemas.android.com/apk/res/android'. When the system parses the file, where it sees the word android it'll  replace it with this long string. 
 6. For Android, the namespace refers to http://schemas.android.com/apk/res/android, which is a URI (NOT URL). This cannot be changed.
-7. Attributes are required by the Java class to initilize the GUI on your screen. Note here although you use words such as 'wrap_content' or 'match_parent', these will later on be substituted with constants. For example wrap_content is equal to -1.
+7. Attributes are required by the Java class to initialize the GUI on your screen. Note here although you use words such as 'wrap_content' or 'match_parent', these will later on be substituted with constants. For example wrap_content is equal to -1.
     
     > Click [here](http://developer.android.com/reference/android/view/ViewGroup.LayoutParams.html) for a list of layout parameters.
     
-8. In the project tool window, under 'res' folder there're several different sub-folders apart from layout, such as menu and values. We'll have a look at these during the rest of this week's lab.
+8. In the project tool window, under 'res' folder there're several different sub-folders apart from layouts, such as menu and values. We'll have a look at these during the rest of this week's lab.
     
     > [XML Syntax Rules from w3school](http://www.w3schools.com/xml/xml_syntax.asp). Note this is for xml in general.
 
@@ -181,8 +181,8 @@ First, we need to re-design the interface by removing some 'hard-coded' values, 
     <string name="menu_clear">Clear list</string>
     ```
     There're several things to note on the menu item attributes above:
-        * oderInCategory set the appearance order of that menu item -- smaller values appear first. For English that is on the left handside. 
-        * namespace app is for older versions of Android, as showAsAction is not available on those systems. Click [here](http://developer.android.com/training/basics/actionbar/adding-buttons.html) for more info on this. 
+    * oderInCategory set the appearance order of that menu item -- smaller values appear first. For English that is on the left handside. 
+    * namespace app is for older versions of Android, as showAsAction is not available on those systems. Click [here](http://developer.android.com/training/basics/actionbar/adding-buttons.html) for more info on this. 
         
 9. Insert the following into strings.xml in between `<resources>` tags.
     
@@ -190,7 +190,7 @@ First, we need to re-design the interface by removing some 'hard-coded' values, 
     <integer name="depreciation">80</integer>
     ```
 
-### ArrayList, StringBuilder, Wrapper class, auto boxing
+### ArrayList, StringBuilder, Wrapper class, autoboxing
 
 Make the following changes to the 'basic' classes to accomodate the UI change.
 
@@ -259,7 +259,7 @@ Next, we need to make some changes to MainActivity.java to handle menu button cl
     private TextView textViewBlock;
     ```
     
-    Declear a Vehicle object for the current vehicle on the screen, an ArrayList that holds Vehicles the user has added through menu, and a couple of other helper variables.
+    Declare a Vehicle object for the current vehicle on the screen, an ArrayList that holds Vehicles the user has added through menu, and a couple of other helper variables.
     
     ```java
     private Vehicle vehicle;
@@ -284,7 +284,7 @@ Next, we need to make some changes to MainActivity.java to handle menu button cl
         Wrapper class can be initialized using *proper* object initialization methods using keyword 'new'. For example, `Double  a = new Double(100.00)`. Or it can be initialized like an ordinary primitive type, e.g. `Double  a = 100.00`. This is called **autoboxing**. By definition, autoboxing refers to the automatic conversion that the Java compiler makes between the primitive types and their corresponding object wrapper classes.
     > For discussions on when to use primitive types and when to use wrapper classes, click [here](http://stackoverflow.com/questions/423704/int-or-integer/423718#423718)
     
-2. Initializatin of these variables was inside method `onButtonClick`, you need to move it to `onCreate`. Also insert initialization of new UI element. Your `onCreate` method should now look like this
+2. Initialization of these variables was inside method `onButtonClick`, you need to move it to `onCreate`. Also, insert initialization of new UI element. Your `onCreate` method should now look like this
     
     ```java
     @Override
@@ -309,7 +309,7 @@ Next, we need to make some changes to MainActivity.java to handle menu button cl
     * By now you've seen how to use xml to provide system resources such as layouts, dimensions, strings, integers. In the codes above you see how to access them. For example, `R.layout.activity_main` refers to the layout xml file 'activity_main.xml', and `R.integer.depreciation` refers to the depreciation rate we added in strings.xml.
     * R is a class automatically generated by Android Studio by collecting system resources available. In the system resource folder, i.e. the 'res' folder, folder name matters but file name does not. For example, you can rename your 'strings.xml' as 'stringsForSql.xml' and it'll still work. But if you rename the folder 'valuesForSql' it'll stop working.
     * Line `textViewBlock.setMovementMethod(new ScrollingMovementMethod());` is to make TextView scrollable. This needs to work in pair with `android:scrollbars="vertical"` attribute in xml.
-    * In Java, you need to be really care with integer division. For example, 5/10 in Java will give you 0. This is because Java doesn't count decimal values if both operants are integers. To get around this, you can use 5/10.0, in which case both operands are automatcially converted to higher precision (double) and will produce the desired output. 
+    * In Java, you need to be really careful with integer division. For example, 5/10 in Java will give you 0. This is because Java doesn't count decimal values if both operands are integers. To get around this, you can use 5/10.0, in which case both operands are automatcially converted to higher precision (double) and will produce the desired output. 
     
 3. Insert the following two lines into `onButtonClick` to initialize price and engine
     
@@ -376,7 +376,7 @@ Next, we need to make some changes to MainActivity.java to handle menu button cl
     ```
     The syntax looks familiar here - Depending on which button being clicked on the options menu, we choose to perform diffeernt actions. In the default case, we call the overridedn method in the super class.
     
-5. Insert the following two methods to the class. These two method respond to option menu clicks so that the current 'vehicle' object can be added to the list, or to clear the list. In addition, we update the outputs for our user to see.
+5. Insert the following two methods to the class. These two methods respond to option menu clicks so that the current 'vehicle' object can be added to the list, or to clear the list. In addition, we update the outputs for our user to see.
     
     ```java
     private void addVehicle() {
@@ -432,13 +432,13 @@ Next, we need to make some changes to MainActivity.java to handle menu button cl
     
     > There's a good story for this called [Pentium FDIV bug](https://en.wikipedia.org/wiki/Pentium_FDIV_bug). Also, check this out [What Every Computer Scientist Should Know About Floating-Point Arithmetic](http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html).
     
-    Now you can run the app to test. You need to make sure that aftering filling out the form, you need to press either 'Create Car' or 'Create Diesel' first before you can add the vehicle to the list. Otherwise the app will crash.
+    Now you can run the app to test. You need to make sure that aftering filling out the form, you need to press either 'Create Car' or 'Create Diesel' first before you can add the vehicle to the list. Otherwise, the app will crash.
     
     ![mini_bmw](.md_images/mini_bmw.png)
     
     ![emptylist](.md_images/emptylist.png)
     
-    > If you continuously press 'add' button you'll see in the ouput window the list gets longer but the serial number remains the same. Why is this?
+    > If you continuously press 'add' button you'll see in the ouput window the list gets longer, but the serial number remains the same. Why is this?
     
 ## Lab 2 Gradle
 
@@ -446,7 +446,7 @@ In this second lab of the week, we will continue our exploration of Android reso
 
 ### Styles, theme, densities, and screen sizes
 
-Duplicaet the project folder you created for the first lab, rename it 'MyXml2'. In Android Studio navigate to where 'MyXml2' is and open the project.
+Duplicate the project folder you created for the first lab, rename it 'MyXml2'. In Android Studio navigate to where 'MyXml2' is and open the project.
 
 > You can continue working on 'MyXml' project if you wish.
 
@@ -462,30 +462,31 @@ We first look at styles.xml. Insert the following into the file in between `styl
 ```
 
 In the code above:
-    * We define a new style called 'CodeFont', that inherits everything from Android system style TextAppearance.Small. This inheritance is the same as in CSS.
+
+* We define a new style called 'CodeFont', that inherits everything from Android system style TextAppearance.Small. This inheritance is the same as in CSS.
+
+    > Unfortunately Google didn't document Android styles very well. This has now become a trial-and-error micacle. You can have a look at the source codes [here](https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/core/res/res/values/styles.xml) if you want to know more.
+
+* System style TextAppearance.Small also inherits from another system style called TextAppearance. The full stop '.' indicates this inheritance. But you cannot inherit system style this way. You can only inherit your own styles using this notation, as you'll see later.
+* 'item' tags define the attributes that we want to override from the parent style. In our case, we override textColor and typeface etc.
+* Android Studio has a built-in theme editor where you can use palettes in a way similar to Photoshop.
     
-> Unfortuantely Google didn't document Android styles very well. This has now become a trial-and-error micacle. You can have a look at the source codes [here](https://android.googlesource.com/platform/frameworks/base/+/refs/heads/master/core/res/res/values/styles.xml) if you want to know more.
-    
-    * System style TextAppearance.Small also inherits from another system style called TextAppearance. The full stop '.' indicates this inheritance. But you cannot inherit system style this way. You can only inherit your own styles using this notation, as you'll see later.
-    * 'item' tags define the attributes that we want to override from the parent style. In our case, we override textColor and typeface etc.
-    * Android Studio has a built-in theme editor where you can use palettes in a way similar to Photoshop.
-    
-![palette](.md_images/palette.png)
+    ![palette](.md_images/palette.png)
     
 Open content_main.xml, insert `style="@style/CodeFont"` into the last TextView so it becomes
     
-    ```xml
-    <TextView
-        android:id="@+id/textBlock"
-        style="@style/CodeFont"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="@dimen/margin_top"
-        android:background="?android:attr/colorActivatedHighlight"
-        android:scrollbars="vertical" />
-    ```
-    
+```xml
+<TextView
+    android:id="@+id/textBlock"
+    style="@style/CodeFont"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="@dimen/margin_top"
+    android:background="?android:attr/colorActivatedHighlight"
+    android:scrollbars="vertical" />
+```
+
 Note nomally we use namespace for attributes, but for styles we don't need to do that. (Don't ask me why).
 
 In the previw tool window, if you use default settings you should see it's currently Nexus 4 being used.
@@ -498,13 +499,13 @@ Click on the littler black triangle next to 'Nexus 4' and select Preview All Scr
 
 When you clicked on the littler black triangle you probably saw mdpi, hdpi, xhdpi etc next to phone models. Also when you downloaded 'plus' and 'minus' icons you saw different versions of the same icon file. So what do those mean?
 
-In Android there're many ways to customise system resources for your users according to their languages, screen sizes, screen density, screen orientation etc. This is very important for user experience. Here dpi refers to screen density, mdpi is around ~160dpi. We also have a set of definitions for screen sizes such as normal, large etc.
+In Android, there're many ways to customize system resources for your users according to their languages, screen sizes, screen density, screen orientation etc. This is very important for user experience. Here dpi refers to screen density, mdpi is around ~160dpi. We also have a set of definitions for screen sizes such as normal, large etc.
 
 ![density](http://developer.android.com/images/screens_support/screens-ranges.png)
 
 These additional resource files are called *alternative resources*. They are named using the convention `<resources_name>-<config_qualifier>`. For example, for the options menu icons, we have drawable-hdpi, drawable-mdpi etc. If you remember I mentioned earlier that folder name matters, this is why. 
 
-In the project tool window, right click on styles.xml folder icon, select New ==> Values resource file. In the window that comes up, select Smallest Screen Width as the qualifier,  click on the icon '>>' to add it to the selection window to the right, and then give it a value of 600. Name the file styles.xml and click OK. Now we just created an alternative style file for devices that has a width greater than 600dp e.g. Nexus 7.
+In the project tool window, right-click on styles.xml folder icon, select New ==> Values resource file. In the window that comes up, select Smallest Screen Width as the qualifier,  click on the icon '>>' to add it to the selection window to the right, and then give it a value of 600. Name the file styles.xml and click OK. Now we just created an alternative style file for devices that has a width greater than 600dp e.g. Nexus 7.
 
 ![new_resources](.md_images/new_resources.png)
 
@@ -530,11 +531,11 @@ Following steps above, create a new dimens.xml for sw600dp devices. Insert the f
 <dimen name="margin_right">80dp</dimen>
 ```
 
-Now if you look at the preview window, for Nexus 7 it looks much better. But there're still quite a bit of space at the bottom of the screen that hasn't be used. Let's do something for that!
+Now if you look at the preview window, for Nexus 7 it looks much better. But there're still quite a bit of space at the bottom of the screen that hasn't been used. Let's do something for that!
 
 ![n7_2](.md_images/n7_2.png)
 
-In the project tool window, right click on the layout folder icon, select New ==> Layout resource file. Set it to be sw600dp, and give it a name 'content_main.xml', click OK.
+In the project tool window, right-click on the layout folder icon, select New ==> Layout resource file. Set it to be sw600dp, and give it a name 'content_main.xml', click OK.
 
 Copy contents in 'content_main.xml' and paste into 'content_main.xml (sw600dp)' to replace what's in there already. Delete the last `TextView` tag and all attributes within it. Insert the following instead
 
@@ -578,11 +579,11 @@ Copy contents in 'content_main.xml' and paste into 'content_main.xml (sw600dp)' 
 ```
 
 There're several things to note in the code above:
-    
-    * We added a ScrollView to make the large area scrollable. In previous lab we used a scrollable TextView, but that's not ideal as it's not a container layout. Here we use ScrollView so that we can have a button at the bottom.
-    * ScrollView can only contain one child element.
-    * `fillViewport="true"` makes the scroll view’s child to expand to the height of the ScrollView. If this is set to 'false' the child element will stay at the very top of the layout.
-        
+
+* We added a ScrollView to make the large area scrollable. In the previous lab, we used a scrollable TextView, but that's not ideal as it's not a container layout. Here we use ScrollView so that we can have a button at the bottom.
+* ScrollView can only contain one child element.
+* `fillViewport="true"` makes the scroll view’s child expand to the height of the ScrollView. If this is set to 'false' the child element will stay at the very top of the layout.
+
 Now the layout looks better on Nexus 7. 
 
 ![n7_3](.md_images/n7_3.png)
@@ -597,7 +598,7 @@ public void onClearClick(View v){
     }
 ```
 
-In addition, it'll be good to show some infomation about car manufactures in our app. We'll build a 'dictionary' for it.
+In addition, it'll be good to show some infomation about car manufacturers in our app. We'll build a 'dictionary' for it.
 
 Insert the following into strings.xml file
 
@@ -613,7 +614,7 @@ Insert the following into strings.xml file
     <item>Volkswagen is a German car manufacturer headquartered in Wolfsburg, Lower Saxony, Germany.</item>
 </string-array>
 ```
-In MainActivity.java declare a variable to hold car manufactures information. This declaration goes together with the declaration of UI elements i.e. outside of any methods.
+In MainActivity.java declare a variable to hold car manufacturers information. This declaration goes together with the declaration of UI elements i.e. outside of any methods.
 
 ```java
 //remove back slash '\' in the following code
@@ -634,8 +635,8 @@ Insert the following lines into the `onCreate` method.
 ```
 
 What the code above does is to read car manufacturer names and their info. These are then put into a dictionary for later use. Note in here:
-    * We use String array instead of ArrayList as the size of the array is fixed.
-    * For array, it has a field (i.e. member variable) called length for its size. But for ArrayList, to get its size we need to call the size() method.
+* We use String array instead of ArrayList as the size of the array is fixed.
+* For array, it has a field (i.e. member variable) called length for its size. But for ArrayList, to get its size we need to call the size() method.
 
 In the `resetOutputs()` method, insert/rearrange the for loop so that it looks like below. What this code does is that it checks if a description is available for the manufacture. If yes, append the info to the output.
 
@@ -672,9 +673,9 @@ private \<T extends Number> Double depreciateAnything(T originalValue) {
 }
 ```
 
-The code above is called a generic method. What it does is that we declare a type parameter 'T' to represent input type. But this type must be subclasses of Number e.g. Integer or Double. We then check the type of input variable to see the actual type, and perform calculations accordingly.
+The code above is called a generic method. What it does is that we declare a type parameter 'T' to represent input type. But this type must be subclasses of Number e.g. Integer or Double. We then check the type of input variable to see the actual type and perform calculations accordingly.
 
-* `T extends Number` is called bounded type parameter. In this case we require that the variable type passed into our method must be a subclass of Number.
+* `T extends Number` is called bounded type parameter. In this case, we require that the variable type passed into our method must be a subclass of Number.
 * Type declaration goes before the return type i.e. Double
 * `instanceof` is an operator in Java. This is equivalent as `type()` in Python.
 
@@ -711,40 +712,82 @@ Every application must have an AndroidManifest.xml file (with precisely that nam
 
 As we go along, you'll know more about app manifest. The above is all for now.
 
-### Gradle build concepts
+### Gradle build system
 
+The ultimate targets for Android application development are apk files. We need to provide resources in xml format and Java source codes to make it happen. But the problem is that, as you have seen already, the system is very complicated with so many different packages/resrouces - We need a build tool that is powerful enough to handle all these, not just a `javac` or `make`. Fortunately in Android Studio the build process is (almost!) automated. We don't normally interfere with it. But it's important you understand how the build system works. In particular, there're three things that you need to be aware of:
 
+1. Files generated by Android Studio for build purposes. Among those files, the most important one is the R.java.
+2. The build.gradle syntax.
+3. Project dependencies
 
-### build ann run
+![](https://developer.android.com/images/build.png)
 
-outputs, temp files etc. r
+> Refer [here](https://developer.android.com/sdk/installing/studio-build.html) for explanation of different files/tools in the image above.
 
-    ```java
-    
-    ```
+**IntelliJ build system**
 
-### include different dependencies
+When you first create your project, Android Studio generates a set of files/folders for you. All these are grouped under 'Gradle Scripts' in project tool window.
 
-IntelliJ build system, , Android lib dependencies
+![gradle_files](.md_images/gradle_files.png)
 
-**Refs**
+This is a bit confusing when you first look at them as there're so many different files. I think Google realized that as well, so they put a short description next to file names i.e. those in brackets. For exmample, local.properties file contain configurations for SDK location.
 
-[Ref.[1]](#ref1) chapter 13
+To make things worse, there're two files with the same name - build.gradle - one for 'Project' and one for 'Module':
 
-[App Manifest](http://developer.android.com/guide/topics/manifest/manifest-intro.html)
+1. `build.gradle (Project: MyXml2)` defines Gradle itself, for example, repositories (jcenter) and dependencies.
+2. `build.gradle (Module: app)` defines various aspects of module build settings. More on this later.
 
-[Build System Overview](https://developer.android.com/sdk/installing/studio-build.html)
+You have used many times `R.id.something` in your java source code, now it's the time to have a look at it. On your hard drive, naviagate to app/build/generated/source/r/debug/com/example/jianhuayang/maxml file, open R.java file in a text editor. Try to locate 'id' class. Now you'll see different IDs available to you, either generated by the system or by yourself. Note that id itself is a class, and different IDs in it are actually integers.
 
-[Gradle Plugin User Guide](http://tools.android.com/tech-docs/new-build-system/user-guide)
+![id](.md_images/id.png)
 
+**build.gradle**
 
+The most important file is `build.gradle (Module: app)`. The basic structure of Gradle build scripts comprises configuration and task blocks. Task blocks are rare in our case `apply plugin: 'com.android.application'`, but ther're lots of configuration blocks in the form of
+
+```xml
+label {
+//Configuration code...
+}```
+
+I'm sure you understand most of the configurations already e.g. applicationId and targetSdkVersion. There're two new configurations: buldTypes refers to whether it's 'release' or 'debug'. If it's release we'll apply a tool called ProGuard to it. productFlavors refers to, for example, if it's a free (lite) version or a paid (full) version. We could set up two different flavors here and Gradle will build both for us. Click [here](http://developer.android.com/tools/building/configuring-gradle.html#workBuildVariants) for an example app with build variants.
+
+> What ProGuard does is 'shrinks, optimizes, and obfuscates your code by removing unused code and renaming classes, fields, and methods with semantically obscure names'. See [here](https://developer.android.com/tools/help/proguard.html) for details.
+
+**Project dependencies**
+
+```xml
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:design:23.0.1'
+}
+```
+
+In the current file we have two types of dependencies:
+
+* `compile fileTree(include: ['*.jar'], dir: 'libs')` is called 'local binary dependencies'. In case your Java needs some additional jar files, you'll have to create a folder called 'libs' under 'app' and put jar files there. 
+* `testCompile 'junit:junit:4.12'` is called 'remote binary dependencies'. The resource we need is in the format of Maven coordinates i.e. group:name:version. 
+
+There's one type of dependencies missing here, which is module dependency. An example of module dependency would be `compile project(":lib")`, where 'lib' is the module name our current module depends on.
+
+Finally, remember Gradle works on conventions, you'll have to change the configurations if you change default file names/locations etc.
 
 
 ## Lab 3 Advanced topics
 
-For those of you who haven't complete previous labs, you can work on it if you wish. For those who have finished, in this final lab I'll ask some challenging questions for you to explore. These questions are related to previous labs, and somehow involves more efforts to complete.
+For those of you who haven't completed previous labs, you can work on it if you wish. For those who have finished, in this final lab I'll ask some challenging questions for you to explore. These questions are related to previous labs, and somehow involves more efforts to complete.
 
-### XML v.s. HTML
+### Build from command line
 
-### Java Build Tools
+If you look at the root folder of the project, there're a couple of files that we haven't mentoned yet e.g. gradlew and gradlew.bat. These are scripts that we can run to build our apps from the command line.
 
+* Open 'gradlew' in a text editor, can you make sense from it?
+* Can you guess what commands to use to build the system from command line?
+
+> Hint: [Building and Running from the Command Line](http://developer.android.com/tools/building/building-cmdline.html)
+
+### Gradle build tools
+
+Instead of using generated wrapper scripts such as gradlew in the previous steps, you can download Gradle and build everything from scratch. Follow this tutorial [Building Android Projects with Gradle](https://spring.io/guides/gs/gradle-android/) from String to explore more of Gradle.
