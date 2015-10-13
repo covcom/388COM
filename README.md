@@ -58,7 +58,7 @@ Google Java style
 
 [Google Java Style](https://google-styleguide.googlecode.com/svn/trunk/javaguide.html)
 
-## Week 3 XML and gradle
+## Week 3 XML and Gradle
 
 ### XML
 
@@ -86,7 +86,7 @@ IntelliJ build system, Gradle build concepts, Android lib dependencies
 
 [Gradle Plugin User Guide](http://tools.android.com/tech-docs/new-build-system/user-guide)
 
-## Week 4 Simple views and controls
+## Week 4 Simple Views and Layouts
 
 ### UI design
 

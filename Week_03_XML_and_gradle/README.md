@@ -1,4 +1,4 @@
-# XML and gradle
+# XML and Gradle
 
 Many of you have used virtual machines such as VMware Workstation Player or VirtualBox where one can setup several virtual operating systems in parallel on a  single 'solid' machine. In fact, the Android system uses some similar technologies. In Android, each app runs within its own virtual machine a.k.a. sandbox. The Android system treats different apps as different 'users', hence they need permissions to access sensors etc. 
 
