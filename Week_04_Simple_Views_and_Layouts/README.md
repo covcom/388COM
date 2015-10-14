@@ -4,10 +4,10 @@
 
 ### MVC pattern
 
-### Design principles
+### Design principles, 
 Pattern usability and design principles: animation, style, layout, components, pattern usability
 
-### Layouts and
+### Layouts components of screen
 
 ### activity and intents
 
@@ -21,11 +21,11 @@ lifecycle,
 
 ## Lab 2 Simple and complex view
 
-### Widgets
+### Widgets 
 
 ### action bar
 
-### Fragments, screen orientation
+### Fragments, screen orientation, dialog
 
 **Refs**
 
