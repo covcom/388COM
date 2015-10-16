@@ -1,60 +1,42 @@
 package com.example.jianhuayang.myactivities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.EditText;
 
+public class MainActivity extends AppCompatActivity {
 
-public class MainActivity extends Activity {
+    private static final String TAG_LIFECYCLE = "TagLifecycle";
+    public static final String KEY_MAKE = "keyMake";
+    public static final String KEY_YEAR = "keyYear";
+    public static final String KEY_COLOR = "keyColor";
+    public static final String KEY_NOTE = "keyNote";
+    private static final int REQUEST1 = 1234;
 
-    String tag = "Lifecycle";
-    String logM = "yyyy";
+    private EditText editTextMake;
+    private EditText editTextYear;
+    private EditText editTextColor;
+    private EditText editTextNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(tag, "In the onCreate() event");
-    }
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d(tag, "In the onStart() event");
-    }
+        editTextMake = (EditText) findViewById(R.id.inputMake);
+        editTextYear = (EditText) findViewById(R.id.inputYear);
+        editTextColor = (EditText) findViewById(R.id.inputColor);
+        editTextNote = (EditText) findViewById(R.id.inputNote);
 
-    @Override
-    public void onRestart() {
-        super.onRestart();
-        Log.d(tag, "In the onRestart() event");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d(tag, "In the onResume() event");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d(tag, "In the onPause() event");
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d(tag, "In the onStop() event");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(tag, "In the onDestroy() event");
+        Log.d(TAG_LIFECYCLE, "In the onCreate() event");
     }
 
     @Override
@@ -79,22 +61,64 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void go2nd(View arg0) {
-        Intent aIntent = new Intent("com.example.jianhuayang.myactivities.SecondActivity");
-        aIntent.putExtra("string1", "this is first string");
-        aIntent.putExtra("string2", "this is second string");
-        Bundle aBundle = new Bundle();
-        aBundle.putString("bundlestr", "this is bundle string");
-        aIntent.putExtras(aBundle);
-        startActivityForResult(aIntent, 1234);
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG_LIFECYCLE, "In the onStart() event");
+    }
 
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        Log.d(TAG_LIFECYCLE, "In the onRestart() event");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG_LIFECYCLE, "In the onResume() event");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG_LIFECYCLE, "In the onPause() event");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG_LIFECYCLE, "In the onStop() event");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG_LIFECYCLE, "In the onDestroy() event");
+    }
+
+    public void goEdit(View arg0) {
+        Intent aIntent = new Intent(this, NoteEditingActivity.class);
+        startActivityForResult(aIntent, REQUEST1);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1234 && resultCode == RESULT_OK) {
-            Log.d(logM, "success return");
-            Log.d(logM, data.getStringExtra("stringback"));
+        if (requestCode == REQUEST1 && resultCode == RESULT_OK) {
+            editTextNote.setText(data.getData().toString());
         }
+    }
+
+    public void goDisplay(View v) {
+        Intent aIntent = new Intent();
+        aIntent.setAction("com.example.jianhuayang.myactivities.ThirdActivity");
+//        Intent aIntent = new Intent(this, ThirdActivity.class);
+        aIntent.putExtra(KEY_MAKE, editTextMake.getText().toString());
+        aIntent.putExtra(KEY_YEAR, Integer.parseInt(editTextYear.getText().toString()));
+        Bundle aBundle = new Bundle();
+        aBundle.putString(KEY_COLOR, editTextColor.getText().toString());
+        aBundle.putString(KEY_NOTE, editTextNote.getText().toString());
+        aIntent.putExtras(aBundle);
+        startActivity(aIntent);
     }
 }
