@@ -21,7 +21,7 @@
         </activity>
         <activity
             android:name=".NoteEditingActivity"
-            android:label="@string/title_activity_second"
+            android:label="@string/title_activity_note_editing"
             android:theme="@style/MyDialog" >
             <intent-filter>
                 <action android:name="com.example.jianhuayang.myactivities.SecondActivity" />
@@ -32,7 +32,7 @@
         <activity
             android:name=".DisplayActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_third"
+            android:label="@string/title_activity_display"
             android:theme="@style/FullscreenTheme" >
             <intent-filter>
                 <action android:name="com.example.jianhuayang.myactivities.ThirdActivity" />

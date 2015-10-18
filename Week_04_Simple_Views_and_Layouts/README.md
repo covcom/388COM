@@ -379,13 +379,170 @@ Following steps below to insert two more activities and prepare the layout file 
     ```
     Open AdroidManifest.xml, change style of the activity to the one you just created 
     
+    ```xml
+    <activity
+            android:name=".NoteEditingActivity"
+            android:label="@string/title_activity_note_editing"
+            android:theme="@style/MyDialog" >
+    </activity>
+    ```
+    
 Now we have three activities. The idea is that in the main activity, if you click 'write note' it'll take you to a second activity where you can take your notes. Once finished, if you click 'display', all the info you typed will be shown in a 3rd activitiy.
+
+We haven't looked at the DisplayActivity yet. If you open actvity_display.xml, it should look like the following
+
+![display](.md_images/display.png)
+
+Change the text displayed in the Button to 'Return' by changing the following in strings.xml `<string name="dummy_button">Return</string>`.
 
 ### Intents
 
 Next, we link-up all the buttons with methods. Also, we link all three activities together.
 
-1. 
+For MainActivity.java, do the following:
+
+1. Open MainActivity.java, declare the following as class members:
+    
+    ```java
+    public static final String KEY_MAKE = "keyMake";
+    public static final String KEY_YEAR = "keyYear";
+    public static final String KEY_COLOR = "keyColor";
+    public static final String KEY_NOTE = "keyNote";
+    private static final int REQUEST1 = 1234;
+    
+    private EditText editTextMake;
+    private EditText editTextYear;
+    private EditText editTextColor;
+    private EditText editTextNote;
+    ```
+    
+2. In `onCreate` method, initialize widget members by inserting the following:
+    
+    ```java
+    editTextMake = (EditText) findViewById(R.id.inputMake);
+    editTextYear = (EditText) findViewById(R.id.inputYear);
+    editTextColor = (EditText) findViewById(R.id.inputColor);
+    editTextNote = (EditText) findViewById(R.id.inputNote);
+    ```
+    
+3. Insert the following two methods into the class.
+    
+    ```java
+    public void goEdit(View arg0) {
+        Intent aIntent = new Intent(this, NoteEditingActivity.class);
+        startActivityForResult(aIntent, REQUEST1);
+    }
+    
+    public void goDisplay(View v) {
+        Intent aIntent = new Intent();
+        aIntent.setAction("com.example.jianhuayang.myactivities.ThirdActivity");
+        aIntent.putExtra(KEY_MAKE, editTextMake.getText().toString());
+        aIntent.putExtra(KEY_YEAR, Integer.parseInt(editTextYear.getText().toString()));
+        Bundle aBundle = new Bundle();
+        aBundle.putString(KEY_COLOR, editTextColor.getText().toString());
+        aBundle.putString(KEY_NOTE, editTextNote.getText().toString());
+        aIntent.putExtras(aBundle);
+        startActivity(aIntent);
+    }
+    ```
+    
+    There're quite a lot going on in the code above:
+    
+    * Before you start a new Activity, you must define an **Intent** object. In the example, I used two different ways of doing it: one uses `Intent(this, NoteEditingActivity.class)` where 'this' is the current object, and '.class' is the type of the targetting object; The other way is that we create a empty Intent and then set the Action, which is a String defined in **IntentFilters**. We'll see more of this later on.
+    * We can pass data along with Intent objects. The way to do it is to use `putExtra()` or `putExtras()` method. These methods take key-value pairs as inputs, where the key is used to retrieve the data back.
+    * To actually move to a different Acitivty, you'll need either `startActivity()` or `startActivityForResult()` method. For both methods, you'll need to supply an Intent. The difference is that for the latter you need to get the results back from the other Intent.
+    
+4. Insert the following method into the class. This is to retrieve data from Activities started by the `startActivityForResult()` method.
+    
+    ```java
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST1 && resultCode == RESULT_OK) {
+            editTextNote.setText(data.getData().toString());
+        }
+    }
+    ```
+    
+    The code above test to see if the results come from the original request by comparing the  request code. If it is the case and the results are ok (RESULT_OK is an constant), we'll get the data passed by the intent. In this case, we used the `getData()` method which returns the URI that the intent is operating on. The URI is then turned into String and displayed in EditText.
+    
+Make changes to NoteEditingActivity.java so that the file looks like the following:
+
+```java
+public class NoteEditingActivity extends AppCompatActivity {
+
+EditText editText;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_note_editing);
+    editText = (EditText) findViewById(R.id.inputNote);
+}
+
+public void onDoneClick(View v) {
+    Intent aIntent = new Intent();
+    Uri aUri = Uri.parse(editText.getText().toString());
+    aIntent.setData(aUri);
+    setResult(RESULT_OK, aIntent);
+    finish();
+}
+}
+```
+
+The method `onDoneClick()` works in pair with `startActivityForResult()` in a sense that it set the results i.e. Intent and close the current activity. The idea is that upon user click, whatever typed in the EditText will be passed to the calling Activity. Note here `setData()` and `getData()` we saw previously are a pair. 
+
+Let's turn to DisplayActivity.java. When you first look at it, the class is full of methods and comments generated by the system. Don't be scared. The idear is that the Activity will display the toolbar/button etc for a short time, and then all these will go away apart from the TextView ocupping the whole screen. You'll learn all these later on during the module. Concentrate on the lifecycle callbacks for the moment.
+
+Do the following to make it possible to collect data passed from MainActivity.
+
+1. Insert a TextView declaration into the class `private TextView textView`.
+2. Insert the following into the `onCreate()` method
+    
+    ```java
+    textView = (TextView) findViewById(R.id.fullscreen_content);
+    StringBuilder messageFromActivity1 = new StringBuilder();
+    Intent intent = getIntent();
+    Bundle bundle = intent.getExtras();
+    messageFromActivity1.append("Make: " + intent.getStringExtra(MainActivity.KEY_MAKE) + System.getProperty("line.separator"));
+    messageFromActivity1.append("Year: " + intent.getIntExtra(MainActivity.KEY_YEAR, 0) + System.getProperty("line.separator"));
+    messageFromActivity1.append("Color: " + intent.getStringExtra(MainActivity.KEY_COLOR) + System.getProperty("line.separator"));
+    messageFromActivity1.append("Note: " + bundle.getString(MainActivity.KEY_NOTE) + System.getProperty("line.separator"));
+    textView.setText(messageFromActivity1);
+    ```
+    
+    To get the Intent that starts the current Activity you'll need to call the `getIntent()` method. The opposite of `putExtra()` to add data into Intents is to use `getStringExtra()` or `getIntExtra()` methods to retrieve the data. To do that, we'll need to know the key for these different values as in key-values pairs we mentioned previously.
+    
+3. In order to enable intent-filters so that MainActivity can start the DispalyActivity by calling the Action name, we need to define the Action in the manifest. Insert the following intent-filter into the manifest file so that the 'activity' tag for DisplayActivity becomes the following
+    ```xml
+    <activity
+        android:name=".DisplayActivity"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:label="@string/title_activity_display"
+        android:theme="@style/FullscreenTheme" >
+        <intent-filter>
+            <action android:name="com.example.jianhuayang.myactivities.ThirdActivity" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+    </activity>
+    ```
+    
+    Here Action is barely a String. You must also have a DEFAULT category, see below quoted from [Google](http://developer.android.com/guide/components/intents-filters.html):
+
+    > In order to receive implicit intents, you must include the CATEGORY_DEFAULT category in the intent filter. The methods startActivity() and startActivityForResult() treat all intents as if they declared the CATEGORY_DEFAULT category. If you do not declare this category in your intent filter, no implicit intents will resolve to your activity.
+
+Now if you run the app, you'll see something like this:
+
+![](.md_images/volvo.png)
+
+If know you click 'Write notes', it'll take you to a second Activity where all the notes you type will be automatically saved.
+
+![](.md_images/notes.png)
+
+If you hit 'Display' you'll see all the info about your car. If you touch anywhere in the screen, it'll give you the toolbar etc. for a short while.
+
+![](.md_images/show.png)
+
 
 ## Lab 2 Simple and complex view
 
