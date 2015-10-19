@@ -1,6 +1,6 @@
 # Simple Views and Layouts
 
-By now you should be familiar with a 'single-page application' in Android. That is, an app that runs within a single Activity (capital 'A'). You should have some expereience using LinearLayouts/RelativeLayouts, providing systems resources for different screen sizes etc. This week, we'll look at Activity lifecycle and how to pass data between Activities. Also, we'll examine some more layouts and widgets. 
+By now you should be familiar with a 'single-page application' in Android. That is an app that runs within a single Activity (capital 'A'). You should have some experience using LinearLayouts/RelativeLayouts, providing systems resources for different screen sizes etc. This week, we'll look at Activity lifecycle and how to pass data between Activities. Also, we'll examine some more layouts and widgets. 
 
 ## Lab 1 UI design
 
@@ -10,39 +10,39 @@ Before we go into details of what each individual widget is capable of doing, we
 
 The MVC pattern, which plays a vital role in modern application programming, assigns objects in an application one of three roles: model, view, or controller:
 
-- *Model*: Model is your data structure. It holds the relationship witin your data. Model objects encapsulate the data specific to an application and define the logic and computation that manipulate and process that data. 
+- *Model*: Model is your data structure. It holds the relationship within your data. Model objects encapsulate the data specific to an application and define the logic and computation that manipulate and process that data. 
 - *View*: A view object is an object in an application that users can see. A view object knows how to draw itself and can respond to user actions.
 - *Controller*: A controller object acts as an intermediary between one or more of an application’s view objects and one or more of its model objects. In Android, a controller is typically a subclass of Activity, Fragment, or Service.
 
 ![mvc](https://developer.apple.com/library/ios/documentation/General/Conceptual/DevPedia-CocoaCore/Art/model_view_controller.jpg)
 
-In Adroid, especially for small-scale apps, it's often not easy to distinguish roles within the MVC pattern. But the benefits of MVC is obvious - it seprates the front-end and back-end, and make it easier to reuse your classes.
+In Android, especially for small-scale apps, it's often not easy to distinguish roles within the MVC pattern. But the benefits of MVC is obvious - it separates the front-end and back-end, and make it easier to reuse your classes.
 
 ### Design principles
 
 On the [official Android website](http://developer.android.com/design/get-started/principles.html) Google lists following principles you need to follow when designing your app, but most of them boils down to common sense.
 
-- *Enchant me*: 'your app should strive to combine beauty, simplicity and purpose to create a magical experience that is effortless and powerful' (quoted direcitly from Google).
+- *Enchant me*: 'your app should strive to combine beauty, simplicity and purpose to create a magical experience that is effortless and powerful' (quoted directly from Google).
 - *Simplify my life*: make your app easy to navigate, easy to use, easy to understand.
 - *Make me amazing*: provide visual hints and/or default values for your app, break big tasks into smaller steps.
 
-Google released the new [Material Design](https://www.google.com/design/spec/material-design/introduction.html) with android 5.0 Lollipop, which provides detailed guidlines for visual, motion etc. and covers almost everything one can think of in app design. Here I list some common requirements that you should try to meet and pitfall s that you should try to avoid in your app. Detailed requirements can be found in Material Design documentation.
+Google released the new [Material Design](https://www.google.com/design/spec/material-design/introduction.html) with android 5.0 Lollipop, which provides detailed guidelines for visual, motion etc. and covers almost everything one can think of in app design. Here I list some common requirements that you should try to meet and pitfall s that you should try to avoid in your app. Detailed requirements can be found in Material Design documentation.
 
 - *Animation*: Changes in acceleration or deceleration should be smooth across the duration of an animation.
-- *Style*: Uer system recommended color, icons, meaningful and genuine images. Use concise and simple languages.
+- *Style*: Use system recommended color, icons, meaningful and genuine images. Use concise and simple languages.
 - *Layout*: Design to suit different devices and screen-sizes. Try to avoid slicing up the interface into too many regions like in the following
 
     ![many regions](https://material-design.storage.googleapis.com/publish/material_v_4/material_ext_publish/0Bx4BSt6jniD7NHNfYW03U28wYnM/layout_structure_regions_guidance4.png)
 
 
-- *Components*: Requirements were layed in Material Design for different UI components such as buttons or menus. Some of these requirements are very specific, e.g. button height need to be 36dp in a dialog. Some other requirements tend to be more general, e.g the rule that states don't use flat buttons in UIs where they would be difficult to see.
-- *Pattern and Usability*: Material Design has guidelines for different senarios which is referred to as 'patterns'. For example, launch screens can be either placeholder UI or branded launch. Of course you can implement anything you wish, but I'd go for one of these two for your app. 
+- *Components*: Requirements were laid in Material Design for different UI components such as buttons or menus. Some of these requirements are very specific, e.g. button height need to be 36dp in a dialog. Some other requirements tend to be more general, e.g the rule that states don't use flat buttons in UIs where they would be difficult to see.
+- *Pattern and Usability*: Material Design has guidelines for different scenarios which is referred to as 'patterns'. For example, launch screens can be either placeholder UI or branded launch. Of course, you can implement anything you wish, but I'd go for one of these two for your app. 
 
 The above is a really brief 'abstract' of the Material Design documentation. The important things to remember is, if in doubt, check with the official documentation.
 
 ### Activity lifecycle
 
-Now we'll start exploring the Activity lifecycle. As we know already, in Android each Activity is (normally) associated with a layout xml file. Before and after the layout becomes visible/disappear on the screen the system has to create or destroy the Activity object by calling some callback methods such as `onCreate`. The whole process i.e. lifecycle of an Activity involes several different stages and callback methods.
+Now we'll start exploring the Activity lifecycle. As we know already, in Android each Activity is (normally) associated with a layout xml file. Before and after the layout becomes visible/disappear on the screen the system has to create or destroy the Activity object by calling some callback methods such as `onCreate`. The whole process i.e. lifecycle of an Activity involves several different stages and callback methods.
 
 Following steps below to create a new project and insert some overriding methods:
 
@@ -93,7 +93,7 @@ Following steps below to create a new project and insert some overriding methods
         Log.d(TAG_LIFECYCLE, "In the onDestroy() event");
     }
     ```
-5. Start your AVD or connect you phont/tablet, and run the app. In logcat, use 'TagLifecycle' to filter the outputs. Now try to answer the following:
+5. Start your AVD or connect you phone/tablet, and run the app. In logcat, use 'TagLifecycle' to filter the outputs. Now try to answer the following:
 
     * When you first start the app, which methods were called?
     * If you press 'back' button, which methods are called?
@@ -101,7 +101,7 @@ Following steps below to create a new project and insert some overriding methods
     * If you now press the 'home' button, which methods are called?
     * Now press the app icon, what happened? What does it mean?
 
-Talking about Activity lifecyle, there're two diagrams you have to know well:
+Talking about Activity lifecycle, there're two diagrams you have to know well:
 
 ![lifecycle](http://developer.android.com/images/activity_lifecycle.png)
 
@@ -117,7 +117,7 @@ The upper image depicts all callback methods an Activity has to go through from 
 
 The other two states in the lower image above i.e. created and started are transient and the system quickly moves from them to the next state by calling the next lifecycle callback method.
 
-Associated with these callback methods are what we need to implement within them. For this, [the official guide](http://developer.android.com/guide/components/activities.html) is thorough and comprehensive. Please spend time to read. The two most important things that are ofthen confused by our students are:
+Associated with these callback methods are what we need to implement them. For this, [the official guide](http://developer.android.com/guide/components/activities.html) is thorough and comprehensive. Please spend some time to read. The two most important things that are often confused by our students are:
 
 1. The 'home' button doesn't destroy your activity. The system will remember your app's current state. So press 'home' button and then press your app icon to restart your app is **NOT** a way to show data persistence.
 2. If the system must recover memory in an emergency, `onStop()` and `onDestroy()` might not be called. Again, to save data for the sake of persistence you'll need to do it in `onPause()`.
@@ -128,7 +128,7 @@ Following steps below to insert two more activities and prepare the layout file 
 
 1. In the Project tool window, right-click app, select New ==> Activity ==> Blank Activity, name it 'NoteEditingActivity'.
 2. Create another new FullscreenActivity and name it 'DispalyActivity'.
-3. Open activity_display.xml, you'll see the root tag is **FrameLayout**. The FrameLayout is a placeholder on screen that you can use to display a single view. Views that you add to a FrameLayout are always anchored to the top left of the layout.
+3. Open activity_display.xml, you'll see the root tag is **FrameLayout**. The FrameLayout is a placeholder on the screen that you can use to display a single view. Views that you add to a FrameLayout are always anchored to the top left of the layout.
 4. Open content_main.xml (or activity_main.xml if you don't have content_main.xml), replace its content with the following:
 
     ```xml
@@ -371,7 +371,7 @@ Following steps below to insert two more activities and prepare the layout file 
     
     ![a2](.md_images/a2.png)
     
-6. For NoteEditingActivity, we want it to show as a dialog style. In other words, it shows up as partially occupying the screen. So add the following to styles.xml
+6. For NoteEditingActivity, we want it to show a dialog style. In other words, it shows up as partially occupying the screen. So add the following to styles.xml
     ```xml
     <style name="MyDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="windowNoTitle">true</item>
@@ -387,7 +387,7 @@ Following steps below to insert two more activities and prepare the layout file 
     </activity>
     ```
     
-Now we have three activities. The idea is that in the main activity, if you click 'write note' it'll take you to a second activity where you can take your notes. Once finished, if you click 'display', all the info you typed will be shown in a 3rd activitiy.
+Now we have three activities. The idea is that in the main activity, if you click 'write note' it'll take you to a second activity where you can take your notes. Once finished, if you click 'display', all the info you typed will be shown in a 3rd activity.
 
 We haven't looked at the DisplayActivity yet. If you open actvity_display.xml, it should look like the following
 
@@ -448,9 +448,9 @@ For MainActivity.java, do the following:
     
     There're quite a lot going on in the code above:
     
-    * Before you start a new Activity, you must define an **Intent** object. In the example, I used two different ways of doing it: one uses `Intent(this, NoteEditingActivity.class)` where 'this' is the current object, and '.class' is the type of the targetting object; The other way is that we create a empty Intent and then set the Action, which is a String defined in **IntentFilters**. We'll see more of this later on.
+    * Before you start a new Activity, you must define an **Intent** object. In the example, I used two different ways of doing it: one uses `Intent(this, NoteEditingActivity.class)` where 'this' is the current object, and '.class' is the type of the targetting object; The other way is that we create an empty Intent and then set the Action, which is a String defined in **IntentFilters**. We'll see more of this later on.
     * We can pass data along with Intent objects. The way to do it is to use `putExtra()` or `putExtras()` method. These methods take key-value pairs as inputs, where the key is used to retrieve the data back.
-    * To actually move to a different Acitivty, you'll need either `startActivity()` or `startActivityForResult()` method. For both methods, you'll need to supply an Intent. The difference is that for the latter you need to get the results back from the other Intent.
+    * To actually move to a different Activity, you'll need either `startActivity()` or `startActivityForResult()` method. For both methods, you'll need to supply an Intent. The difference is that for the latter you need to get the results back from the other Intent.
     
 4. Insert the following method into the class. This is to retrieve data from Activities started by the `startActivityForResult()` method.
     
@@ -463,7 +463,7 @@ For MainActivity.java, do the following:
     }
     ```
     
-    The code above test to see if the results come from the original request by comparing the  request code. If it is the case and the results are ok (RESULT_OK is an constant), we'll get the data passed by the intent. In this case, we used the `getData()` method which returns the URI that the intent is operating on. The URI is then turned into String and displayed in EditText.
+    The code above tests to see if the results come from the original request by comparing the  request code. If it is the case and the results are ok (RESULT_OK is a constant), we'll get the data passed by the intent. In this case, we used the `getData()` method which returns the URI that the intent is operating on. The URI is then turned into String and displayed in EditText.
     
 Make changes to NoteEditingActivity.java so that the file looks like the following:
 
@@ -491,7 +491,7 @@ public void onDoneClick(View v) {
 
 The method `onDoneClick()` works in pair with `startActivityForResult()` in a sense that it set the results i.e. Intent and close the current activity. The idea is that upon user click, whatever typed in the EditText will be passed to the calling Activity. Note here `setData()` and `getData()` we saw previously are a pair. 
 
-Let's turn to DisplayActivity.java. When you first look at it, the class is full of methods and comments generated by the system. Don't be scared. The idear is that the Activity will display the toolbar/button etc for a short time, and then all these will go away apart from the TextView ocupping the whole screen. You'll learn all these later on during the module. Concentrate on the lifecycle callbacks for the moment.
+Let's turn to DisplayActivity.java. When you first look at it, the class is full of methods and comments generated by the system. Don't be scared. The idea is that the Activity will display the toolbar/button etc for a short time, and then all these will go away apart from the TextView occupying the whole screen. You'll learn all these later on during the module. Concentrate on the lifecycle callbacks for the moment.
 
 Do the following to make it possible to collect data passed from MainActivity.
 
@@ -546,19 +546,19 @@ If you hit 'Display' you'll see all the info about your car. If you touch anywhe
 
 ## Lab 2 Simple and complex view
 
-When you look at your layout files in Design view, the Palette shows everything that is avaible to you. We have only explored a small fraction of what's available. In this second lab, we'll explore some more.
+When you look at your layout files in Design view, the Palette shows everything that is available to you. We have only explored a small fraction of what's available. In this second lab, we'll explore some more.
 
 ### Common controls 
 
-Google has listed some commonly used widgets and refer to those collectively as Common Controls. In the following excercise, I'll show you how to include these in your layouts and how to connect those with Java code. If you have finished previous lab, duplicate the folder and rename it MyActivities2. We'll start from there.
+Google has listed some commonly used widgets and refers to those collectively as Common Controls. In the following exercise, I'll show you how to include these in your layouts and how to connect those with Java code. If you have finished the previous lab, duplicate the folder and rename it MyActivities2. We'll start from there.
 
 ![common controls](http://developer.android.com/images/ui/ui-controls.png)
 
-1. Download the ['mode edit' icon](https://www.google.com/design/icons/index.html#ic_mode_edit) from Google, and add to the resrouces of your project.
+1. Download the ['mode edit' icon](https://www.google.com/design/icons/index.html#ic_mode_edit) from Google, and add to the resources of your project.
     
     ![](.md_images/mode_edit.png)
     
-2. Donwload a photo of any vehicle and add it to drawables. For example, I added something called 'bike.jpg'.
+2. Download a photo of any vehicle and add it to drawable. For example, I added something called 'bike.jpg'.
 3. Insert the following into strings.xml file to get ready a string array
     ```xml
     <string-array name="car_maker">
@@ -840,11 +840,11 @@ Google has listed some commonly used widgets and refer to those collectively as 
     
     ![controls](.md_images/controls.png)
 
-    Here Make is a drop-down menu Spinner and Fuel type is a Switch. These two are new and worth spending some time on. We also have here some radio buttons and checkboxes, which are pretty straightforward. Note here the 'mode edit' is an ImageButton, which is also new. 
+    Here Make is a drop-down menu Spinner and Fuel type are a Switch. These two are new and worth spending some time on. We also have here some radio buttons and checkboxes, which are pretty straightforward. Note here the 'mode edit' is an ImageButton, which is also new. 
     
     Spend some time with this layout file, and try to understand different attributes associated with different widgets.
     
-5. Insert the following variable declaration into MainActivity class. This is to accomodate layout element changes.
+5. Insert the following variable declaration into MainActivity class. This is to accommodate layout element changes.
     ```java
     public static final String KEY_MAKE = "keyMake";
     public static final String KEY_Fuel = "keyFuel";
@@ -911,11 +911,11 @@ Google has listed some commonly used widgets and refer to those collectively as 
     }
     ```
 
-There're quite a lot of codes above. In fact, CheckBox, RadioButton, Switch, SwitchCompat, and ToggleButton are all sub-classes of CompoundButton, and so share a lot of things e.g. methods in common. Also most of these should be familiar by now.
+There're quite a lot of codes above. In fact, CheckBox, RadioButton, Switch, SwitchCompat, and ToggleButton are all sub-classes of CompoundButton, and so share a lot of things e.g. methods in common. Also, most of these should be familiar by now.
 
 ### Spinner, AdapterView 
 
-The wedigets that haven't been dealt include the Spinner. It takes a seperate section for it.
+The widgets that haven't been dealt include the Spinner. It takes a separate section for it.
 
 1. Change MainActivity signature to `public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener`.
 2. Insert the following into `onCreate()` method
@@ -940,13 +940,13 @@ The wedigets that haven't been dealt include the Spinner. It takes a seperate se
     }
     ```
 
-What happened here is that Spinner is a special case of AdapterView. For this type of view we need to set data source for it, so that the 'adaptor' can combine data with view (remember MVC pattern?). Here `android.R.layout.simple_spinner_item` and `android.R.layout.simple_spinner_dropdown_item` are built-in layouts provided by the system. 
+What happened here is that Spinner is a special case of AdapterView. For this type of view, we need to set data source for it, so that the 'adaptor' can combine data with a view (remember MVC pattern?). Here `android.R.layout.simple_spinner_item` and `android.R.layout.simple_spinner_dropdown_item` are built-in layouts provided by the system. 
 
 What we need to do to initialize the adaptor is that we need to implement two concrete methods `onItemSelected` and `onNothingSelected`. These two methods provide actions based on which item is being selected.
 
 ### ProgressBar, Android threading
 
-What we also want to do for our app is that once we clicke the 'Download' button we'll go to a seperate Activit to download some images. And the downloaded image can be passed back to the main activity to be displayed.
+What we also want to do for our app is that once we click the 'Download' button we'll go to a separate Activity to download some images. And the downloaded image can be passed back to the main activity to be displayed.
 
 1. Create a new Empty Activity and name it DownloadActivity. Open activity_download.xml and replace everthing in it with the following:
     ```xml
@@ -994,7 +994,7 @@ What we also want to do for our app is that once we clicke the 'Download' button
     </LinearLayout>
     ```
     
-    You haven't seen ProgressBar and ImageView before. As the name suggests, basically ProgressBar show the progress of some jobs as a vertial bar or little circle, and ImageView is a View to hold images. The rest of the layout should be self-explanary.
+    You haven't seen ProgressBar and ImageView before. As the name suggests, basically ProgressBar show the progress of some jobs as a vertical bar or little circle, and ImageView is a View to hold images. The rest of the layout should be self-explanatory.
 
 2. Make changes to DownloadActivity so that it looks like below
     ```java
@@ -1062,9 +1062,9 @@ What we also want to do for our app is that once we clicke the 'Download' button
     }
     ```
     
-    Explanation of handle and thread.
+    The `onReturnClick()` method is easy, the difficult part here is the Thread and Handler objects. In Android, your app runs in a special thread called UI thread. Your layout, animations etc are being rendered using this Thread. As you can image, if you run intensive tasks in this thread, you'll slow down the display. That is not what your user want to happen. So what you do then is to run heavy tasks in a separate thread. The way to do it is to use **Thread** objects, and define tasks in `run()` method. However, what if you want to pass data back to UI thread to update display? Here comes the **Handler** object, which is a way to bridge background threads with UI element. Note here background thread can access member variables etc. The only thing they are not allowed to do is to update UI. Hence we `post()` new jobs back to UI thread, such as updating visibilities.
     
-3. Go back to MainActivity and insert the following method:
+3. Go back to MainActivity and insert the following method to respond to a button click.
     ```java
     public void goDownload(View v) {
         Intent aIntent = new Intent(this, DownloadActivity.class);
@@ -1072,7 +1072,7 @@ What we also want to do for our app is that once we clicke the 'Download' button
     }
     ```
     
-4. In MainActivity, replace `onActivityResult()` with the following:
+4. In MainActivity, replace `onActivityResult()` with the following. What happened here is that once we have the drawable ID, we'll set the background image of our Download button.
     ```java
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -1098,7 +1098,6 @@ If you wait a little while, this will turn into
 If you click Done, it'll take you back to the main Activity, like this
 
 ![done](.md_images/done.png)
-
 
 
 
