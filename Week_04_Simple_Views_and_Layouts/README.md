@@ -1062,9 +1062,43 @@ What we also want to do for our app is that once we clicke the 'Download' button
     }
     ```
     
-3. java
+    Explanation of handle and thread.
+    
+3. Go back to MainActivity and insert the following method:
+    ```java
+    public void goDownload(View v) {
+        Intent aIntent = new Intent(this, DownloadActivity.class);
+        startActivityForResult(aIntent, REQUEST2);
+    }
+    ```
+    
+4. In MainActivity, replace `onActivityResult()` with the following:
+    ```java
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST1 && resultCode == RESULT_OK) {
+            editTextNote.setText(data.getData().toString());
+        }
 
-Explanation of handle and thread.
+        if (requestCode == REQUEST2 && resultCode == RESULT_OK) {
+            buttonImage.setText("");
+            buttonImage.setBackgroundResource(data.getIntExtra(DownloadActivity.KEY_DRAWABLE, R.mipmap.ic_launcher));
+        }
+    }
+    ```
+
+If everything goes well, which it should be, when you go to DownloadActivity and click Download you should see something similar to this
+
+![download](.md_images/download.png)
+
+If you wait a little while, this will turn into
+
+![download finish](.md_images/download_finish.png)
+
+If you click Done, it'll take you back to the main Activity, like this
+
+![done](.md_images/done.png)
+
 
 
 
