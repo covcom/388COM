@@ -942,14 +942,126 @@ The wedigets that haven't been dealt include the Spinner. It takes a seperate se
 
 What happened here is that Spinner is a special case of AdapterView. For this type of view we need to set data source for it, so that the 'adaptor' can combine data with view (remember MVC pattern?). Here `android.R.layout.simple_spinner_item` and `android.R.layout.simple_spinner_dropdown_item` are built-in layouts provided by the system. 
 
-What we need to do to initialize the adaptor is that we need to implement to concrete methods `onItemSelected` and `onNothingSelected`. These two methods provide actions based on which item is being selected.
+What we need to do to initialize the adaptor is that we need to implement two concrete methods `onItemSelected` and `onNothingSelected`. These two methods provide actions based on which item is being selected.
 
 ### ProgressBar, Android threading
 
 What we also want to do for our app is that once we clicke the 'Download' button we'll go to a seperate Activit to download some images. And the downloaded image can be passed back to the main activity to be displayed.
 
-1. Create a new Activity
-2. layout
+1. Create a new Empty Activity and name it DownloadActivity. Open activity_download.xml and replace everthing in it with the following:
+    ```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.jianhuayang.myactivities.DownloadActivity">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progressBar"
+        android:layout_marginTop="20dp"
+        android:text="Downloading..." />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/buttonReturn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:onClick="onReturnClick"
+        android:text="Return" />
+
+    </LinearLayout>
+    ```
+    
+    You haven't seen ProgressBar and ImageView before. As the name suggests, basically ProgressBar show the progress of some jobs as a vertial bar or little circle, and ImageView is a View to hold images. The rest of the layout should be self-explanary.
+
+2. Make changes to DownloadActivity so that it looks like below
+    ```java
+    public class DownloadActivity extends AppCompatActivity {
+
+    public static final String KEY_DRAWABLE = "keyDrawable";
+
+    private ProgressBar progressBar;
+    private TextView textView;
+    private ImageView imageView;
+    private int progressStatus;
+    private static int staticStatus;
+    private Handler handler = new Handler();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_download);
+
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        textView = (TextView) findViewById(R.id.textView);
+        imageView = (ImageView) findViewById(R.id.imageView);
+        imageView.setVisibility(View.GONE);
+        staticStatus = 0;
+
+        new Thread(new Runnable() {
+            public void run() {
+                while (progressStatus < 100) {
+                    progressStatus = doSomeWork();
+                    handler.post(new Runnable() {
+                        public void run() {
+                            progressBar.setProgress(progressStatus);
+                        }
+                    });
+                }
+                if (progressStatus == 100) {
+                    handler.post(new Runnable() {
+                        public void run() {
+                            progressBar.setVisibility(View.GONE);
+                            textView.setVisibility(View.GONE);
+                            imageView.setVisibility(View.VISIBLE);
+                            imageView.setImageResource(R.drawable.bike);
+                        }
+                    });
+                }
+            }
+
+            private int doSomeWork() {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return ++staticStatus;
+            }
+        }).start();
+    }
+
+    public void onReturnClick(View v) {
+        Intent intent = new Intent();
+        intent.putExtra(KEY_DRAWABLE, R.drawable.bike);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+    }
+    ```
+    
 3. java
 
 Explanation of handle and thread.
