@@ -48,10 +48,12 @@ Following steps below to create a new project and insert some overriding methods
 
 1. Create a new project called 'My Activities'.
 2. Insert the following code into the class body of 'MainActivity.java'.
+    
     ```java
     private static final String TAG_LIFECYCLE = "TagLifecycle";
     ```
-3. Insert teh following into the `onCreate` method
+3. Insert the following into the `onCreate` method
+    
     ```java
     Log.d(TAG_LIFECYCLE, "In the onCreate() event");
     ```
