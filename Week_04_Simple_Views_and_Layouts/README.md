@@ -58,6 +58,7 @@ Following steps below to create a new project and insert some overriding methods
     Log.d(TAG_LIFECYCLE, "In the onCreate() event");
     ```
 4. Insert the following into the class body:
+    
     ```java
     @Override
     public void onStart() {
@@ -132,7 +133,7 @@ Following steps below to insert two more activities and prepare the layout file 
 2. Create another new FullscreenActivity and name it 'DispalyActivity'.
 3. Open activity_display.xml, you'll see the root tag is **FrameLayout**. The FrameLayout is a placeholder on the screen that you can use to display a single view. Views that you add to a FrameLayout are always anchored to the top left of the layout.
 4. Open content_main.xml (or activity_main.xml if you don't have content_main.xml), replace its content with the following:
-
+    
     ```xml
     <?xml version="1.0" encoding="utf-8"?>
 
@@ -307,6 +308,7 @@ Following steps below to insert two more activities and prepare the layout file 
     ![a1](.md_images/a1.png)
     
 5. Replace the content of content_note_editing.xml with the following
+    
     ```xml
     <?xml version="1.0" encoding="utf-8"?>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -374,6 +376,7 @@ Following steps below to insert two more activities and prepare the layout file 
     ![a2](.md_images/a2.png)
     
 6. For NoteEditingActivity, we want it to show a dialog style. In other words, it shows up as partially occupying the screen. So add the following to styles.xml
+    
     ```xml
     <style name="MyDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="windowNoTitle">true</item>
@@ -515,6 +518,7 @@ Do the following to make it possible to collect data passed from MainActivity.
     To get the Intent that starts the current Activity you'll need to call the `getIntent()` method. The opposite of `putExtra()` to add data into Intents is to use `getStringExtra()` or `getIntExtra()` methods to retrieve the data. To do that, we'll need to know the key for these different values as in key-values pairs we mentioned previously.
     
 3. In order to enable intent-filters so that MainActivity can start the DispalyActivity by calling the Action name, we need to define the Action in the manifest. Insert the following intent-filter into the manifest file so that the 'activity' tag for DisplayActivity becomes the following
+    
     ```xml
     <activity
         android:name=".DisplayActivity"
@@ -562,6 +566,7 @@ Google has listed some commonly used widgets and refers to those collectively as
     
 2. Download a photo of any vehicle and add it to drawable. For example, I added something called 'bike.jpg'.
 3. Insert the following into strings.xml file to get ready a string array
+    
     ```xml
     <string-array name="car_maker">
         <item>Volvo</item>
@@ -570,6 +575,7 @@ Google has listed some commonly used widgets and refers to those collectively as
     </string-array>
     ```
 4. Open content_main.xml and make changes so it looks like the following:
+    
     ```xml
     <?xml version="1.0" encoding="utf-8"?>
 
@@ -847,6 +853,7 @@ Google has listed some commonly used widgets and refers to those collectively as
     Spend some time with this layout file, and try to understand different attributes associated with different widgets.
     
 5. Insert the following variable declaration into MainActivity class. This is to accommodate layout element changes.
+    
     ```java
     public static final String KEY_MAKE = "keyMake";
     public static final String KEY_Fuel = "keyFuel";
@@ -872,6 +879,7 @@ Google has listed some commonly used widgets and refers to those collectively as
     private String make;
     ```
 6. Replace variable initialization blocks in `onCreate()` so that the method looks like the following:
+    
     ```java
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -895,6 +903,7 @@ Google has listed some commonly used widgets and refers to those collectively as
     ```
 
 7. Update the `goDisplay()` method so it looks like the following:
+    
     ```java
     public void goDisplay(View v) {
     Intent aIntent = new Intent();
@@ -921,6 +930,7 @@ The widgets that haven't been dealt include the Spinner. It takes a separate sec
 
 1. Change MainActivity signature to `public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener`.
 2. Insert the following into `onCreate()` method
+    
     ```java
     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
             R.array.car_maker, android.R.layout.simple_spinner_item);
@@ -928,7 +938,9 @@ The widgets that haven't been dealt include the Spinner. It takes a separate sec
     spinnerMaker.setAdapter(adapter);
     spinnerMaker.setOnItemSelectedListener(this);
     ```
+    
 3. Insert the following methods into the class.
+   
     ```java
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -951,6 +963,7 @@ What we need to do to initialize the adaptor is that we need to implement two co
 What we also want to do for our app is that once we click the 'Download' button we'll go to a separate Activity to download some images. And the downloaded image can be passed back to the main activity to be displayed.
 
 1. Create a new Empty Activity and name it DownloadActivity. Open activity_download.xml and replace everthing in it with the following:
+   
     ```xml
     <?xml version="1.0" encoding="utf-8"?>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -999,6 +1012,7 @@ What we also want to do for our app is that once we click the 'Download' button 
     You haven't seen ProgressBar and ImageView before. As the name suggests, basically ProgressBar show the progress of some jobs as a vertical bar or little circle, and ImageView is a View to hold images. The rest of the layout should be self-explanatory.
 
 2. Make changes to DownloadActivity so that it looks like below
+   
     ```java
     public class DownloadActivity extends AppCompatActivity {
 
@@ -1067,6 +1081,7 @@ What we also want to do for our app is that once we click the 'Download' button 
     The `onReturnClick()` method is easy, the difficult part here is the Thread and Handler objects. In Android, your app runs in a special thread called UI thread. Your layout, animations etc are being rendered using this Thread. As you can image, if you run intensive tasks in this thread, you'll slow down the display. That is not what your user want to happen. So what you do then is to run heavy tasks in a separate thread. The way to do it is to use **Thread** objects, and define tasks in `run()` method. However, what if you want to pass data back to UI thread to update display? Here comes the **Handler** object, which is a way to bridge background threads with UI element. Note here background thread can access member variables etc. The only thing they are not allowed to do is to update UI. Hence we `post()` new jobs back to UI thread, such as updating visibilities.
     
 3. Go back to MainActivity and insert the following method to respond to a button click.
+   
     ```java
     public void goDownload(View v) {
         Intent aIntent = new Intent(this, DownloadActivity.class);
@@ -1075,6 +1090,7 @@ What we also want to do for our app is that once we click the 'Download' button 
     ```
     
 4. In MainActivity, replace `onActivityResult()` with the following. What happened here is that once we have the drawable ID, we'll set the background image of our Download button.
+   
     ```java
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
