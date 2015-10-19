@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         Log.d(TAG_LIFECYCLE, "In the onCreate() event");
 
+        spinnerMaker = (Spinner) findViewById(R.id.spinnerMake);
         switchFuel = (Switch) findViewById(R.id.switchFuel);
         editTextYear = (EditText) findViewById(R.id.inputYear);
         radioGroupColor = (RadioGroup) findViewById(R.id.radioColor);
@@ -59,15 +60,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         checkBoxRightHand = (CheckBox) findViewById(R.id.isRightHand);
         buttonImage = (Button) findViewById(R.id.buttonImage);
         editTextNote = (EditText) findViewById(R.id.inputNote);
+        carMaker = getResources().getStringArray(R.array.car_maker);
 
-        spinnerMaker = (Spinner) findViewById(R.id.spinnerMake);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.car_maker, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMaker.setAdapter(adapter);
         spinnerMaker.setOnItemSelectedListener(this);
-
-        carMaker = getResources().getStringArray(R.array.car_maker);
     }
 
     @Override

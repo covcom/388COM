@@ -546,28 +546,416 @@ If you hit 'Display' you'll see all the info about your car. If you touch anywhe
 
 ## Lab 2 Simple and complex view
 
-When you look at your layout files in Design view, the Palette shows evrything that is avaible to you. 
+When you look at your layout files in Design view, the Palette shows everything that is avaible to you. We have only explored a small fraction of what's available. In this second lab, we'll explore some more.
 
-### Widgets 
+### Common controls 
 
-### action bar
+Google has listed some commonly used widgets and refer to those collectively as Common Controls. In the following excercise, I'll show you how to include these in your layouts and how to connect those with Java code. If you have finished previous lab, duplicate the folder and rename it MyActivities2. We'll start from there.
 
-### adapter view spinner
+![common controls](http://developer.android.com/images/ui/ui-controls.png)
 
-### thread
+1. Download the ['mode edit' icon](https://www.google.com/design/icons/index.html#ic_mode_edit) from Google, and add to the resrouces of your project.
+    
+    ![](.md_images/mode_edit.png)
+    
+2. Donwload a photo of any vehicle and add it to drawables. For example, I added something called 'bike.jpg'.
+3. Insert the following into strings.xml file to get ready a string array
+    ```xml
+    <string-array name="car_maker">
+        <item>Volvo</item>
+        <item>Mini</item>
+        <item>Volkswagen</item>
+    </string-array>
+    ```
+4. Open content_main.xml and make changes so it looks like the following:
+    ```xml
+    <?xml version="1.0" encoding="utf-8"?>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:shrinkColumns="1"
+        android:stretchColumns="1">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="1900dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_span="3"
+                android:text="Activity No. 1"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="24sp" />
+        </TableRow>
+
+        <TableRow
+            android:gravity="top"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/labelMake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="19dp"
+                android:layout_marginTop="10dp"
+                android:text="Make:"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <Spinner
+                android:id="@+id/spinnerMake"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="19dp"
+                android:layout_marginTop="10dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_height="30dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/labelType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="19dp"
+                android:layout_marginTop="10dp"
+                android:text="Fuel type:"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <Switch
+                android:id="@+id/switchFuel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginLeft="19dp"
+                android:showText="true"
+                android:textOff="Petrol"
+                android:textOn="Diesel" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/labelYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="19dp"
+                android:layout_marginTop="10dp"
+                android:text="Year:"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <EditText
+                android:id="@+id/inputYear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="19dp"
+                android:layout_marginRight="10dp"
+                android:ems="10"
+                android:hint="e.g. 1980"
+                android:inputType="number" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/labelColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="19dp"
+                android:layout_marginTop="10dp"
+                android:text="Color:"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <LinearLayout
+                android:id="@+id/containerColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="19dp"
+                android:orientation="vertical">
+
+                <RadioGroup
+                    android:id="@+id/radioColor"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/colorWhite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="White" />
+
+                    <RadioButton
+                        android:id="@+id/colorBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Black" />
+
+                    <RadioButton
+                        android:id="@+id/colorOther"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Other" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/labelOptions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="19dp"
+                android:layout_marginTop="10dp"
+                android:text="Options:"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <LinearLayout
+                android:id="@+id/containerOptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="19dp"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/isNew"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="New at first registration" />
+
+                <CheckBox
+                    android:id="@+id/isRightHand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Right-hand drive" />
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/labelPhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="19dp"
+                android:layout_marginTop="10dp"
+                android:text="Photo:"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="19dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/buttonImage"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:onClick="goDownload"
+                    android:text="Download..." />
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/labelNote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="19dp"
+                android:layout_marginTop="10dp"
+                android:text="Note:"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <EditText
+                android:id="@+id/inputNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="19dp"
+                android:layout_marginRight="10dp"
+                android:ems="10"
+                android:hint="e.g. This is my first." />
+
+            <ImageButton
+                android:id="@+id/buttonNote"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:onClick="goEdit"
+                android:src="@drawable/ic_mode_edit_black_24dp"
+                android:layout_gravity="bottom"/>
+        </TableRow>
+
+        <View
+            android:layout_height="3dp"
+            android:background="@color/colorPrimary" />
+
+        <TableRow
+            android:layout_marginLeft="19dp"
+            android:layout_marginRight="10dp">
+
+            <Button
+                android:id="@+id/buttonDisplay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_span="2"
+                android:gravity="center"
+                android:onClick="goDisplay"
+
+                android:text="Display" />
+
+        </TableRow>
+    </TableLayout>
+
+    </ScrollView>
+    ```
+    
+    Don't be scared by the length of the code above. What we're trying to achieve here is pretty simple - we want our layout file look like the following:
+    
+    ![controls](.md_images/controls.png)
+
+    Here Make is a drop-down menu Spinner and Fuel type is a Switch. These two are new and worth spending some time on. We also have here some radio buttons and checkboxes, which are pretty straightforward. Note here the 'mode edit' is an ImageButton, which is also new. 
+    
+    Spend some time with this layout file, and try to understand different attributes associated with different widgets.
+    
+5. Insert the following variable declaration into MainActivity class. This is to accomodate layout element changes.
+    ```java
+    public static final String KEY_MAKE = "keyMake";
+    public static final String KEY_Fuel = "keyFuel";
+    public static final String KEY_YEAR = "keyYear";
+    public static final String KEY_COLOR = "keyColor";
+    public static final String KEY_NEW = "keyNew";
+    public static final String KEY_RIGHT_HAND = "keyRightHand";
+    public static final String KEY_NOTE = "keyNote";
+    private static final String TAG_LIFECYCLE = "TagLifecycle";
+    private static final int REQUEST1 = 1234;
+    private static final int REQUEST2 = 5678;
+
+    private Spinner spinnerMaker;
+    private Switch switchFuel;
+    private EditText editTextYear;
+    private RadioGroup radioGroupColor;
+    private CheckBox checkBoxNew;
+    private CheckBox checkBoxRightHand;
+    private Button buttonImage;
+    private EditText editTextNote;
+
+    private String[] carMaker;
+    private String make;
+    ```
+6. Replace variable initialization blocks in `onCreate()` so that the method looks like the following:
+    ```java
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    setSupportActionBar(toolbar);
+    
+    Log.d(TAG_LIFECYCLE, "In the onCreate() event");
+
+    spinnerMaker = (Spinner) findViewById(R.id.spinnerMake);
+    switchFuel = (Switch) findViewById(R.id.switchFuel);
+    editTextYear = (EditText) findViewById(R.id.inputYear);
+    radioGroupColor = (RadioGroup) findViewById(R.id.radioColor);
+    checkBoxNew = (CheckBox) findViewById(R.id.isNew);
+    checkBoxRightHand = (CheckBox) findViewById(R.id.isRightHand);
+    buttonImage = (Button) findViewById(R.id.buttonImage);
+    editTextNote = (EditText) findViewById(R.id.inputNote);
+    carMaker = getResources().getStringArray(R.array.car_maker);
+    }
+    ```
+
+7. Update the `goDisplay()` method so it looks like the following:
+    ```java
+    public void goDisplay(View v) {
+    Intent aIntent = new Intent();
+    aIntent.setAction("com.example.jianhuayang.myactivities.ThirdActivity");
+    aIntent.putExtra(KEY_MAKE, make);
+    aIntent.putExtra(KEY_Fuel, switchFuel.isChecked());
+    aIntent.putExtra(KEY_YEAR, Integer.parseInt(editTextYear.getText().toString()));
+    Bundle aBundle = new Bundle();
+    String color = ((RadioButton) findViewById(radioGroupColor.getCheckedRadioButtonId())).getText().toString();
+    aBundle.putString(KEY_COLOR, color);
+    aBundle.putBoolean(KEY_NEW, checkBoxNew.isChecked());
+    aBundle.putBoolean(KEY_RIGHT_HAND, checkBoxRightHand.isChecked());
+    aBundle.putString(KEY_NOTE, editTextNote.getText().toString());
+    aIntent.putExtras(aBundle);
+    startActivity(aIntent);
+    }
+    ```
+
+There're quite a lot of codes above. In fact, CheckBox, RadioButton, Switch, SwitchCompat, and ToggleButton are all sub-classes of CompoundButton, and so share a lot of things e.g. methods in common. Also most of these should be familiar by now.
+
+### Spinner, AdapterView 
+
+The wedigets that haven't been dealt include the Spinner. It takes a seperate section for it.
+
+1. Change MainActivity signature to `public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener`.
+2. Insert the following into `onCreate()` method
+    ```java
+    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+            R.array.car_maker, android.R.layout.simple_spinner_item);
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    spinnerMaker.setAdapter(adapter);
+    spinnerMaker.setOnItemSelectedListener(this);
+    ```
+3. Insert the following methods into the class.
+    ```java
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        // An item was selected. You can retrieve the selected item using
+        // parent.getItemAtPosition(pos)
+        make = carMaker[pos];
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        make = "No maker selected";
+    }
+    ```
+
+What happened here is that Spinner is a special case of AdapterView. For this type of view we need to set data source for it, so that the 'adaptor' can combine data with view (remember MVC pattern?). Here `android.R.layout.simple_spinner_item` and `android.R.layout.simple_spinner_dropdown_item` are built-in layouts provided by the system. 
+
+What we need to do to initialize the adaptor is that we need to implement to concrete methods `onItemSelected` and `onNothingSelected`. These two methods provide actions based on which item is being selected.
+
+### ProgressBar, Android threading
+
+What we also want to do for our app is that once we clicke the 'Download' button we'll go to a seperate Activit to download some images. And the downloaded image can be passed back to the main activity to be displayed.
+
+1. Create a new Activity
+2. layout
+3. java
+
+Explanation of handle and thread.
 
 
 
 
-**Refs**
 
-[Ref.[4]](#ref4) chapter 3/4
-
-## Lab 3 Advanced topics
-
-For those of you who haven't completed previous labs, you can work on it if you wish. For those who have finished, in this final lab I'll ask some challenging questions for you to explore. These questions are related to previous labs, and somehow involves more efforts to complete.
-
-### Fragments, screen orientation, 
-
-### dialog, picker
 

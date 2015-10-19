@@ -236,10 +236,9 @@
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:onClick="goEdit"
-                android:src="@drawable/ic_create_black_24dp"
+                android:src="@drawable/ic_mode_edit_black_24dp"
                 android:layout_gravity="bottom"/>
         </TableRow>
-
 
         <View
             android:layout_height="3dp"

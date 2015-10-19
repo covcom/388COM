@@ -94,7 +94,7 @@ IntelliJ build system, Gradle build concepts, Android lib dependencies
 
 MVC pattern, activity lifecycle, layouts, and intents
 
-Pattern usability and design principles: animation, style, layout, components, pattern usability
+Pattern usability and design principles: animation, style, layout, components, pattern, usability
 
 **Refs**
 
@@ -106,7 +106,7 @@ Pattern usability and design principles: animation, style, layout, components, p
 
 **Contents**
 
-Fragments, screen orientation, basic views, action bar
+Common controls, AdapterView, Spinner, ProgressBar, Android threading
 
 **Refs**
 
@@ -118,7 +118,7 @@ Fragments, screen orientation, basic views, action bar
 
 **Contents**
 
-Simple listview, complex listview, adapter view
+Simple listview, complex listview, adapter view, Grid view
 
 **Refs**
 
@@ -126,11 +126,11 @@ Simple listview, complex listview, adapter view
 
 [Android official API guide: List View ](http://developer.android.com/guide/topics/ui/layout/listview.html)
 
-### Grid view
+### Fragments
 
 **Contents**
 
-Grid view, specialized fragments, dialogs
+Fragments, specialized fragments, dialogs, screen orientation, picker
 
 **Refs**
 
