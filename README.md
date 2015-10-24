@@ -112,9 +112,9 @@ Common controls, AdapterView, Spinner, ProgressBar, Android threading
 
 [Ref.[4]](#ref4) chapter 3/4
 
-## Week 5 Composite views
+## Week 5 AdapterViews and Fragments
 
-### List view
+### AdapterViews
 
 **Contents**
 
@@ -130,13 +130,11 @@ Simple listview, complex listview, adapter view, Grid view
 
 **Contents**
 
-Fragments, specialized fragments, dialogs, screen orientation, picker
+Fragments, specialized fragments, screen orientation
 
 **Refs**
 
 [Ref.[4]](#ref4) chapter 4
-
-[Android official API guide: Dialogs](http://developer.android.com/guide/topics/ui/dialogs.html)
 
 ## Week 6 Data persistence
 
@@ -144,11 +142,13 @@ Fragments, specialized fragments, dialogs, screen orientation, picker
 
 **Contents**
 
-Application preference, prefrence activity, files and directories
+Dialogs, Pickers, Application preference, prefrence activity, files and directories
 
 **Refs**
 
 [Ref.[5]](#ref5) chapter 11/12
+
+[Android official API guide: Dialogs](http://developer.android.com/guide/topics/ui/dialogs.html)
 
 ### SQL database
 
