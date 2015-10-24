@@ -57,7 +57,6 @@ public class PhotoListActivity extends AppCompatActivity {
         for (int i = 0; i < candidatePhotos.length; i++) {
             candidates.add(new Candidates(candidateNames[i], candidateDetails[i], candidatePhotos[i]));
         }
-
-
     }
+
 }
