@@ -502,26 +502,177 @@ A similar hierarchy can be drawn for AdapterView and subclasses. Even though tho
 
 > Above images from a [blog](http://www.intertech.com/Blog/android-adapters-adapterviews/) written by Jim White.
 
-
-
-
 ## Lab 2 Fragments
 
-**Contents**
+When Android was first created, the screens weren't very big so there's no need to reuse part of the layout. But later on as screen sizes get bigger and bigger, Goodle introduced Fragments, which is basically a fraction of your layout. The idea is that Fragments can be reused to suit different screen sizes. We'll see some examples in the current lab.
 
-Fragments, specialized fragments, screen orientation
+### Static Fragments
 
-**Refs**
+Follow steps below to add static Fragments:
 
-[Ref.[4]](#ref4) chapter 4
+1. Start a new Android Studio project called 'My Fragments' using all default options. Open content_main.xml and change RelativeLayout to LinearLayout. 
+    
+    > Now if you go to the Design view of this layout file, go to 'Component Tree', right click on LinearLayout, under the menu called Morphing you’ll be able to switch back from LinearLayout to RelativeLayout. But if the layout is RelativeLayout (default option), this ‘morphing’ menu doesn’t show. This is a design feature (bug?) of Android Studio.
+    
+    > ![morphing](.md_images/morphing.png)
+    
+2. Delete the TextView, and add `android:orientation` attribute as vertical.
+3. Right-click on the blank area of the Project tool window, select NewFragmentFragment (blank). If the system doesn’t give you the option to create new Fragment, check that if you are under the Android view. In the window that pops up, uncheck both 'include fragment factory methods' and 'include interface callbacks'. Use the default name 'BlankFragment' and click Finish. 
+4. Repeat the above process for a second time to produce a second fragment, and name it BlankFragment2. After this step, your project should contain three java classes and three (or four depending on your version) layout files. The project view of Android Studio should look like this
+    
+    ![blank](.md_images/blank.png)
+    
+5. Double click to open fragment_blank.xml. Note the TODO sentence on line No.6. This is a nice feature of Android Studio. If you click on the TODO tab at the bottom of the workbench you’ll see that all TODOs are being summarized there.
+    
+    ![todo](.md_images/todo.png)
+    
+6. Change the layout from FrameLayout to LinearLayout, add vertical as orientation. Change the TextView text to 'This is fragment No.1'. 
+7. In the LinearLayout opening tag, add `android:background="#00FF00"`. Once you finish adding the text, leave your mouse within the text for a bit and Android Studio will pop up a small help window to let you choose your color. Follow the link to choose a desired color.
+    
+    > If you are using a Mac, you need to type in key combinations 'alt' + '3' to insert the # sign. 
+    
+8. Repeat the steps 6 & 7 above for fragment_blank2.xml, i.e. change layout, add orientation, change TextView text to 'This is fragment No.2', and change the background color to "#ff191e". Now we have two fragments and we’re ready to put them on our activity.
+9. Open your content_main.xml, in Design view, scroll down Palette until you see fragment under Custom tab. Actually that’s almost the end, you can’t scroll down any further. Click on BlandFrangment ==> OK and leave it at the centre of the screen. You fragment will appear as a narrow line as below. This is because the layout_height was set to be 'wrap_content'. Just leave it for now.
+    
+    ![frag1](.md_images/frag1.png)
+    
+    ![frag1 center](.md_images/frag1_center.png)
+    
+10. Add BlandFrangment2 onto your lalyout using similar steps as above. For each fragment, change layout_height to "0dp" and add the following attribute `android:layout_weight="1"`. Now each fragment will take up approximately half of the screen. (Not exactly because of the padding spaces). Your xml should now look like the following:
+    
+    ```xml
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:name="com.example.jianhuayang.myfragments.BlankFragment"
+        android:id="@+id/fragment"
+        android:layout_gravity="center_horizontal" />
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:name="com.example.jianhuayang.myfragments.BlankFragment2"
+        android:id="@+id/fragment2"
+        android:layout_gravity="center_horizontal" />
+    ```
+    
+11. If you run your app you should have something similar to the one below.
+    
+    ![static](.md_images/static.png)
+
+### Programmatically add the fragment
+
+In the previous example, you added static Fragments into your layout resource file. This is possible but a more handy way to do it is to add Fragments programmatically.
+
+1. Create an Empty Activity called DynamicActivity.
+2. Open activity_dynamic.xml, insert the following into the default RelativeLayout tag `android:id="@+id/dynamicContainer"`.
+3. Open DynamicActivity.java, modify the `onCreate()` method so it looks like below:
+    
+    ```java
+        @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_dynamic);
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            BlankFragment frag1 = new BlankFragment();
+            fragmentTransaction.replace(R.id.dynamicContainer, frag1);
+        } else {
+            BlankFragment2 frag2 = new BlankFragment2();
+            fragmentTransaction.replace(R.id.dynamicContainer, frag2);
+        }
+        fragmentTransaction.commit();
+    }
+    ```
+    
+    In order to have Fragments loaded in your Java code, we first created a FragmentManager, which is followed by FragmentTransaction. FragmentManager, as the name suggests, can be used to track Fragments i.e. `findFragmentById()` or `findFragmentByTag()`. It can also be used to pop fragments off the back stack, or  register a listener for changes to the back stack. FragmentTransaction is used to manipulate Fragments. It has methods such as `add()`, `remove()`, and `replace()`. To apply the transaction to the activity, you must call `commit()`.
+    
+    `getResources().getConfiguration().orientation` is a way to determine screen orientation. Click [here](http://developer.android.com/reference/android/content/res/Configuration.html#orientation) to read the manual on Configuration class.
+    
+    > Check out this StackOverflow question on Android orientation [link](http://stackoverflow.com/questions/2795833/check-orientation-on-android-phone).
+    
+4. Add the following into menu_main.xml
+    
+    ```xml
+    <item
+        android:id="@+id/action_dynamic"
+        android:orderInCategory="90"
+        android:title="@string/action_dynamic"
+        app:showAsAction="ifRoom" />
+    ```
+    
+5. Replace the  method with the following
+    
+    ```java
+       @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_dynamic:
+                startActivity(new Intent(this, DynamicActivity.class));
+                return true;
+            case R.id.action_settings:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+    ```
+    
+6. If you run the ap and click 'Dynamic', you'll have two differnt Fragments for different orientations.
+    
+    ![port](.md_images/port.png)
+    
+    ![land](.md_images/land.png)
+    
+
+### ListFragments
+
+So far we have only dealt with Fragments that contain static data, we haven't used any AdapterViews we learnt in the 1st lab. Let's now move to an example where we combine Fragments with ListView i.e. ListFragments. ListFragment displays a list of items that are managed by an adapter.
+
+First of all, we need to provide some data for the app.
+
+1. Copy the 8 photos you downloaded previously into the drawable folder of the current project.
+2. Right-click on the package name of your project, select New ==> Package. Give it a name of 'data'.
+    
+    ![package](.md_images/package.png)
+    
+3. Within the 'data' package, create a new class and name it Candidates. Insert the following code into the class
+    
+    ```java
+    
+    ```
+    
+
+
+
+### Two panel layouts
+
+### Fragment lifecycle
+
+![fragment_lifecycle](https://raw.githubusercontent.com/xxv/android-lifecycle/master/complete_android_fragment_lifecycle.png)
+
+> Above images created by [Steve Pomeroy](https://github.com/xxv/android-lifecycle).
+
+
 
 
 
 ## Lab 3 Advanced topics
 
-For those of you who haven't completed previous labs, you can work on it if you wish. For those who have finished, in this final lab I'll ask some challenging questions for you to explore. These questions are related to previous labs, and somehow involves more efforts to complete.
+In a similar module run by Professor Andrew T. Campbell at Dartmouth College, they used some material from the official Android samples. Follow the tutorial at [here](http://www.cs.dartmouth.edu/~campbell/cs65/lecture09/lecture09.html) and answer the following questions:
 
-### Build from command line
-
+* sss
 
 ![simple](.md_images/simple.png)
+
+
