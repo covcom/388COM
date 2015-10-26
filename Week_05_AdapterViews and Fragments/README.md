@@ -649,13 +649,270 @@ First of all, we need to provide some data for the app.
 3. Within the 'data' package, create a new class and name it Candidates. Insert the following code into the class
     
     ```java
+    public final class Candidates {
     
+    public static final String[] candidateNames = {
+            "Hillary Clinton",
+            "Bernie Sanders",
+            "Martin O'Malley",
+            "Lincoln Chafee",
+            "Donald Trump",
+            "Ben Carson",
+            "Marco Rubio",
+            "Jeb Bush"
+    };
+    public static final String[] candidateDetails = {
+            "Former US Secretary of State Hillary Clinton (New York)",
+            "US Senator Bernie Sanders (Vermont)",
+            "Former Governor Martin O\'Malley (Maryland)",
+            "Former Governor Lincoln Chafee (Rhode Island)",
+            "Businessman Donald Trump (New York)",
+            "Dr. Ben Carson (Florida)",
+            "US Senator Marco Rubio (Florida)",
+            "Former Governor Jeb Bush (Florida)",
+    };
+    
+    public static final int[] candidatePhotos = {
+            R.drawable.clinton,
+            R.drawable.sanders,
+            R.drawable.omalley,
+            R.drawable.chafee,
+            R.drawable.trump,
+            R.drawable.carson,
+            R.drawable.rubio,
+            R.drawable.bush
+    };
+    
+    }
     ```
     
+Now we're ready to create the new Fragment.
 
+1. Create a new Fragment by clicking New ==> Fragment ==> Fragment (list). Uncheck 'Include fragment...' and 'Switch to...' checkboxes, leave the name as defaults, and click Finish.
+2. You'll see a 'dummy' folder automatically created. Delete that folder. Surprisingly the system didn't automatically generate a layout file for you. This is because the default setting is that each ListFragment has one and only one ListView with it.
+3. Change the `setListAdapter()` method to the following
+    
+    ```java
+    // replace \ with angle bracket in the line below
+    setListAdapter(new ArrayAdapter\String>(getActivity(),
+                android.R.layout.simple_list_item_1, android.R.id.text1, Candidates.candidateNames));
+    ```
+    
+4. Change `public void onFragmentInteraction(String id)` to `public void onFragmentInteraction(int position)`. Basically we want an int to be passed in this interface method.
+5. Change `mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id)` to `mListener.onFragmentInteraction(position)`. This is to accomodate the change in the previous step. Steps 3 - 5 should is the same as ListView.
+6. Create an Empty Activity and name it ListFragmentActivity. Open activity_list_fragment.xml, insert an id attribute `android:id="@+id/ListFrameLayout"`.
+7. Open ListFragmentActivity.java, modify your code so that it looks like the following:
+    
+    ```java
+    public class ListFragmentActivity extends AppCompatActivity implements ItemFragment.OnFragmentInteractionListener{
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_list_fragment);
+
+        getFragmentManager().beginTransaction().add(R.id.ListFrameLayout, new ItemFragment()).commit();
+    }
+
+    @Override
+    public void onFragmentInteraction(int position){
+        Toast.makeText(getBaseContext(), Candidates.candidateNames[position], Toast.LENGTH_SHORT).show();
+    }
+    }
+    ```
+    
+    Note here to communicate from Fragment back to Activity, we had to make sure the Activity implements the interface. This is because the same Fragment might be used in several different Activities, it needs to know which one is being called through the interface contract.
+    
+8. Add an menu item and case for the new Activity
+    
+    ```xml
+    <item
+        android:id="@+id/action_list"
+        android:orderInCategory="80"
+        android:title="@string/action_list"
+        app:showAsAction="ifRoom" />
+    ```
+    
+    ```java
+        case R.id.action_list:
+        startActivity(new Intent(this, ListFragmentActivity.class));
+        return true;
+    ```
+    
+    If you run the app and click 'Lists' you'll see the following
+    
+    ![lists](.md_images/lists.png)
+    
 
 ### Two panel layouts
+
+1. fragment_details.xml
+    ```xml
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jianhuayang.myfragments.DetailsFragment"
+    android:id="@+id/detailsFrameLayout">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/detailsLinearLayout"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center" />
+
+    </LinearLayout>
+    
+    </FrameLayout>
+    ```
+    
+2. DetailsFragment.java
+    
+    ```java
+    public static final String POSITION = "position";
+    
+    @Override
+    public void onStart() {
+        super.onStart();
+        Bundle args = getArguments();
+        if (args != null) {
+            int position = args.getInt(POSITION);
+            TextView description = (TextView) getActivity().findViewById(R.id.description);
+            description.setText(Candidates.candidateDetails[position]);
+            ImageView imageView = (ImageView) getActivity().findViewById(R.id.imageView);
+            imageView.setImageResource(Candidates.candidatePhotos[position]);
+        } else {
+            TextView description = (TextView) getActivity().findViewById(R.id.description);
+            description.setText("Click on the names on the left to see details");
+        }
+    }
+    ```
+    
+3. activity_multi_panel.xml
+    
+    ```xml
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/multiPanel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.jianhuayang.myfragments.MultiPanelActivity">
+
+    <FrameLayout
+        android:id="@+id/fragmentLeft"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1" />
+
+    <FrameLayout
+        android:id="@+id/fragmentRight"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2" />
+    </LinearLayout>
+    ```
+    
+4. MultiPanelActivity.java
+    
+    ```java
+    public class MultiPanelActivity extends AppCompatActivity implements ItemFragment.OnFragmentInteractionListener {
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_multi_panel);
+        
+        if (savedInstanceState == null){
+            getFragmentManager().beginTransaction().add(R.id.fragmentLeft, new ItemFragment()).commit();
+            getFragmentManager().beginTransaction().add(R.id.fragmentRight, new DetailsFragment()).commit();
+        }
+    }
+    
+    @Override
+    public void onFragmentInteraction(int position) {
+    
+        DetailsFragment detailsFragment = (DetailsFragment)
+                getFragmentManager().findFragmentById(R.id.fragmentRight);
+                
+        if (detailsFragment != null) {
+            // If article frag is available, we're in two-pane layout...
+            
+            // Call a method in the ArticleFragment to update its content
+            
+            DetailsFragment detailsFragmentNew = new DetailsFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt(DetailsFragment.POSITION, position);
+            detailsFragmentNew.setArguments(bundle);
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentRight, detailsFragmentNew);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+            
+        }
+        
+    }
+    
+    }
+    ```
+    
+5. ItemFragment.java
+    
+    ```java
+    @Override
+    public void onStart() {
+        super.onStart();
+        getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        getListView().setSelector(android.R.color.darker_gray);
+    
+    }
+    
+6. menu
+    
+    ```xml
+    <item
+        android:id="@+id/action_panel"
+        android:orderInCategory="70"
+        android:title="@string/action_panel"
+        app:showAsAction="ifRoom" />
+    ```
+    
+    switch
+    
+    ```java
+    case R.id.action_panel:
+    startActivity(new Intent(this, MultiPanelActivity.class));
+    return true;
+    ```
+    
+7. result
+    
+    ![panels](.md_images/panels.png)
+
+
+
 
 ### Fragment lifecycle
 
@@ -673,6 +930,6 @@ In a similar module run by Professor Andrew T. Campbell at Dartmouth College, th
 
 * sss
 
-![simple](.md_images/simple.png)
+
 
 
