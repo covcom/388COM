@@ -8,8 +8,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
+
+    private EditText idText;
+    private EditText nameText;
+    private EditText phoneText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +22,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        idText = (EditText) findViewById(R.id.IDText);
+        nameText = (EditText) findViewById(R.id.nameText);
+        phoneText = (EditText) findViewById(R.id.phoneText);
 
     }
 
@@ -40,5 +49,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void save(View v){
+        int anID = Integer.parseInt(idText.getText().toString());
+        String aName = nameText.getText().toString();
+        String aPhone = phoneText.getText().toString();
+        DatabaseHandler db = new DatabaseHandler(this);
+        db.addContact(new Contact(anID, aName, aPhone));
     }
 }

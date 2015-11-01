@@ -260,7 +260,7 @@ Have a play around and make sure you understand everything, as these are importa
 
 1. Start a new Android Studio project and name it 'My SQLite'.
 2. In Android Studio, right click on your package's 'java' folder (not the test one), select New ==> Java Class to create a new class. Name your class Contact.
-3. Modify your class to make it look like the following:
+3. Modify your class to make it look like the following. You should generate getters and setters instead of typing them manually. You'll need to 'Rearrange Code' after that.
     
     ```java
     public class Contact {
@@ -299,8 +299,7 @@ Have a play around and make sure you understand everything, as these are importa
         }
     }
     ```
-
-       
+    
 
 ### DB handler
 
@@ -315,7 +314,7 @@ Have a play around and make sure you understand everything, as these are importa
 2. If you move your mouse over the line highlighted in red underline you'll see that we need to implement some abstract methods in order to inherit. Insert the following codes into the class to implement the two abstract methods.
     
     ```java
-    public void onCreate(SQLiteDatabase db
+    public void onCreate(SQLiteDatabase db){
     
     }
     
@@ -332,7 +331,7 @@ Have a play around and make sure you understand everything, as these are importa
     }
     ```
     
-    This eliminates all error messages, but still the onCreate method is empty. Insert codes into the method so it looks like the following:
+    The first two parameters, one is the current context and the other is the database name. The 3rd parameter is a SQLiteDatabase.CursorFactory. The last parameter is the datbase version, where we'll always use 1. This constructor eliminates all error messages, but still the onCreate method is empty. Insert codes into the method so it looks like the following:
     
     ```java
     public void onCreate(SQLiteDatabase db){
@@ -340,55 +339,163 @@ Have a play around and make sure you understand everything, as these are importa
     }
     ```
     
-    Here 'col' means column, but it can be anything as it's just a name. If you follow along online tutorials on Android SQLites you'll find that our tutorial is very simple. This is because SQLite allow several different ways of creating a table. For example, every statement that is not on the 'straight line' in the image below can be safely ignored. Detailed documentation on this is [here](https://www.sqlite.org/lang_createtable.html). 
+    Here 'col' means column, but it can be anything as it's just a name. If you follow along online tutorials on Android SQLites you'll find that our tutorial is very simple. In fact, this is because SQLite allow several different ways of creating a table and we adopted the simplest approach. For example, every statement that is not on the 'straight line' in the image below can be safely ignored. Detailed documentation on this is [here](https://www.sqlite.org/lang_createtable.html). 
     
     ![sql create](https://www.sqlite.org/images/syntax/create-table-stmt.gif)
 
 ### Add contacts
+
 In order to have functional storage, you need to read/write to it. In terms of SQL database, this is commonly refered to as CRUD i.e. create, read, update, and delete.
 
 To insert data into the database, you need the following method:
 
 ```java
-
+public void addContact(Contact contact){
+    SQLiteDatabase db = this.getWritableDatabase();
+    
+    ContentValues values = new ContentValues();
+    values.put("colID", contact.getId());
+    values.put("colName", contact.getName());
+    values.put("colPhone", contact.getPhone());
+    
+    long result = db.insert("contactTable", null, values);
+    if (result > 0){
+        Log.d("dbhelper", "inserted successfully");
+    } else {
+        Log.d("dbhelper", "failed to insert");
+    }
+    
+    db.close();
+}
 ```
 
-Now note that our implementation of the addContact method is different from the online tutorial. I have explained insert method in the lectures – what comes back from it is the row id if it's successful, or -1 if it failed.
+ContentValues is very similar to Bundle - both are used to store key-values pairs. But Bundle is associated with Intent and used to pass data in between activities. ContentValues is mainly for database insertion/updating etc. People are suggesting that ContentValues is a special case of Bundle, see [here](http://stackoverflow.com/questions/9334470/is-there-an-efficient-way-to-convert-from-bundle-to-contentvalues). Also note here what comes back from insertion is the row id if it's successful or -1 if it failed.
 
 ### The layout file
-Open your xml file (should be only one), change the layout from RelativeLayout to LinearLayout, add vertical orientation, and delete the helloworld TextView.
 
-Next insert the following code into the xml so it looks like the following:
+Open content_main.xml file, modify the contents so it looks like the following:
 
- this is followed by 
+```xml
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main">
 
-The actual layout looks like 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID" />
 
+    <EditText
+        android:id="@+id/IDText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="insert ID"
+        android:inputType="number" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name" />
+
+    <EditText
+        android:id="@+id/nameText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="insert name"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone" />
+
+    <EditText
+        android:id="@+id/phoneText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="insert phone number"
+        android:inputType="phone" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:onClick="save"
+        android:text="Save" />
+</LinearLayout>
+```
 
 ### Test your activity
-Open your MainActivity.java file and define these variables:
+
+Open MainActivity.java file and declare these variables after class declaration.
+
+```java
+private EditText idText;
+private EditText nameText;
+private EditText phoneText;
+```
+
+Insert variable initializations in `onCreate()` method
+
+```java
+idText = (EditText) findViewById(R.id.IDText);
+nameText = (EditText) findViewById(R.id.nameText);
+phoneText = (EditText) findViewById(R.id.phoneText);
+```
+
+Next, create a `save()` method:
+
+```java
+public void save(View v){
+    int anID = Integer.parseInt(idText.getText().toString());
+    String aName = nameText.getText().toString();
+    String aPhone = phoneText.getText().toString();
+    DatabaseHandler db = new DatabaseHandler(this);
+    db.addContact(new Contact(anID, aName, aPhone));
+}
+```
+
+You need to associate this method with the save button in the xml file, which has been done in the previous step. 
+
+Until this point, you should be able to test the `addContact()` method. Run this app in an AVD and insert some texts and click save, what you'll see is that there's a log entry produced:
+
+![](.md_images/sqlite_screen.png)
+
+--------------------divider---------------------------
+
+![](.md_images/db_insert.png)
 
 
 
-
-
-Next, create a method called save:
-
-
-
-You'll need to associate this method with the save button in the xml file. Until this point, you should be able to test the addContact() method. Now, run this app in AVD and insert some texts and click save, what you'll see is that there's a log entry produced:
-
-  
 ### Verify the results
+
 Open the Android Device Monitor, locate the SQLite database you just created. Export this file to your hard drive.
 
+![](.md_images/db_file.png)
 
 
-Download a tool called SQLiteStudio from http://sqlitestudio.pl. Double click to open it. Next, drag and drop the database you exported into the database window. Locate TablescontactTable and double click it. In the table view click the Data tab. Now you'll see the data you just created.
+Download and install a Firefox addon called 'SQLite Manager'. 
 
-      
+![](.md_images/addon.png)
 
+Once installed, restart Firefox and click Tools ==> SQLite Manager. In the window that pops up, click the 'open folder' icon in the toolbar and then navigate to where your exported the SQLite database. Now you'll see the data you just created.
+
+![](.md_images/manager.png)
+
+Now we have finished database insertion. The rest of the CRUD operation follow exactly the same routes. With the help of online documentation, not tutorials, try to implement 'read', 'update' and 'delete'.
 
 ## Lab 3 Advanced topics
 
@@ -433,8 +540,10 @@ What you have done in lab 1 is to use internal storage. What can also be done is
 
 ### SQLite CRUD operations
 
-> The exercises in here roughly follows an [online tutorial](http://www.androidhive.info/2011/11/android-sqlite-database-tutorial/) written by Ravi Tamada.
+> The SQLite exercises here roughly follow an [online tutorial](http://www.androidhive.info/2011/11/android-sqlite-database-tutorial/) written by Ravi Tamada. Read through that tutorial and answer the following questions:
 
+* How to define a 'contract' class, as suggested [here](http://developer.android.com/training/basics/data-storage/databases.html) in the official website, to improve the tutorial?
+* How would you implement 'delete'/'update' on the UI?
 
 
 
