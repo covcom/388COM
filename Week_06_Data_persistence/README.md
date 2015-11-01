@@ -540,7 +540,7 @@ What you have done in lab 1 is to use internal storage. What can also be done is
 
 ### SQLite CRUD operations
 
-> The SQLite exercises here roughly follow an [online tutorial](http://www.androidhive.info/2011/11/android-sqlite-database-tutorial/) written by Ravi Tamada. Read through that tutorial and answer the following questions:
+Read through the [online tutorial](http://www.androidhive.info/2011/11/android-sqlite-database-tutorial/) written by Ravi Tamada and answer the following questions:
 
 * How to define a 'contract' class, as suggested [here](http://developer.android.com/training/basics/data-storage/databases.html) in the official website, to improve the tutorial?
 * How would you implement 'delete'/'update' on the UI?
