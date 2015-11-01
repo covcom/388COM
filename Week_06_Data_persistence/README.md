@@ -217,77 +217,145 @@ Follow steps below to create a simple app that stores some data in a file.
 
 SharedPreferences and File storage are mainly for data of small quantity. If you have a large amount of data the chance is that you'll need to use SQLite database.
 
-SQL in 5 minutes
-For those of you who aren’t familiar with SQL syntax, go to the following address, http://www.w3schools.com/sql/trysql.asp?filename=trysql_select_all, and type in the following in order:
+### SQL in 5 minutes
+For those of you who aren't familiar with SQL syntax, follow instructions below to finish a very simple tutorial. If you 'are familiar with the sytax, you can skip this section and to to the next one directly.
 
-CREATE TABLE contacts (
-   id INT PRIMARY KEY     NOT NULL,
-   name          TEXT    NOT NULL,
-   age           INT,
-   address       CHAR(50)
-);
+1. Go to this [link](http://www.w3schools.com/sql/trysql.asp?filename=trysql_select_all). Pastes the following into the 'SQL Statement' text area to replace what's in there already, and click 'Run SQL'
+    
+    ```sql
+    CREATE TABLE contacts (
+        id INT PRIMARY KEY     NOT NULL,
+        name          TEXT    NOT NULL,
+        age           INT,
+        address       CHAR(50)
+    );
+    ```
+    
+    This will create a new 'table' that has four columns. We also defined the data type for each column.
+    
+2. Replace the texts in the text area with the following, one line at a time, and then click 'Run SQL'
+    
+    ```sql
+    INSERT INTO contacts (id, name, age, address) VALUES (1, 'Paul', 22, 'Singer Hall');
+    INSERT INTO contacts (id, name, age, address) VALUES (2, 'John', 23, 'Singer Hall');
+    INSERT INTO contacts (id, name, age, address) VALUES (3, 'Ben', 23, 'Callice Court');
+    ```
+    
+    This will insert some rows into the table. After completeion, if you click on the table name i.e. 'contacts' under 'Your Databasae' area to the right of your browser window, you should see the tables contents
+    
+    ![](.md_images/sql.png)
+    
+3. Replace the texts in the text area with the following, and then click 'Run SQL'
+    ```sql
+    SELECT * FROM contacts WHERE id = 2;
+    ```
+    
+    You should see that the second row came back from the query. This is how we query databases using 'WHERE' clause.
 
-INSERT INTO contacts (id, name, age, address) VALUES (1, 'Paul', 22, 'Singer Hall');
-INSERT INTO contacts (id, name, age, address) VALUES (2, 'John', 23, 'Singer Hall');
-INSERT INTO contacts (id, name, age, address) VALUES (3, 'Ben', 23, 'Callice Court');
+Have a play around and make sure you understand everything, as these are important for the following steps. In case that you're not sure about anything, go to [here](http://www.w3schools.com/sql/) and click the links to the left of the page to read more.
 
-SELECT * FROM contacts WHERE id = 2;
+### Contact Class
 
-Have a play around and make sure you understand everything, as these are important for the following steps. In case that you’re not sure about anything, go to http://www.w3schools.com/sql/ and click the links to the left of the page to read more.
+> The exercises in here roughly follows an [online tutorial](http://www.androidhive.info/2011/11/android-sqlite-database-tutorial/) written by Ravi Tamada.
 
-SQLite database
-Start a new Android Studio project and name it ‘My SQLite’. Following all default options to create a MainActivity.java class and an activity_main.xml file. 
-Contact Class
-In Android Studio, right click on your package’s ‘java’ folder (not the test one), select NewJava Class to create a new class. Choose ‘…/app/src/main/java’ as the directory and name it Contact.
-
-
-
-Android Studio will create an empty class that looks similar to below:
-
-
-Now, modify your class to make it look like the following (left figure):
+1. Start a new Android Studio project and name it 'My SQLite'.
+2. In Android Studio, right click on your package's 'java' folder (not the test one), select New ==> Java Class to create a new class. Name your class Contact.
+3. Modify your class to make it look like the following:
+    
+    ```java
+    public class Contact {
+        private int id;
+        private String name;
+        private String phone;
+        
+        public Contact(int id, String name, String phone) {
+            this.id = id;
+            this.name = name;
+            this.phone = phone;
+        }
+        
+        public int getId() {
+            return id;
+        }
+        
+        public void setId(int id) {
+            this.id = id;
+        }
+        
+        public String getName() {
+            return name;
+        }
+        
+        public void setName(String name) {
+            this.name = name;
+        }
+        
+        public String getPhone() {
+            return phone;
+        }
+        
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+    }
+    ```
 
        
 
-Position your mouse so that the cursor is after the constructor but still within the class definition (that is, just before the last curly brackets). On the menu bar, select CodeGenerate…Getter and Setter and select all three member variables. This will generate getter/setter methods for your member variables (right figure above).
+### DB handler
 
-DB handler
-Following steps similar to the previous one to create a new class called DatabseHandler.java. Modify the class definition to extend SQLiteOpenHelper. You class should now look like:
+1. Following steps similar to the previous one to create a new class called DatabseHandler.java. Modify the class definition to extend SQLiteOpenHelper.
+    
+    ```java
+    public class DatabaseHandler extends SQLiteOpenHelper{
+    
+    }
+    ``
+    
+2. If you move your mouse over the line highlighted in red underline you'll see that we need to implement some abstract methods in order to inherit. Insert the following codes into the class to implement the two abstract methods.
+    
+    ```java
+    public void onCreate(SQLiteDatabase db
+    
+    }
+    
+    public void onUpgrade (SQLiteDatabase db, int oldVersion, int newVersion){
+    
+    }
+    ```
+    
+3. What you'll see now is that even though you implemented the two abstract methods, there's still an error saying no constructor available. So let's insert a constructor for it.
+    
+    ```java
+    public DatabaseHandler(Context context){
+        super(context, "testDB", null, 1);
+    }
+    ```
+    
+    This eliminates all error messages, but still the onCreate method is empty. Insert codes into the method so it looks like the following:
+    
+    ```java
+    public void onCreate(SQLiteDatabase db){
+        db.execSQL("CREATE TABLE contactTable (colID, colName, colPhone)");
+    }
+    ```
+    
+    Here 'col' means column, but it can be anything as it's just a name. If you follow along online tutorials on Android SQLites you'll find that our tutorial is very simple. This is because SQLite allow several different ways of creating a table. For example, every statement that is not on the 'straight line' in the image below can be safely ignored. Detailed documentation on this is [here](https://www.sqlite.org/lang_createtable.html). 
+    
+    ![sql create](https://www.sqlite.org/images/syntax/create-table-stmt.gif)
 
-
-
-If you move your mouse over the line highlighted in red underline you’ll see that we need to implement some abstract methods in order to inherit. This is also confirmed from the online manual at http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html:
-
-
-
-Insert the following code into the class to implement the two abstract methods:
-
-
-
-Now what you’ll see is that even though you implemented the two abstract methods, there’s still an error saying no constructor available. So let’s insert a constructor for it:
-
-
-
-This eliminates the error message, but still the onCreate method is empty. Insert codes into the method so it looks like the following:
-
-
-
-Here ‘col’ means column, but it can be anything (just a name). If you follow along the online tutorial written by Ravi Tamada you’ll find that our tutorial is a lot simpler. This is because SQLite allow several different ways of creating a table. For example, every statement that is not on the ‘straight line’ in the image below can be safely ignored.
-
-
-
-Detailed documentation on this is online at https://www.sqlite.org/lang_createtable.html. 
-
-Add contacts
-In order to have functional storage, you need to read/write to it. In terms of SQL database, this is CRUD i.e. create, read, update, and delete.
+### Add contacts
+In order to have functional storage, you need to read/write to it. In terms of SQL database, this is commonly refered to as CRUD i.e. create, read, update, and delete.
 
 To insert data into the database, you need the following method:
 
+```java
 
+```
 
-Now note that our implementation of the addContact method is different from the online tutorial. I have explained insert method in the lectures – what comes back from it is the row id if it’s successful, or -1 if it failed.
+Now note that our implementation of the addContact method is different from the online tutorial. I have explained insert method in the lectures – what comes back from it is the row id if it's successful, or -1 if it failed.
 
-The layout file
+### The layout file
 Open your xml file (should be only one), change the layout from RelativeLayout to LinearLayout, add vertical orientation, and delete the helloworld TextView.
 
 Next insert the following code into the xml so it looks like the following:
@@ -298,7 +366,7 @@ The actual layout looks like
 
 
 
-Test your activity
+### Test your activity
 Open your MainActivity.java file and define these variables:
 
 
@@ -309,15 +377,15 @@ Next, create a method called save:
 
 
 
-You’ll need to associate this method with the save button in the xml file. Until this point, you should be able to test the addContact() method. Now, run this app in AVD and insert some texts and click save, what you’ll see is that there’s a log entry produced:
+You'll need to associate this method with the save button in the xml file. Until this point, you should be able to test the addContact() method. Now, run this app in AVD and insert some texts and click save, what you'll see is that there's a log entry produced:
 
   
-Verify the results
+### Verify the results
 Open the Android Device Monitor, locate the SQLite database you just created. Export this file to your hard drive.
 
 
 
-Download a tool called SQLiteStudio from http://sqlitestudio.pl. Double click to open it. Next, drag and drop the database you exported into the database window. Locate TablescontactTable and double click it. In the table view click the Data tab. Now you’ll see the data you just created.
+Download a tool called SQLiteStudio from http://sqlitestudio.pl. Double click to open it. Next, drag and drop the database you exported into the database window. Locate TablescontactTable and double click it. In the table view click the Data tab. Now you'll see the data you just created.
 
       
 
@@ -358,12 +426,14 @@ public String[] loadArray(String arrayName, Context mContext) {
 
 What you have done in lab 1 is to use internal storage. What can also be done is to use external storage i.e. SD card. The procedures are pretty much the same. The only two differences are:
 
-1.	You’ll need to add permissions in manifest.
-2.	You’ll need to check the status Environment.getExternalStorageState().
-
+1.	You'll need to add permissions in manifest.
+2.	You'll need to check the status Environment.getExternalStorageState().
 
 * Can you change the example in lab 1 so that the sytsem write to external storage?
 
+### SQLite CRUD operations
+
+> The exercises in here roughly follows an [online tutorial](http://www.androidhive.info/2011/11/android-sqlite-database-tutorial/) written by Ravi Tamada.
 
 
 
