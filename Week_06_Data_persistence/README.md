@@ -309,7 +309,7 @@ Have a play around and make sure you understand everything, as these are importa
     public class DatabaseHandler extends SQLiteOpenHelper{
     
     }
-    ``
+    ```
     
 2. If you move your mouse over the line highlighted in red underline you'll see that we need to implement some abstract methods in order to inherit. Insert the following codes into the class to implement the two abstract methods.
     
