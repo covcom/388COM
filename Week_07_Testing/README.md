@@ -15,15 +15,24 @@ Data persistence refers to the fact that data need to persist through app life c
 
 ## Lab 3 Advanced topics
 
-### Array data using SharedPreferences
+### Official resources for Android Testing
+
+* [Best practices for testing](http://developer.android.com/training/testing.html)
+* [Android workflow testing](http://developer.android.com/tools/testing/index.html)
+* [Android testing tools](http://developer.android.com/tools/testing/testing-tools.html)
+* The testing section in [Gradle Plugin User Guide](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing)
+* Android Studio [unit testing support](http://tools.android.com/tech-docs/unit-testing-support)
+* Android testing samples on [GitHub](https://github.com/googlesamples/android-testing)
+
+ActivityInstrumentationTestCase2 will become deprecated you need to define a @Rule.
+http://wiebe-elsinga.com/blog/whats-new-in-android-testing/
+
+### IntelliJ resources for Android Testing
+
+* [Testing](https://www.jetbrains.com/idea/help/testing.html)
+* [Testing Android Applications](https://www.jetbrains.com/idea/help/testing-android-applications.html)
+* [Test Runner Tab](https://www.jetbrains.com/idea/help/test-runner-tab.html)
 
 
-### SQLite CRUD operations
 
-Read through the [online tutorial](http://www.androidhive.info/2011/11/android-sqlite-database-tutorial/) written by Ravi Tamada and answer the following questions:
-
-* How to define a 'contract' class, as suggested [here](http://developer.android.com/training/basics/data-storage/databases.html) in the official website, to improve the tutorial?
-* How would you implement 'delete'/'update' on the UI?
-
-
-    ![](.md_images/sql.png)
+![](.md_images/sql.png)
