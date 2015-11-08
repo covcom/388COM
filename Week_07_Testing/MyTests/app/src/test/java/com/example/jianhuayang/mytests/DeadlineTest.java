@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by jianhuayang on 06/11/2015.
@@ -38,7 +38,6 @@ public class DeadlineTest {
     SharedPreferences.Editor editor;
 
     private Deadline deadline;
-
 
     @Test
     public void testCalculate() throws Exception {

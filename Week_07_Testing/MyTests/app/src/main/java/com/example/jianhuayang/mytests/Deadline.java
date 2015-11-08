@@ -41,7 +41,7 @@ public class Deadline {
         Date submission;
         try {
             submission = dateFormat.parse("18/12/15");
-            return (int) (submission.getTime() - date.getTime() )/ (1000 * 60 * 60 * 24);
+            return (int) ((submission.getTime() - date.getTime() )/ (1000 * 60 * 60 * 24));
         } catch (ParseException e) {
             e.printStackTrace();
             return -1;
