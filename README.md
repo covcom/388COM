@@ -138,17 +138,15 @@ Fragments, specialized fragments, screen orientation
 
 ## Week 6 Data persistence
 
-### Shared preference
+### SharedPreferences and files
 
 **Contents**
 
-Dialogs, Pickers, Application preference, prefrence activity, files and directories
+SharedPreferences API, Android Device Monitor, Java IO, writing and reading to files, internal/external storage
 
 **Refs**
 
 [Ref.[5]](#ref5) chapter 11/12
-
-[Android official API guide: Dialogs](http://developer.android.com/guide/topics/ui/dialogs.html)
 
 ### SQL database
 
@@ -178,7 +176,7 @@ Unit test best practices, junit essentials
 
 **Contents**
 
-The Android testing API, activity testing, service testing, content provider testing, acceptance testing--robotium, continuous integration
+The Android testing API, continuous integration
 
 **Refs**
 
