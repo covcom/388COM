@@ -336,7 +336,7 @@ The critical part of the app above is the ability to calculate the time differen
     
 3. In the window that pops up, select Create New Test. Then change from JUnit3 to Junit4, check the 'calculate' box, click OK.
     
-    ![](.md_images/goto.png)
+    ![](.md_images/create.png)
     
     We just created a testing class for Deadline, and this new class appears in the test package.
     
@@ -602,5 +602,3 @@ Google lists the following for your to consider regarding testing, more info can
 * [Test Runner Tab](https://www.jetbrains.com/idea/help/test-runner-tab.html)
 
 
-
-    ![](.md_images/toolbar.png)
