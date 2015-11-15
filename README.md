@@ -164,7 +164,7 @@ SQLite API, helper class, pre-creating databases
 
 **Contents**
 
-Unit test best practices, junit essentials
+JUnit essentials, Unit test best practices, local unit testing, mocked unit testing
 
 **Refs**
 
@@ -172,11 +172,11 @@ Unit test best practices, junit essentials
 
 [vogella tutorials: Unit Testing with JUnit](http://www.vogella.com/tutorials/JUnit/article.html)
 
-### Android testing
+### Instrumented testing
 
 **Contents**
 
-The Android testing API, continuous integration
+Instrumented unit tests, UI testing using Espresso
 
 **Refs**
 
@@ -185,7 +185,13 @@ The Android testing API, continuous integration
 
 ## Week 8 Wearables
 
-### Android wear
+### Notifications on Android wearables
+
+**Contents**
+
+Android services, broadcasting, notifications
+
+### Android wear apps
 
 **Contents**
 
@@ -197,13 +203,6 @@ Setting up wearable environment, optimize for screen technologies, build watchfa
 
 [Ref.[3]](#ref3) chapter 15
 
-### 3rd party wearables
-
-**Contents**
-
-Pebble, Microsoft Band
-
-**Refs**
 
 ## Week 9 Graphics and animation
 
