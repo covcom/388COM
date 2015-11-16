@@ -16,13 +16,13 @@ public class CountingReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(MainActivity.DEBUG_KEY, "on receive");
-        String timeElapsed = intent.getStringExtra(BackgroundCounting.REPORT_KEY);
+        String timeElapsed = intent.getStringExtra(CountingService.REPORT_KEY);
         Log.d(MainActivity.DEBUG_KEY, "time elapsed: " + timeElapsed);
 
         Intent intentNew = new Intent(context, DisplayActivity.class);
         intentNew.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intentNew.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intentNew.putExtra(BackgroundCounting.REPORT_KEY, timeElapsed);
+        intentNew.putExtra(CountingService.REPORT_KEY, timeElapsed);
         context.startActivity(intentNew);
     }
 

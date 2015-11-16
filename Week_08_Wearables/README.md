@@ -254,31 +254,208 @@ If you run the app and hit Start Counting, you'll see that on both your phone an
 
 ![](.md_images/not2_watch.png)
 
-If you click Open on phone in the watch, it'll bring you to the display activity
+If you click Open on phone in the watch, it'll bring you back to the display activity
 
 ![](.md_images/open_on_phone.png)
 
-
 ## Lab 2 Android wear apps
 
-
-
-### Setting up wearable environment
+The app we created in lab 1 is use notifications on wearable to control the app installed on the phone. In this second lab we'll build an app that runs directly on the watch. The idea is that once we start the app we'll start time counting down. And once we hit Send button, we'll send a Message to the phone to display a Toast.
 
 ### Add a wearable module
 
+1. Duplicate the project folder you created earlier and rename it MyWearables2, open it in Android Studio.
+2. Click menu File ==> New ==> New Module, and select Android wear Module
+    
+    ![](.md_images/wear_module.png)
+    
+3. Give the application a name My Wearables, click Next
+4. Select Always On Wear Activity, click Next until Finish. Now you have two mdoules in your project, as follows
+    
+    ![](.md_images/modules.png)
+    
+    Refactor these two modules so that their names change to mobile and wear respectively. These are the default names for such an app.
+    
+    ![](.md_images/modules_new.png)
+    
+5. Open build.gradle (Module: mobile) file and insert the following into dependencies block
+    
+    ```xml
+    wearApp project(':wear')
+    compile 'com.google.android.gms:play-services:7.8.0'
+    ```
+    
+    The reason of doing this is that any wearable apps need to be included in the corresdping phone app in order to be installed. This makes sense as there isn't a Google Play store for wearables.
+
 ### Build an interface
+
+1. Open activity_main.xml for wear. Change the device in Preview window to Wear Square
+    
+    ![](.md_images/wear_sq.png)
+    
+2. Insert the following button into the layout file
+    
+    ```xml
+    <Button
+        android:id="@+id/send"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:onClick="onSendClick"
+        android:text="Send" 
+    />
+    ```
+    
+    This is prettey simple to do. Note that in the layout file we have a BoxInsetLayout, which is new and used to auto detect the watch shape.
 
 ### Send message back to the phone
 
+1. Open MainActivity.java for wear, insert the following variable declarations
+    
+    ```java
+    private Button mButton;
+    private static final long CONNECTION_TIME_OUT_MS = 100;
+    private String message;
+    private GoogleApiClient client;
+    private String nodeId;
+    ```
+    
+2. Change the `onCreate()` method so it becomes the following
+    
+    ```java
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        setAmbientEnabled();
+        
+        mContainerView = (BoxInsetLayout) findViewById(R.id.container);
+        mTextView = (TextView) findViewById(R.id.text);
+        mClockView = (TextView) findViewById(R.id.clock);
+        mButton = (Button) findViewById(R.id.send);
+        initApi();
+        new CountDownTimer(30000, 1000) {
+        
+            public void onTick(long millisUntilFinished) {
+                message = "seconds remaining: " + millisUntilFinished / 1000;
+                mTextView.setText(message);
+            }
+            
+            public void onFinish() {
+                mTextView.setText("done!");
+            }
+        }.start();
+    }
+    ```
+    
+    The codes above use an Android system built-in timer to count down 30 seconds and display it on the watch screen. Once counting down finishes, it'll display done!.
+    
+3. Modify the `updateDisplay()` method, adding entries for the Button
+    
+    ```java
+    private void updateDisplay() {
+        if (isAmbient()) {
+            mContainerView.setBackgroundColor(getResources().getColor(android.R.color.black));
+            mTextView.setTextColor(getResources().getColor(android.R.color.white));
+            mClockView.setVisibility(View.VISIBLE);
+            mButton.setTextColor(getResources().getColor(android.R.color.white));
+            mClockView.setText(AMBIENT_DATE_FORMAT.format(new Date()));
+        } else {
+            mContainerView.setBackground(null);
+            mTextView.setTextColor(getResources().getColor(android.R.color.black));
+            mButton.setTextColor(getResources().getColor(android.R.color.black));
+            mClockView.setVisibility(View.GONE);
+        }
+    }
+    ```
+    
+    Ambient is the state when you put the watch to 'sleep' so that it is in a low energy state. You can do this by clicking the 'power' button next to the watch screen in an AVD.
+    
+4. Insert the following code into the class
+    
+    ```java
+    private void initApi() {
+        client = getGoogleApiClient(this);
+        retrieveDeviceNode();
+    }
+    
+    private GoogleApiClient getGoogleApiClient(Context context) {
+        return new GoogleApiClient.Builder(context)
+                .addApi(Wearable.API)
+                .build();
+    }
+    
+    private void retrieveDeviceNode() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                client.blockingConnect(CONNECTION_TIME_OUT_MS, TimeUnit.MILLISECONDS);
+                NodeApi.GetConnectedNodesResult result =
+                        Wearable.NodeApi.getConnectedNodes(client).await();
+                List<Node> nodes = result.getNodes();
+                if (nodes.size() > 0) {
+                    nodeId = nodes.get(0).getId();
+                    Log.d("DEBUG_KEY", "size "+Integer.toString(nodes.size()));
 
-## Lab 3 Advanced topics
+                    Log.d("DEBUG_KEY", nodeId);
+                }
+                client.disconnect();
+            }
+        }).start();
+    }
+    
+    public void onSendClick(View v) {
+        if (nodeId != null) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d("DEBUG_KEY", "on click");
+                    client.blockingConnect(CONNECTION_TIME_OUT_MS, TimeUnit.MILLISECONDS);
+                    Wearable.MessageApi.sendMessage(client, nodeId, message, null);
+                    client.disconnect();
+                    Log.d("DEBUG_KEY", "on click sent");
+                    
+                }
+            }).start();
+        }
+    }
+    ```
+    
+    some explanation here.
+    
+5. Create a new class called ListenerService for mobile module, insert the following code into the Java file
+    
+    ```java
+    public class ListenerService extends WearableListenerService {
+    @Override
+    public void onMessageReceived(MessageEvent messageEvent) {
+        Log.d("DEBUG_KEY", "on received");
+        showToast(messageEvent.getPath());
+    }
 
-A
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+}
+    ```
+    
+    some explanation here.
+    
+6. Open AndroidManifest.xml and insert the following within `application` tag
+    
+    ```xml
+    <service
+            android:name=".ListenerService">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
+            </intent-filter>
+    </service>
+    ```
+    
+    some explanation here.
+    
+    ![](.md_images/20s_w.png)
+    
+    ![](.md_images/20s_m.png)
 
-### data
-Google lists the following for your to consider regarding testing, more info can be found here](http://developer.android.com/tools/testing/what_to_test.html):
 
-* Change in orientation
-
-![](.md_images/command.png)

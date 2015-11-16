@@ -1,4 +1,4 @@
-package com.example.jianhuayang.myapplication;
+package com.example.jianhuayang.mywearables;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -29,8 +30,9 @@ public class MainActivity extends WearableActivity {
     private TextView mTextView;
     private TextView mClockView;
 
+    private Button mButton;
     private static final long CONNECTION_TIME_OUT_MS = 100;
-    private static final String MESSAGE = "Hello Wear!";
+    private String message;
     private GoogleApiClient client;
     private String nodeId;
 
@@ -43,11 +45,13 @@ public class MainActivity extends WearableActivity {
         mContainerView = (BoxInsetLayout) findViewById(R.id.container);
         mTextView = (TextView) findViewById(R.id.text);
         mClockView = (TextView) findViewById(R.id.clock);
+        mButton = (Button) findViewById(R.id.send);
         initApi();
         new CountDownTimer(30000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                mTextView.setText("seconds remaining: " + millisUntilFinished / 1000);
+                message = "seconds remaining: " + millisUntilFinished / 1000;
+                mTextView.setText(message);
             }
 
             public void onFinish() {
@@ -79,11 +83,12 @@ public class MainActivity extends WearableActivity {
             mContainerView.setBackgroundColor(getResources().getColor(android.R.color.black));
             mTextView.setTextColor(getResources().getColor(android.R.color.white));
             mClockView.setVisibility(View.VISIBLE);
-
+            mButton.setTextColor(getResources().getColor(android.R.color.white));
             mClockView.setText(AMBIENT_DATE_FORMAT.format(new Date()));
         } else {
             mContainerView.setBackground(null);
             mTextView.setTextColor(getResources().getColor(android.R.color.black));
+            mButton.setTextColor(getResources().getColor(android.R.color.black));
             mClockView.setVisibility(View.GONE);
         }
     }
@@ -125,7 +130,7 @@ public class MainActivity extends WearableActivity {
                 public void run() {
                     Log.d("DEBUG_KEY", "on click");
                     client.blockingConnect(CONNECTION_TIME_OUT_MS, TimeUnit.MILLISECONDS);
-                    Wearable.MessageApi.sendMessage(client, nodeId, MESSAGE, null);
+                    Wearable.MessageApi.sendMessage(client, nodeId, message, null);
                     client.disconnect();
                     Log.d("DEBUG_KEY", "on click sent");
 

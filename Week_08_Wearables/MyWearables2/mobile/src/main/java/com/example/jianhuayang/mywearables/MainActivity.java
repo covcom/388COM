@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onStartClick(View v) {
-        startService(new Intent(this, BackgroundCounting.class));
+        startService(new Intent(this, CountingService.class));
         Log.d(DEBUG_KEY, "service started");
 
     }

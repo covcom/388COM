@@ -13,12 +13,12 @@ import android.util.Log;
 /**
  * Created by jianhuayang on 12/11/2015.
  */
-public class BackgroundCounting extends IntentService {
+public class CountingService extends IntentService {
 
     public static final String REPORT_KEY = "REPORT_KEY";
     public static final String INTENT_KEY = "com.example.jianhuayang.mywearables.BROADCAST";
 
-    public BackgroundCounting() {
+    public CountingService() {
         super("BackgroundCounting");
     }
 

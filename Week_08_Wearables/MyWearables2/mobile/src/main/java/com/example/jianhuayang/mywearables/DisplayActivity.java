@@ -14,7 +14,7 @@ public class DisplayActivity extends AppCompatActivity {
         if (getIntent() != null) {
             Intent intent = getIntent();
             TextView textView = (TextView) findViewById(R.id.display);
-            textView.setText("Time elapsed (seconds):\n" + intent.getStringExtra(BackgroundCounting.REPORT_KEY));
+            textView.setText("Time elapsed (seconds):\n" + intent.getStringExtra(CountingService.REPORT_KEY));
         }
 
     }
