@@ -2,15 +2,15 @@
 
 Congratulations to those of you who had their Moto 360 delivered last week. For those who haven't got it, you can expect a nice Easter present from the university! (That's how long it takes to re-process the order.)
 
-This week we look at Android wearables i.e. watches. There are mainly two different usages of an Android watch: 1) as an extension of your phone/tablet. By extension I meant the watch provides assistive functions to apps installed on the phone; 2) You can also have apps run directly on the watch, in which case, the watch is a separtated device.
+This week we look at Android wearables i.e. watches. There are mainly two different usages of an Android watch: 1) as an extension of your phone/tablet. By extension I meant the watch provides assistive functions to apps installed on the phone; 2) You can also have apps run directly on the watch, in which case, the watch is a separate device.
 
-To finish exercies in this week, you'll need an Android watch, either AVD or Moto 360. *I'll use an AVD for demo purposes in the lab sheets.* In addition, you must have a physical Android phone/tablet.
+To finish the exercise in this week, you'll need an Android watch, either AVD or Moto 360. *I'll use an AVD for demo purposes in the lab sheets.* In addition, you must have a physical Android phone/tablet.
 
-> In theory, it's not advisable to connect an emulated watch with an emulated phone. But there are work-arounds for this, click [here](http://stackoverflow.com/questions/25205888/pairing-android-and-wear-emulators) in case you don't have an Android phone. 
+> In theory, it's not advisable to connect an emulated watch with an emulated phone. But there are workarounds for this, click [here](http://stackoverflow.com/questions/25205888/pairing-android-and-wear-emulators) in case you don't have an Android phone. 
 
 ## Lab 1 Notifications on Android wearables
 
-Suppose you're in a lecture and the lecturer hates it when you check Facebook messages on your phone from time to time, which is also not something you enjoy doing. A less awkward solution is to check it on your watch! That is, if the notification can be delivered. Notifications delivered to your phone will automatically be displayed on your watch as well. Let's see how.
+Suppose you're in a lecture and the lecturer hates it when you check Facebook messages on your phone from time to time, which is also not something you enjoy doing. A less awkward solution is to check it on your watch! That is if the notification can be delivered. Notifications delivered to your phone will automatically be displayed on your watch as well. Let's see how.
 
 ![](http://thenextweb.com/wp-content/blogs.dir/1/files/2014/03/Android-Wear.png)
 
@@ -29,18 +29,18 @@ Follow steps below to setup an Android watch AVD and connect to your phone.
 2. Set up an Android wear AVD:
     1. Open AVD Manager and click Create Virtual Device
     2. Select Android Wear Round with 320*320 resolution
-    3. Selelct the system image you downloaded earlier and click Next ==> Finish
-    4. Click the green triangle once the AVD is created to start it. On first start, the watch will give you a quick demo on how to use it. Follow instructions there and feel free to explore your virtual watch.
+    3. Select the system image you downloaded earlier and click Next ==> Finish
+    4. Click the green triangle once the AVD is created to start it. On the first start, the watch will give you a quick demo on how to use it. Follow instructions there and feel free to explore your virtual watch.
         
         ![](.md_images/watch_start.png)
     
 3. On your phone, install an app called Android Wear from Play store.
-4. Connect your phone to the Mac/Windows machine using a usb cable.
+4. Connect your phone to the Mac/Windows machine using a USB cable.
 5. Open a terminal window, navigate to where you saved your adb tools. For example, on my Mac it's saved at `/Users/jianhuayang/Portables/android-sdk-macosx/platform-tools`. Issue the following command so that the AVD can connect to the phone `./adb -d forward tcp:5601 tcp:5601`. This command should return nothing.
     
     ![](.md_images/command.png)
     
-    > This command only works when you have a single wearable. If you have more than one, you should try to diable one of those. Or you could try the solution suggested [here](http://stackoverflow.com/questions/14654718/adb-shell-when-multiple-devices).
+    > This command only works when you have a single wearable. If you have more than one, you should try to disable one of those. Or you could try the solution suggested [here](http://stackoverflow.com/questions/14654718/adb-shell-when-multiple-devices).
     
 6. On your phone, open Android Wear and connect to the watch called Emulator. To test the connection, click Try out watch notifications ==> Reminder (by time), if it's connected successfully you should see something similar to below
     
@@ -84,7 +84,7 @@ Follow steps below to setup a service class:
     
     Here we start a service in a way similar to starting an activity. We'll define the service later.
     
-4. Create a Empty Activity named DisplayActivity. Open activity_display.xml and insert the following TextView. We need this activity to display the counting result from the service.
+4. Create an Empty Activity named DisplayActivity. Open activity_display.xml and insert the following TextView. We need this activity to display the counting result from the service.
     
     ```xml
     <TextView
@@ -126,9 +126,9 @@ Follow steps below to setup a service class:
     }
     ```
     
-    In Android, a Service is like an Activity but without UI. You can perform certian tasks in the background without interfering with the UI of your app. 
+    In Android, a Service is like an Activity but without UI. You can perform certain tasks in the background without interfering with the UI of your app. 
     * Here we extended IntentService, wich requires us to provide a constructor and override the `onHandleIntent()` method. This is the simplest case of a Service.
-    * The `synchronized (this){}` block is to ensure that only one thread has access at a time. Otherwise if you click Start Counting in the main activity you'll start several different services.
+    * The `synchronized (this){}` block is to ensure that only one thread has access at a time. Otherwise, if you click Start Counting in the main activity you'll start several different services.
     * IntentService class needs to finish the job defined in `onHandleIntent()`. Once started, we cannot call methods to stop it. This is why we used the `while` block.
     
 6. Open AndroidManifest.xml and insert the following within `application` tag
@@ -188,7 +188,7 @@ Follow steps below to setup a service class:
     }
     ```
     
-    Here once we receive the intent, we'll start the display activity to display the time elapsed. In the service class we broadcast every single second. This means that the display activity will get started every second too. Intent flags make sure that once we have a new activity started this new activity will relace what's already on the screen instead of adding on top of the stack.
+    Here once we receive the intent, we'll start the display activity to display the time elapsed. In the service class, we broadcast every single second. This means that the display activity will get started every second too. Intent flags make sure that once we have a new activity started this new activity will relace what's already on the screen instead of adding on top of the stack.
     
 9. Open AndroidManifest.xml and insert the following within `application` tag
     
@@ -203,7 +203,7 @@ Follow steps below to setup a service class:
     </receiver>
     ```
     
-    Note here the intent-filter string is the same as the one we defind as INTENT_KEY in CountingService.java.
+    Note here the intent-filter string is the same as the one we defined as INTENT_KEY in CountingService.java.
     
 10. Open DisplayActivity.java, insert the following into the `onCreate()` method
     
@@ -219,7 +219,7 @@ Follow steps below to setup a service class:
 
 ### Notifications
 
-The way we used service above doesn't concern wearables at all. In order to use some wearable features we'll need to buildl notifications. In fact, in a real-world app you probably only want to show the notification once they move away from your app.
+The way we used service above doesn't concern wearables at all. In order to use some wearable features, we'll need to build notifications. In fact, in a real-world app you probably only want to show the notification once they move away from your app.
 
 Following steps below to build notifications and send to both your phone and watch.
 
@@ -245,7 +245,7 @@ notificationManager.notify(123123, builder.build());
 ```
 
 There are several things to note in the codes above:
-* Intent is what we've been using since we started. However, we'll probably need to close the app completely before we use the notification to start it again. Here comes the PendingIntent. By giving a PendingIntent to notificatio builder, you are granting it the right to perform the operation you have specified as if the other application was yourself.
+* Intent is what we've been using since we started. However, we'll probably need to close the app completely before we use the notification to start it again. Here comes the PendingIntent. By giving a PendingIntent to notification builder, you are granting it the right to perform the operation you have specified as if the other application was yourself.
 * When we start display activity, we must preserve the user's expected navigation experience. For example, clicking Back should take the user back through the application's normal work flow to the Home screen, and clicking Recents should show the Activity as a separate task. This is why we use TaskStackBuilder.
 
 If you run the app and hit Start Counting, you'll see that on both your phone and watch the notification updates itself.
@@ -260,7 +260,7 @@ If you click Open on phone in the watch, it'll bring you back to the display act
 
 ## Lab 2 Android wear apps
 
-The app we created in lab 1 is use notifications on wearable to control the app installed on the phone. In this second lab we'll build an app that runs directly on the watch. The idea is that once we start the app we'll start time counting down. And once we hit Send button, we'll send a Message to the phone to display a Toast.
+The app we created in lab 1 uses notifications on wearable to control the app installed on the phone. In this second lab, we'll build an app that runs directly on the watch. The idea is that once we start the app we'll start time counting down. And once we hit Send button, we'll send a Message to the phone to display a Toast.
 
 ### Add a wearable module
 
@@ -270,7 +270,7 @@ The app we created in lab 1 is use notifications on wearable to control the app 
     ![](.md_images/wear_module.png)
     
 3. Give the application a name My Wearables, click Next
-4. Select Always On Wear Activity, click Next until Finish. Now you have two mdoules in your project, as follows
+4. Select Always On Wear Activity, click Next until Finish. Now you have two modules in your project, as follows
     
     ![](.md_images/modules.png)
     
@@ -285,7 +285,7 @@ The app we created in lab 1 is use notifications on wearable to control the app 
     compile 'com.google.android.gms:play-services:7.8.0'
     ```
     
-    The reason of doing this is that any wearable apps need to be included in the corresdping phone app in order to be installed. This makes sense as there isn't a Google Play store for wearables.
+    The reason of doing this is that any wearable apps need to be included in the corresponding phone app in order to be installed. This makes sense as there isn't a Google Play store for wearables.
 
 ### Build an interface
 
@@ -306,7 +306,7 @@ The app we created in lab 1 is use notifications on wearable to control the app 
     />
     ```
     
-    This is prettey simple to do. Note that in the layout file we have a BoxInsetLayout, which is new and used to auto detect the watch shape.
+    This is pretty simple to do. Note that in the layout file we have a BoxInsetLayout, which is new and used to auto detect the watch shape.
 
 ### Send message back to the phone
 
@@ -421,9 +421,9 @@ The app we created in lab 1 is use notifications on wearable to control the app 
     }
     ```
     
-    some explanation here.
+    To send data from watch to phone, we'll need to use Google Play services. This is completely different from the case in lab 1 where you treat the watch as part of the app. First of all, we set up GoogleApiClient to use Wearable API. Then we test to see if we have any connections. To have the app work correctly, it's vital in this step that we have only 1 watch connected to the phone. Once we have the node id we can then send the message over.
     
-5. Create a new class called ListenerService for mobile module, insert the following code into the Java file
+5. Create a new class called ListenerService for the mobile module, insert the following code into the Java file. What happens here is that once we receive the Message, we'll display it as a Toaster. This is done by implementing the `WearableListenerService` interface.
     
     ```java
     public class ListenerService extends WearableListenerService {
@@ -432,16 +432,14 @@ The app we created in lab 1 is use notifications on wearable to control the app 
         Log.d("DEBUG_KEY", "on received");
         showToast(messageEvent.getPath());
     }
-
+    
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
-}
+    }
     ```
     
-    some explanation here.
-    
-6. Open AndroidManifest.xml and insert the following within `application` tag
+6. Finally, we need to add permissions for the system to use our service. Open AndroidManifest.xml and insert the following within `application` tag
     
     ```xml
     <service
@@ -452,10 +450,9 @@ The app we created in lab 1 is use notifications on wearable to control the app 
     </service>
     ```
     
-    some explanation here.
+    If you run the app on your watch by tapping My Wearables icon, the counting down timer will auto start. If you press the Send button at any point, the time left will be sent to your phone and appears as a Toaster, like below.
     
     ![](.md_images/20s_w.png)
     
     ![](.md_images/20s_m.png)
-
 
