@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service
-            android:name=".BackgroundCounting"
+            android:name=".CountingService"
             android:enabled="true"
             android:exported="false" />
 

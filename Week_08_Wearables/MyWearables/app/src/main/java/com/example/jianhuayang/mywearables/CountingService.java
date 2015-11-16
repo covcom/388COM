@@ -13,12 +13,12 @@ import android.util.Log;
 /**
  * Created by jianhuayang on 12/11/2015.
  */
-public class BackgroundCounting extends IntentService {
+public class CountingService extends IntentService {
 
     public static final String REPORT_KEY = "REPORT_KEY";
     public static final String INTENT_KEY = "com.example.jianhuayang.mywearables.BROADCAST";
 
-    public BackgroundCounting() {
+    public CountingService() {
         super("BackgroundCounting");
     }
 
@@ -26,13 +26,14 @@ public class BackgroundCounting extends IntentService {
     protected void onHandleIntent(Intent intent) {
 
         int count = 0;
-        while (count < 6) {
+        while (count < 10) {
             synchronized (this) {
                 try {
-                    wait(5 * 1000);
-//                Thread.sleep(5 * 1000);
+                    wait(1000);
+//                Thread.sleep(1000);
                     count++;
                     Log.d(MainActivity.DEBUG_KEY, Integer.toString(count));
+
 
 //                    send info using intent
 //                    Intent intentNew = new Intent(getBaseContext(), DisplayActivity.class);
@@ -41,18 +42,20 @@ public class BackgroundCounting extends IntentService {
 //                    intentNew.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //                    getBaseContext().startActivity(intentNew);
 
-//                send info using broadcast
-//                Intent localIntent = new Intent();
-//                localIntent.setAction(INTENT_KEY);
-//                localIntent.putExtra(REPORT_KEY, Integer.toString(count));
-                    /*
+
+////                send info using broadcast
+//                    Intent localIntent = new Intent();
+//                    localIntent.setAction(INTENT_KEY);
+//                    localIntent.putExtra(REPORT_KEY, Integer.toString(count));
+//                    /*
 ////                line below uses LocalBroadcastManager to send, in order to receive broadcasts sent using
 ////                LocalBroadcastManager, have to register receiver using LocalBroadcastManager, see examples in
 ////                http://developer.android.com/training/run-background-service/report-status.html
-                    */
+//                    */
 ////                LocalBroadcastManager.getInstance(this).sendBroadcast(localIntent);
-//                sendBroadcast(localIntent);
-//                Log.d(MainActivity.DEBUG_KEY, "broadcasted");
+//                    sendBroadcast(localIntent);
+//                    Log.d(MainActivity.DEBUG_KEY, "broadcasted");
+
 
                     NotificationCompat.Builder builder =
                             new NotificationCompat.Builder(this)
