@@ -36,4 +36,5 @@ build/
 
 # need to ignore all ppt files, but keep generated pdf for class
 *.pptx
+*.mp4
 
