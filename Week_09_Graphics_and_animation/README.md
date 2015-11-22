@@ -3,7 +3,7 @@
 > The fool doth think he is a 387COMer, but the 387COMer knows himself to be a fool.
 > -- [William Shakespeare Quote Generator](http://thesurrealist.co.uk)
 
-Android provides a number of useful APIs for manipulating graphics and animation. We will look at some simple examples in the exercises below. Full documentations on this can be found [here](http://developer.android.com/guide/topics/graphics/overview.html). Opon finishing the exercises, you should have an app that looks like below. The app has two 'pages', each of which contain a single graphic. If you press the 'start/stop' button, you'll start/stop the animation on that graphic.
+Android provides a number of useful APIs for manipulating graphics and animation. We will look at some simple examples in the exercises below. Full documentations on this can be found [here](http://developer.android.com/guide/topics/graphics/overview.html). Upon finishing the exercises, you should have an app that looks like below. The app has two 'pages', each of which contains a single graphic. If you press the 'start/stop' button, you'll start/stop the animation on that graphic.
 
 [![](.md_images/ezgif-23203067.gif)](https://youtu.be/ewk5-RKs-X4)
 
@@ -113,7 +113,7 @@ Create an app called My Graphics using all default options. Then follow steps be
     />
     ```
     
-    Similar to ListView in a ListActivity, we can use ViewPager as the single element in a layout file, or we can use it in combination with other views. Here it's the only thing we need. Also note ViewPager is dependant on v4 version of the support library.
+    Similar to ListView in a ListActivity, we can use ViewPager as the single element in a layout file, or we can use it in combination with other views. Here it's the only thing we need. Also, note ViewPager is dependent on the v4 version of the support library.
     
 6. Open PageFragment.java, make changes so that it looks like the following:
     
@@ -158,7 +158,7 @@ Create an app called My Graphics using all default options. Then follow steps be
     }
     ```
     
-    Here line `public static PageFragment create(int pageNumber) {}` declare a method using the [factory pattern](http://www.tutorialspoint.com/design_pattern/factory_pattern.htm). Instead of using constructors and passing values using Bundle, we use the static factory method to create the fragment object. In the `onCreate()` method we get the variable that is passed into the fragment. And this variable is later used in the `onCreateView()` method to update the TextView texts.
+    Here line `public static PageFragment create(int pageNumber) {}` declare a method using the [factory pattern](http://www.tutorialspoint.com/design_pattern/factory_pattern.htm). Instead of using constructors and passing values using Bundle, we use the static factory method to create the fragment object. In the `onCreate()` method, we get the variable that is passed into the fragment. And this variable is later used in the `onCreateView()` method to update the TextView texts.
 
 7. Open MainActivity.java and comment out the following lines:
     
@@ -206,7 +206,7 @@ Create an app called My Graphics using all default options. Then follow steps be
     }
     ```
     
-    In order to combine Fragment with ViewPager, you have to use an FragmentStatePagerAdapter, which is a subclass of android.support.v4.view.PagerAdapter. This is not to be confused with android.widget.Adapter, which is used to work together with AdapterView to achieve dynamic data binding. For FragmentStatePagerAdapter we need to override the two methods `getItem()` and `getCount()`. Note here the two Fragments will be created as soon as ViewPager becomes visible. This means that ordinary call-backs for Fragment such as `onPause()` etc. will not work!
+    In order to combine Fragment with ViewPager, you have to use a FragmentStatePagerAdapter, which is a subclass of android.support.v4.view.PagerAdapter. This is not to be confused with android.widget.Adapter, which is used to work together with AdapterView to achieve dynamic data binding. For FragmentStatePagerAdapter we need to override the two methods `getItem()` and `getCount()`. Note here the two Fragments will be created as soon as ViewPager becomes visible. This means that ordinary call-backs for Fragment such as `onPause()` etc. will not work!
     
     If you run the app now, you'll see two 'pages' that allows you to switch between each other using sliding
     
@@ -216,7 +216,7 @@ Create an app called My Graphics using all default options. Then follow steps be
 
 ### Drawable resources for ShapeDrawable
 
-Now we're ready to insert some shapes into the 1st page. We have images as drawables. We can also define the shapes in an xml file.
+Now we're ready to insert some shapes into the 1st page. We have images as drawable. We can also define the shapes in an xml file.
 
 1. Right-click on the drawable folder to create a Drawable resource file, name it gradient_box.
     
@@ -260,7 +260,7 @@ Now we're ready to insert some shapes into the 1st page. We have images as drawa
 
 ### Extending View class
 
-You can also craete a customized class by extending View and include ShapeDrawables in it.
+You can also create a customized class by extending View and include ShapeDrawables in it.
 
 1. Create a new class called CustomDrawableView and insert the following code:
     
@@ -287,7 +287,7 @@ You can also craete a customized class by extending View and include ShapeDrawab
     }
     ```
     
-    This is an example taken from the office [API guide](http://developer.android.com/guide/topics/graphics/2d-graphics.html#drawables-from-xml). After defining the oval shape in constructor, once `View.onDraw()` is called, our shape will draw itself on the canvas provided by the syste.
+    This is an example taken from the office [API guide](http://developer.android.com/guide/topics/graphics/2d-graphics.html#drawables-from-xml). After defining the oval shape in constructor, once `View.onDraw()` is called, our shape will draw itself on the canvas provided by the system.
     
 2. Open PageFragment.java, edit the `if` clause inside `onCreateView()` method so it becomes the following
     
@@ -309,16 +309,20 @@ You can also craete a customized class by extending View and include ShapeDrawab
     ```
     
     For the second page, what we did is that we hide the ImageView by setting its visibility to GONE. Then we create a new CustomDrawableView and add it to the RelativeLayout. For more info on LayoutParams click [here](http://developer.android.com/guide/topics/ui/declaring-layout.html#layout-params).
+    
+    If you run the app now, you'll see the new View object, like this
+    
+    ![](.md_images/p2shape.png)
 
 ## Lab 2 Animations
 
-There're (at least!) two ways to do animation. One is to use property animation and the other is View animation. While the former is capable of animating any objects, the latter is limitted to Views only. We'll look at examples of both.
+There're (at least!) two ways to do animation. One is to use property animation and the other is View animation. While the former is capable of animating any objects, the latter is limited to Views only. We'll look at examples of both.
 
-What I did in the exercise is that I duplicated the foler created earlier for lab 1 and renamed it MyGraphics2. But you can leave this step if you want.
+What I did in the exercise is that I duplicated the folder created earlier for lab 1 and renamed it MyGraphics2. But you can leave this step if you want.
 
 ### Property animation
 
-1. Open PageFragmet.java and move variable declaration outside of the `onCreateView()` method. So the method should look like
+1. Open PageFragmet.java and move variable declaration outside of the `onCreateView()` method. Insert a new Button initialization. Your method should now look like
     
     ```java
     @Override
@@ -330,6 +334,8 @@ What I did in the exercise is that I duplicated the foler created earlier for la
         textView = (TextView) v.findViewById(R.id.title);
         textView.setText("This is page No. " + Integer.toString(pageNumber + 1));
         imageView = (ImageView) v.findViewById(R.id.body);
+        button = (Button) v.findViewById(R.id.button);
+        
         if (pageNumber == 0) {
             Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.gradient_box);
             imageView.setImageDrawable(drawable);
@@ -398,9 +404,9 @@ What I did in the exercise is that I duplicated the foler created earlier for la
     </set>
     ```
     
-    Here we defined two levels of herirachy by using the 'set' tag. 
+    Here we defined two levels of hierarchy by using the 'set' tag. The parent 'set' tag contains another 'set' tag and an objectAnimator. The inner 'set' in turn contains two animators for both 'x' and 'y' positions.
     
-5. aa
+5. Open PageFragment.java and replace the if clause with the following
     
     ```java
     if (pageNumber == 0) {
@@ -428,8 +434,14 @@ What I did in the exercise is that I duplicated the foler created earlier for la
             
         }
     ```
+    
+    Here we load the AnimatorSet from the resource xml file and set the target as the rectangle we created earlier. Note that we previously used `android:valueType="floatType"` for both 'x' and 'y' values. This is because that ImageView has them in float format, see [here](http://developer.android.com/reference/android/widget/ImageView.html). But this can be of intType for other objects. After setting the target, we set the onClickListener. As mentioned already, some fragment lifecycle methods are not called automatically. So we have to implement the `set.cancel()` method to stop the animation.
 
 ### View animation
+
+Property animation we saw earlier was introduced in Android 3.0 (API 11), it can be applied to any objects. An older alternative is View animation. As the name suggests, it can only be applied to Views. In the following exercises, we'll apply View animation to the customized View class we created earlier.
+
+In the Android tool window, right-click on the res folder and select New ==> Android Resource Directory, select anim as the type and click OK. Right-click on the folder you just created, and create a new resource file called hyperspace_jump.xml. Insert into it the following contents:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -467,10 +479,7 @@ What I did in the exercise is that I duplicated the foler created earlier for la
 </set>
 ```
 
-```java
-button = (Button) v.findViewById(R.id.button);
-```
-
+Open PageFragment.java and replace the 'else if' clause with the following
 
 ```java
 else if (pageNumber == 1) {
@@ -482,13 +491,13 @@ else if (pageNumber == 1) {
             params.setMargins(80, 80, 0, 0);
             params.addRule(RelativeLayout.BELOW, textView.getId());
             relativeLayout.addView(customDrawableView, params);
-
+            
             hyperspaceJumpAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.hyperspace_jump);
-
+            
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                
                     if (!isAnimatorSetOn) {
                         customDrawableView.startAnimation(hyperspaceJumpAnimation);
                         isAnimatorSetOn = true;
@@ -496,21 +505,21 @@ else if (pageNumber == 1) {
                         customDrawableView.clearAnimation();
                         isAnimatorSetOn = false;
                     }
-
+                    
                     Log.d("DEBUG_KEY", "clicked button page 1");
                 }
             });
-
-
+            
         }
 ```
 
+In a way similar to property animation, in View animation we need to load the object from a system resource. But the difference is that here we use an inherited method `startAnimation()` to start the actual process.
 
 ## Lab 3 Useful Resources
 
 ### OpenGL ES 
 
-Android includes support for high performance 2D and 3D graphics with the Open Graphics Library (OpenGL®), specifically, the OpenGL ES API. Our past student *Fabian Furger*, a fellow citizen of Roger Federer, has created a squash training app using OpenGL.
+Android includes support for high-performance 2D and 3D graphics with the Open Graphics Library (OpenGL®), specifically, the OpenGL ES API. Our past student *Fabian Furger*, a fellow citizen of Roger Federer, has created a squash training app using OpenGL.
 
 * Squash simulation on [GitHub](https://github.com/furgerf/Squash/tree/master/Squash%20Simulation)
 * YouTube [video](https://www.youtube.com/watch?v=4VqZXWbodaY)
