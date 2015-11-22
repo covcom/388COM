@@ -29,9 +29,10 @@ public class PageFragment extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE";
     public static final String DEBUG_KEY = "DEBUG_KEY";
     private int pageNumber;
+
     private TextView textView;
-    private Button button;
     private ImageView imageView;
+    private Button button;
     private AnimatorSet set;
     private boolean isAnimatorSetOn = false;
     private CustomDrawableView customDrawableView;
@@ -64,6 +65,7 @@ public class PageFragment extends Fragment {
         Log.d(DEBUG_KEY, Integer.toString(pageNumber));
         textView = (TextView) v.findViewById(R.id.title);
         textView.setText("This is page No. " + Integer.toString(pageNumber + 1));
+        imageView = (ImageView) v.findViewById(R.id.body);
         button = (Button) v.findViewById(R.id.button);
 
         if (pageNumber == 0) {
@@ -71,7 +73,6 @@ public class PageFragment extends Fragment {
 //            Resources res = getResources();
 //            Drawable shape = res. getDrawable(R.drawable.gradient_box);
 //            below from http://stackoverflow.com/questions/29041027/android-getresources-getdrawable-deprecated-api-22
-            imageView = (ImageView) v.findViewById(R.id.body);
             Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.gradient_box);
             imageView.setImageDrawable(drawable);
 
@@ -96,7 +97,7 @@ public class PageFragment extends Fragment {
             });
 
         } else if (pageNumber == 1) {
-            ImageView imageView = (ImageView) v.findViewById(R.id.body);
+
             imageView.setVisibility(View.GONE);
             RelativeLayout relativeLayout = (RelativeLayout) v.findViewById(R.id.container);
             customDrawableView = new CustomDrawableView(getContext());

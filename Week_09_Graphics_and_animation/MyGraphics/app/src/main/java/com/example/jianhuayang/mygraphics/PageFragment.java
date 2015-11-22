@@ -23,7 +23,7 @@ public class PageFragment extends Fragment {
 
     public static final String ARG_PAGE = "ARG_PAGE";
     public static final String DEBUG_KEY = "DEBUG_KEY";
-    int pageNumber;
+    private int pageNumber;
 
     public static PageFragment create(int pageNumber) {
         PageFragment pageFragment = new PageFragment();
@@ -52,7 +52,7 @@ public class PageFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_page, container, false);
         Log.d(DEBUG_KEY, Integer.toString(pageNumber));
         TextView textView = (TextView) v.findViewById(R.id.title);
-        textView.setText(Integer.toString(pageNumber));
+        textView.setText("This is page No. " + Integer.toString(pageNumber + 1));
 
         if (pageNumber == 0) {
 //            the Google tutorial used the following lines, and it doesn't work
@@ -75,6 +75,5 @@ public class PageFragment extends Fragment {
         }
         return v;
     }
-
 
 }
