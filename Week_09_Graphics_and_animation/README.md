@@ -528,7 +528,7 @@ Android includes support for high-performance 2D and 3D graphics with the Open G
 
 
 * [Beginner's Guide to Android Animation/Graphics](http://www.codeproject.com/Articles/825700/Beginners-Guide-to-Android-Animation-Graphics)
-* [add submodule in Git](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
+* [Add submodule in Git](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
 <!--(git submodule add https://github.com/jianhuayang/Squash.git)-->
 
 * [How to embed a video into GitHub README.md](http://stackoverflow.com/questions/4279611/how-to-embed-a-video-into-github-readme-md/29842302#29842302)
