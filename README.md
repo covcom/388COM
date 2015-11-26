@@ -206,11 +206,11 @@ Setting up wearable environment, optimize for screen technologies, build watchfa
 
 ## Week 9 Graphics and animation
 
-### Graphic design
+### Graphics
 
 **Contents**
 
-Imaging concepts, format, drawable assets, ImageButton XML structure, grid view, 3rd party filters
+ViewPager, Drawable resources, extended View class
 
 **Refs**
 
@@ -222,7 +222,7 @@ Imaging concepts, format, drawable assets, ImageButton XML structure, grid view,
 
 **Contents**
 
-Frame animation, tween animation, hybrid animation
+Property animation, View animation
 
 **Refs**
 
@@ -230,27 +230,27 @@ Frame animation, tween animation, hybrid animation
 
 [Android official API guide: Adding Animations](http://developer.android.com/training/animation/index.html)
 
-## Week 10 Location services and Maps
+## Week 10 Location services and Google maps
 
 ### Location services
 
 **Contents**
 
-Getting location, retrieve updates, display address, Google maps
+Getting location, retrieve updates, display address
 
 **Refs**
 
 [Android official API guide: Making Your App Location-Aware](http://developer.android.com/training/location/index.html)
 
-[Google Maps API for Android](https://developers.google.com/maps/documentation/android/)
-
-### Indoor location
+### Google maps
 
 **Contents**
 
-iBeacons, Proximity, Triangulation
+Google maps
 
 **Refs**
+
+[Google Maps API for Android](https://developers.google.com/maps/documentation/android/)
 
 ## Week 11 Multimedia
 
