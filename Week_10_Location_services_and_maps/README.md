@@ -95,6 +95,15 @@ Configuring to use Google Play Services on Android is a bit difficult compared t
     
     If your version number is not 6587, you’ll need to adjust accordingly. Save the file and click the Sync Project with Gradle Files button.
     
+    > If you have problems following instructions above, try to do the following, taken from [here](http://stackoverflow.com/questions/16624827/android-studio-with-google-play-services):
+    
+    * Go to File -> Project Structure
+    * Select 'Project Settings'
+    * Select 'Dependencies' Tab
+    * Click '+' and select '1.Library Dependencies'
+    * Search for : com.google.android.gms:play-services
+    * Select the latest version and click 'OK'
+    
 6. Add the following line as a child of the application element in your manifest file
     
     ![](.md_images/meta.png)

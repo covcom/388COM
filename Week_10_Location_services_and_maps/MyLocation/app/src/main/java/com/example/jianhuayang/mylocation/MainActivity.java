@@ -4,29 +4,25 @@ import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
 
-
-public class MainActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks {
-    //    private LocationManager locationManager;
+public class MainActivity extends AppCompatActivity {
+    private LocationManager locationManager;
     private Location currentLocation;
     private TextView locationText;
-    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationText = (TextView) findViewById(R.id.textView1);
-        buildGoogleApiClient();
     }
 
 
@@ -55,15 +51,27 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
     @Override
     public void onResume() {
         super.onResume();
-//        currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        try {
+            currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
         updateDisplay();
-//        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mListener);
+        try {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mListener);
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-//        locationManager.removeUpdates(mListener);
+        try {
+            locationManager.removeUpdates(mListener);
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
     }
 
     private void updateDisplay() {
@@ -76,44 +84,25 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.C
         }
     }
 
-    //    private LocationListener mListener = new LocationListener() {
-//        @Override
-//        public void onLocationChanged(Location location) {
-//            currentLocation = location;
-//            updateDisplay();
-//        }
-//        @Override
-//        public void onProviderDisabled(String provider) {
-//        }
-//        @Override
-//        public void onProviderEnabled(String provider) {
-//        }
-//        @Override
-//        public void onStatusChanged(String provider, int status, Bundle extras) {
-//        }
-//    };
-    protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addApi(LocationServices.API)
-                .build();
-    }
+    private LocationListener mListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            currentLocation = location;
+            updateDisplay();
+        }
 
-    @Override
-    public void onConnected(Bundle connectionHint) {
-        currentLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-        updateDisplay();
-    }
-    @Override
-    public void onConnectionSuspended(int cause) {
-        mGoogleApiClient.connect();
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mGoogleApiClient.connect();
-    }
+        @Override
+        public void onProviderDisabled(String provider) {
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+        }
+    };
 }
 
 
