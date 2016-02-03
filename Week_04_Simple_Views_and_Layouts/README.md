@@ -14,7 +14,7 @@ The MVC pattern, which plays a vital role in modern application programming, ass
 - *View*: A view object is an object in an application that users can see. A view object knows how to draw itself and can respond to user actions.
 - *Controller*: A controller object acts as an intermediary between one or more of an application’s view objects and one or more of its model objects. In Android, a controller is typically a subclass of Activity, Fragment, or Service.
 
-![mvc](https://developer.apple.com/library/ios/documentation/General/Conceptual/DevPedia-CocoaCore/Art/model_view_controller.jpg)
+![mvc](https://developer.apple.com/library/ios/documentation/General/Conceptual/DevPedia-CocoaCore/Art/model_view_controller_2x.png)
 
 In Android, especially for small-scale apps, it's often not easy to distinguish roles within the MVC pattern. But the benefits of MVC is obvious - it separates the front-end and back-end, and make it easier to reuse your classes.
 
